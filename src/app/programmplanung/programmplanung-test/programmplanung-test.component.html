@@ -1,32 +1,84 @@
 <p></p>
 <h3>{{fahrrad.modell}}</h3>
-<table class="table table-striped table-sm">
-  <tr>
-    <td></td>
-    <td>Week {{fahrrad.porgammplanungInputArray[0].week}}</td>
-    <td>Week {{fahrrad.porgammplanungInputArray[1].week}}</td>
-    <td>Week {{fahrrad.porgammplanungInputArray[2].week}}</td>
- </tr>
-  <tr>
-    <td>Planning:</td>
-    <td>{{fahrrad.porgammplanungInputArray[0].planning}}</td>
-    <td>{{fahrrad.porgammplanungInputArray[1].planning}}</td>
-    <td>{{fahrrad.porgammplanungInputArray[2].planning}}</td>
-  </tr>
-  <tr>
-    <td>Demand:</td>
-    <td>{{fahrrad.porgammplanungInputArray[0].demand}}</td>
-    <td>{{fahrrad.porgammplanungInputArray[1].demand}}</td>
-    <td>{{fahrrad.porgammplanungInputArray[2].demand}}</td>
-  </tr>
-  <tr>
-    <td>Changes:</td>
-    <td>{{fahrrad.porgammplanungInputArray[0].planning - fahrrad.porgammplanungInputArray[0].demand}}</td>
-    <td>{{fahrrad.porgammplanungInputArray[1].planning - fahrrad.porgammplanungInputArray[1].demand}}</td>
-    <td>{{fahrrad.porgammplanungInputArray[2].planning - fahrrad.porgammplanungInputArray[2].demand}}</td>
-  </tr>
-  
-</table>
-<hr>
-<hr>
+<form #f="ngForm">
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+        <th></th>
+      <th>Week {{fahrrad.progammplanungInputArray[0].week}}</th>
+      <th>Week {{fahrrad.progammplanungInputArray[1].week}}</th>
+      <th>Week {{fahrrad.progammplanungInputArray[2].week}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Planning:</td>
+      <td>
+        <input type="number" 
+        id="modell" 
+        class="form control"
+        ngModel="{{fahrrad.progammplanungInputArray[0].planning}}"
+        name="fahrradProgammplanungInputArray0Planning"
+        >
+      </td>
+      <td>
+          <input type="number" 
+          id="modell" 
+          class="form control"
+          ngModel="{{fahrrad.progammplanungInputArray[1].planning}}"
+          name="fahrradProgammplanungInputArray1Planning"
+          >
+      </td>
+      <td>
+          <input type="number" 
+          id="modell" 
+          class="form control"
+          ngModel="{{fahrrad.progammplanungInputArray[2].planning}}"
+          name="fahrradProgammplanungInputArray2Planning"
+          >
+      </td>
+    </tr>
+    <tr>
+      <td>Demand:</td>
+      <td>
+          <input type="number" 
+          id="modell" 
+          class="form control"
+          ngModel="{{fahrrad.progammplanungInputArray[0].demand}}"
+          name="fahrradProgammplanungInputArray0Demand"
+          >
+      </td>
+      <td>
+          <input type="number" 
+          id="modell" 
+          class="form control"
+          ngModel="{{fahrrad.progammplanungInputArray[1].demand}}"
+          name="fahrradProgammplanungInputArray1Demand"
+          >  
+      </td>
+      <td>        
+        <input type="number" 
+        id="modell" 
+        class="form control"
+        ngModel="{{fahrrad.progammplanungInputArray[2].demand}}"
+        name="fahrradProgammplanungInputArray2Demand"
+        >
+      </td>
+    </tr>
+    <tr>
+      <td>Changes:</td>
+      <td>{{fahrrad.progammplanungInputArray[0].planning - fahrrad.progammplanungInputArray[0].demand}}</td>
+      <td>{{fahrrad.progammplanungInputArray[1].planning - fahrrad.progammplanungInputArray[1].demand}}</td>
+      <td>{{fahrrad.progammplanungInputArray[2].planning - fahrrad.progammplanungInputArray[2].demand}}</td>
+    </tr>  
 
+  </tbody>
+</table>
+<div class="row">
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-success" (click)="onChange(f)">Ändern</button>
+    </div>
+  </div>
+</form>
+<hr>
+<hr>

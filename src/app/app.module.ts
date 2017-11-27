@@ -10,6 +10,7 @@ import { StuecklisteItemComponent } from './stueckliste/stueckliste-item/stueckl
 import { FahrradService } from './shared/fahrrad.service';
 import { TestTabComponent } from './test-tab/test-tab.component';
 import { ProgrammplanungTestComponent } from './programmplanung/programmplanung-test/programmplanung-test.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ProgrammplanungTestComponent } from './programmplanung/programmplanung-
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     routing
   ],
   providers: [FahrradService],

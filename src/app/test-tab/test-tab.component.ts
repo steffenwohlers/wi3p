@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Fahrrad } from '../shared/fahrrad.model';
+import { FahrradService } from '../shared/fahrrad.service';
 
 @Component({
   selector: 'app-test-tab',
@@ -6,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class TestTabComponent implements OnInit {
-  wochen = 52;
+  fahrraeder: Fahrrad[];
+  fahrrad: Fahrrad;
 
-  constructor() { }
+    constructor(private fahrradService: FahrradService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+      this.fahrraeder = this.fahrradService.getFahrraeder();
+
+      this.fahrrad = this.fahrraeder[0];
+    }
 
 }

@@ -5,5 +5,5 @@ export class Fahrrad {
         public rahmen: string,
         public sattel: string,
         public gabel: string,
-        public porgammplanungInputArray: ProgrammplanungInput[] ) {}
+        public progammplanungInputArray: ProgrammplanungInput[] ) {}
 }
