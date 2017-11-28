@@ -1,75 +1,37 @@
 <h3>Input</h3>
-<form #f="ngForm">
+
 <table class="table table-striped table-hover">
-  <thead>
-    <tr>
-        <th></th>
-      <th>Month {{fahrrad.progammplanungInputArray[0].month}}</th>
-      <th>Month {{fahrrad.progammplanungInputArray[1].month}}</th>
-      <th>Month {{fahrrad.progammplanungInputArray[2].month}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Planning:</td>
-      <td>
-        <input type="number" 
-        id="modell" 
-        class="form control"
-        [(ngModel)]="fahrrad.progammplanungInputArray[0].planning"
-        name="fahrradProgammplanungInputArray0Planning"
-        >
-      </td>
-      <td>
-          <input type="number" 
-          id="modell" 
-          class="form control"
-          [(ngModel)]="fahrrad.progammplanungInputArray[1].planning"
-          name="fahrradProgammplanungInputArray1Planning"
-          >
-      </td>
-      <td>
-          <input type="number" 
-          id="modell" 
-          class="form control"
-          [(ngModel)]="fahrrad.progammplanungInputArray[2].planning"
-          name="fahrradProgammplanungInputArray2Planning"
-          >
-      </td>
-    </tr>
-    <tr>
-      <td>Demand:</td>
-      <td>
-          <input type="number" 
-          id="modell" 
-          class="form control"
-          [(ngModel)]="fahrrad.progammplanungInputArray[0].demand"
-          name="fahrradProgammplanungInputArray0Demand"
-          >
-      </td>
-      <td>
-          <input type="number" 
-          id="modell" 
-          class="form control"
-          [(ngModel)]="fahrrad.progammplanungInputArray[1].demand"
-          name="fahrradProgammplanungInputArray1Demand"
-          >  
-      </td>
-      <td>        
-        <input type="number" 
-        id="modell" 
-        class="form control"
-        [(ngModel)]="fahrrad.progammplanungInputArray[2].demand"
-        name="fahrradProgammplanungInputArray2Demand"
-        >
-      </td>
-    </tr>
-    <tr>
-      <td>Changes:</td>
-      <td>{{fahrrad.progammplanungInputArray[0].planning - fahrrad.progammplanungInputArray[0].demand}}</td>
-      <td>{{fahrrad.progammplanungInputArray[1].planning - fahrrad.progammplanungInputArray[1].demand}}</td>
-      <td>{{fahrrad.progammplanungInputArray[2].planning - fahrrad.progammplanungInputArray[2].demand}}</td>
-    </tr>  
-  </tbody>
+    <thead>
+        <tr>
+            <th></th>
+            <th *ngFor="let i of fahrrad.progammplanungInputArray">Month: {{i.month}}</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+              <td>Planning:</td>
+              <td *ngFor="let programmplanung of fahrrad.progammplanungInputArray">
+                  <input type="number" 
+                  id="modell" 
+                  class="form control"
+                  [(ngModel)]="programmplanung.planning"
+              >
+              </td>
+            </tr>
+            <tr>
+              <td>Demand:</td>
+              <td *ngFor="let programmplanung of fahrrad.progammplanungInputArray">
+                  <input type="number" 
+                  id="modell" 
+                  class="form control"
+                  [(ngModel)]="programmplanung.demand"
+              >
+              </td>
+            </tr>
+            <tr>
+              <td>Changes:</td>
+              <td *ngFor="let programmplanung of fahrrad.progammplanungInputArray">{{programmplanung.planning - programmplanung.demand}}</td>
+            </tr>        
+    </tbody>
 </table>
-</form>
+

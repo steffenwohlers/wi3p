@@ -11,6 +11,8 @@ import { FahrradService } from './shared/fahrrad.service';
 import { TestTabComponent } from './test-tab/test-tab.component';
 import { ProgrammplanungInputComponent } from './programmplanung/programmplanung-input/programmplanung-input.component';
 import { FormsModule } from '@angular/forms';
+import { ProgrammplanungFahrradComponent } from './programmplanung/programmplanung-fahrrad/programmplanung-fahrrad.component';
+import { ProgrammplanungOutputComponent } from './programmplanung/programmplanung-output/programmplanung-output.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     StuecklisteItemComponent,
     TestTabComponent,
-    ProgrammplanungInputComponent
+    ProgrammplanungInputComponent,
+    ProgrammplanungFahrradComponent,
+    ProgrammplanungOutputComponent
   ],
   imports: [
     BrowserModule,

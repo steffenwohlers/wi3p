@@ -8,15 +8,20 @@ import { FahrradService } from '../shared/fahrrad.service';
   styles: []
 })
 export class TestTabComponent implements OnInit {
+  date: Date = new Date();
+  weeks: number[];
+
   fahrraeder: Fahrrad[];
   fahrrad: Fahrrad;
 
-    constructor(private fahrradService: FahrradService) { }
+    constructor(private fahrradService: FahrradService) {
+      this.weeks = Array(52).fill(0).map((x, i) => i);
+      this.fahrraeder = fahrradService.getFahrraeder();
+      this.fahrrad = this.fahrraeder[0];
+     }
 
     ngOnInit() {
-      this.fahrraeder = this.fahrradService.getFahrraeder();
 
-      this.fahrrad = this.fahrraeder[0];
     }
 
 }
