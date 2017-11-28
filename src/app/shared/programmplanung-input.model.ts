@@ -1,4 +1,8 @@
 export class ProgrammplanungInput {
 
-    constructor(public week: number, public planning: number, public demand: number ) {}
+    public changes: number;
+
+    constructor(public month: number, public planning: number, public demand: number ) {
+        this.changes = this.planning - this.demand;
+    }
 }
