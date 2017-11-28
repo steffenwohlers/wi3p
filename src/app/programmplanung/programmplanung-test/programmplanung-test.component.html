@@ -17,7 +17,7 @@
         <input type="number" 
         id="modell" 
         class="form control"
-        ngModel="{{fahrrad.progammplanungInputArray[0].planning}}"
+        [(ngModel)]="fahrrad.progammplanungInputArray[0].planning"
         name="fahrradProgammplanungInputArray0Planning"
         >
       </td>
@@ -25,7 +25,7 @@
           <input type="number" 
           id="modell" 
           class="form control"
-          ngModel="{{fahrrad.progammplanungInputArray[1].planning}}"
+          [(ngModel)]="fahrrad.progammplanungInputArray[1].planning"
           name="fahrradProgammplanungInputArray1Planning"
           >
       </td>
@@ -33,7 +33,7 @@
           <input type="number" 
           id="modell" 
           class="form control"
-          ngModel="{{fahrrad.progammplanungInputArray[2].planning}}"
+          [(ngModel)]="fahrrad.progammplanungInputArray[2].planning"
           name="fahrradProgammplanungInputArray2Planning"
           >
       </td>
@@ -44,7 +44,7 @@
           <input type="number" 
           id="modell" 
           class="form control"
-          ngModel="{{fahrrad.progammplanungInputArray[0].demand}}"
+          [(ngModel)]="fahrrad.progammplanungInputArray[0].demand"
           name="fahrradProgammplanungInputArray0Demand"
           >
       </td>
@@ -52,7 +52,7 @@
           <input type="number" 
           id="modell" 
           class="form control"
-          ngModel="{{fahrrad.progammplanungInputArray[1].demand}}"
+          [(ngModel)]="fahrrad.progammplanungInputArray[1].demand"
           name="fahrradProgammplanungInputArray1Demand"
           >  
       </td>
@@ -60,7 +60,7 @@
         <input type="number" 
         id="modell" 
         class="form control"
-        ngModel="{{fahrrad.progammplanungInputArray[2].demand}}"
+        [(ngModel)]="fahrrad.progammplanungInputArray[2].demand"
         name="fahrradProgammplanungInputArray2Demand"
         >
       </td>
@@ -74,11 +74,6 @@
 
   </tbody>
 </table>
-<div class="row">
-    <div class="col-xs-12">
-      <button type="button" class="btn btn-success" (click)="onChange(f)">Ändern</button>
-    </div>
-  </div>
 </form>
 <hr>
 <hr>
