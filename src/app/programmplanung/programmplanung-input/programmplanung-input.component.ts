@@ -3,11 +3,11 @@ import { Fahrrad } from '../../shared/fahrrad.model';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-programmplanung-test',
-  templateUrl: './programmplanung-test.component.html',
+  selector: 'app-programmplanung-input',
+  templateUrl: './programmplanung-input.component.html',
   styles: []
 })
-export class ProgrammplanungTestComponent implements OnInit {
+export class ProgrammplanungInputComponent implements OnInit {
 
   @Input() fahrrad: Fahrrad;
 

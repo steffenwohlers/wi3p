@@ -9,7 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { StuecklisteItemComponent } from './stueckliste/stueckliste-item/stueckliste-item.component';
 import { FahrradService } from './shared/fahrrad.service';
 import { TestTabComponent } from './test-tab/test-tab.component';
-import { ProgrammplanungTestComponent } from './programmplanung/programmplanung-test/programmplanung-test.component';
+import { ProgrammplanungInputComponent } from './programmplanung/programmplanung-input/programmplanung-input.component';
 import { FormsModule } from '@angular/forms';
 
 
@@ -21,7 +21,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     StuecklisteItemComponent,
     TestTabComponent,
-    ProgrammplanungTestComponent
+    ProgrammplanungInputComponent
   ],
   imports: [
     BrowserModule,
