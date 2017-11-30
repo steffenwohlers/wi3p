@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Fahrrad } from '../../shared/fahrrad.model';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-programmplanung-input',
@@ -11,14 +12,14 @@ export class ProgrammplanungInputComponent implements OnInit {
 
   @Input() fahrrad: Fahrrad;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
 
-    }
-
-  onChange(form: NgForm) {
-
-
   }
+
+  onOutput() {
+    this.router.navigate(['/programmplanung', 'output']);
+  }
+
 }

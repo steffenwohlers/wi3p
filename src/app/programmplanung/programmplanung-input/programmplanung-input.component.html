@@ -4,7 +4,7 @@
     <thead>
         <tr>
             <th></th>
-            <th *ngFor="let i of fahrrad.progammplanungInputArray">Month: {{i.month}}</th>
+            <th *ngFor="let i of fahrrad.progammplanungInputArray">Monat: {{i.date.getMonth() + 1}} </th>
         </tr>
     </thead>
     <tbody>
@@ -29,9 +29,12 @@
               </td>
             </tr>
             <tr>
-              <td>Changes:</td>
-              <td *ngFor="let programmplanung of fahrrad.progammplanungInputArray">{{programmplanung.planning - programmplanung.demand}}</td>
-            </tr>        
+                <td>Changes:</td>
+                <td *ngFor="let programmplanung of fahrrad.progammplanungInputArray">{{programmplanung.planning - programmplanung.demand}}</td>
+            </tr>
     </tbody>
 </table>
+<hr>
+<router-outlet></router-outlet>
+
 
