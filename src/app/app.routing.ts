@@ -3,6 +3,7 @@ import { ProgrammplanungComponent } from './programmplanung/programmplanung.comp
 import { StuecklisteComponent } from './stueckliste/stueckliste.component';
 import { TestTabComponent } from './test-tab/test-tab.component';
 
+
 const APP_ROUTES: Routes = [
     { path: '', redirectTo: '/programmplanung', pathMatch: 'full'},
     { path: 'programmplanung', component: ProgrammplanungComponent},

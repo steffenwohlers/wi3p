@@ -9,10 +9,12 @@ import { HeaderComponent } from './header/header.component';
 import { StuecklisteItemComponent } from './stueckliste/stueckliste-item/stueckliste-item.component';
 import { FahrradService } from './shared/fahrrad.service';
 import { TestTabComponent } from './test-tab/test-tab.component';
-import { ProgrammplanungInputComponent } from './programmplanung/programmplanung-input/programmplanung-input.component';
 import { FormsModule } from '@angular/forms';
 import { ProgrammplanungFahrradComponent } from './programmplanung/programmplanung-fahrrad/programmplanung-fahrrad.component';
-import { ProgrammplanungOutputComponent } from './programmplanung/programmplanung-output/programmplanung-output.component';
+
+// tslint:disable-next-line:max-line-length
+import { ProgrammplanungInputFahrradComponent } from './programmplanung/programmplanung-fahrrad-input/programmplanung-fahrrad-input.component';
+import { ProgrammplanungFahrradOutputComponent } from './programmplanung/programmplanung-fahrrad-output/programmplanung-fahrrad-output.component';
 
 
 @NgModule({
@@ -23,9 +25,9 @@ import { ProgrammplanungOutputComponent } from './programmplanung/programmplanun
     HeaderComponent,
     StuecklisteItemComponent,
     TestTabComponent,
-    ProgrammplanungInputComponent,
     ProgrammplanungFahrradComponent,
-    ProgrammplanungOutputComponent
+    ProgrammplanungInputFahrradComponent,
+    ProgrammplanungFahrradOutputComponent
   ],
   imports: [
     BrowserModule,

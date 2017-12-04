@@ -2,15 +2,17 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Fahrrad } from '../../shared/fahrrad.model';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProgrammplanungInput } from '../../shared/programmplanung-input.model';
 
 @Component({
-  selector: 'app-programmplanung-input',
-  templateUrl: './programmplanung-input.component.html',
+  selector: 'app-programmplanung-fahrrad-input',
+  templateUrl: './programmplanung-fahrrad-input.component.html',
   styles: []
 })
-export class ProgrammplanungInputComponent implements OnInit {
+export class ProgrammplanungInputFahrradComponent implements OnInit {
 
-  @Input() fahrrad: Fahrrad;
+  @Input() programmplanungInput: ProgrammplanungInput;
+  // @Input() fahrrad: Fahrrad;
 
   constructor(private router: Router) { }
 

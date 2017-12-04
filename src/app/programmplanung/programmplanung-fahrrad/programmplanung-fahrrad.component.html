@@ -1,3 +1,4 @@
 <h2>{{fahrrad.modell}}</h2>
-<app-programmplanung-input [fahrrad]="fahrrad"></app-programmplanung-input>
+<h3>Input</h3>
+<app-programmplanung-fahrrad-input *ngFor="let programmplanungInput of fahrrad.progammplanungInputArray" [programmplanungInput]="programmplanungInput"></app-programmplanung-fahrrad-input>
 <hr>
