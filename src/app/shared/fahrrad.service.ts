@@ -69,4 +69,8 @@ export class FahrradService {
     getFahrraeder() {
         return this.fahrraeder;
     }
+
+    getFahrrad(id: number) {
+        return this.fahrraeder[id];
+    }
 }

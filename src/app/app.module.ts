@@ -15,6 +15,7 @@ import { ProgrammplanungFahrradComponent } from './programmplanung/programmplanu
 // tslint:disable-next-line:max-line-length
 import { ProgrammplanungInputFahrradComponent } from './programmplanung/programmplanung-fahrrad-input/programmplanung-fahrrad-input.component';
 import { ProgrammplanungFahrradOutputComponent } from './programmplanung/programmplanung-fahrrad-output/programmplanung-fahrrad-output.component';
+import { ProgrammplanungFahrradStartComponent } from './programmplanung/programmplanung-fahrrad-start/programmplanung-fahrrad-start.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ProgrammplanungFahrradOutputComponent } from './programmplanung/program
     TestTabComponent,
     ProgrammplanungFahrradComponent,
     ProgrammplanungInputFahrradComponent,
-    ProgrammplanungFahrradOutputComponent
+    ProgrammplanungFahrradOutputComponent,
+    ProgrammplanungFahrradStartComponent
   ],
   imports: [
     BrowserModule,

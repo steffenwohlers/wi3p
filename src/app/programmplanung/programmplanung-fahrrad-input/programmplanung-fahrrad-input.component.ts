@@ -12,7 +12,6 @@ import { ProgrammplanungInput } from '../../shared/programmplanung-input.model';
 export class ProgrammplanungInputFahrradComponent implements OnInit {
 
   @Input() programmplanungInput: ProgrammplanungInput;
-  // @Input() fahrrad: Fahrrad;
 
   constructor(private router: Router) { }
 
