@@ -15,6 +15,7 @@ export class ProgrammplanungComponent implements OnInit {
   ngOnInit() {
     this.fahrraeder = this.fahrradService.getFahrraeder();
 
+    console.log(this.fahrraeder);
   }
 
 }

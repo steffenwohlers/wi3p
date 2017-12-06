@@ -10,10 +10,8 @@ import { StuecklisteItemComponent } from './stueckliste/stueckliste-item/stueckl
 import { FahrradService } from './shared/fahrrad.service';
 import { TestTabComponent } from './test-tab/test-tab.component';
 import { FormsModule } from '@angular/forms';
-import { ProgrammplanungFahrradComponent } from './programmplanung/programmplanung-fahrrad/programmplanung-fahrrad.component';
 
 // tslint:disable-next-line:max-line-length
-import { ProgrammplanungInputFahrradComponent } from './programmplanung/programmplanung-fahrrad-input/programmplanung-fahrrad-input.component';
 import { ProgrammplanungFahrradOutputComponent } from './programmplanung/programmplanung-fahrrad-output/programmplanung-fahrrad-output.component';
 import { ProgrammplanungFahrradStartComponent } from './programmplanung/programmplanung-fahrrad-start/programmplanung-fahrrad-start.component';
 
@@ -26,8 +24,6 @@ import { ProgrammplanungFahrradStartComponent } from './programmplanung/programm
     HeaderComponent,
     StuecklisteItemComponent,
     TestTabComponent,
-    ProgrammplanungFahrradComponent,
-    ProgrammplanungInputFahrradComponent,
     ProgrammplanungFahrradOutputComponent,
     ProgrammplanungFahrradStartComponent
   ],

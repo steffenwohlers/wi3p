@@ -1,4 +1,37 @@
 <h1>Programmplanung</h1>
 
-
-<app-programmplanung-fahrrad *ngFor="let fahrrad of fahrraeder" [fahrrad]="fahrrad"></app-programmplanung-fahrrad>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th colspan="2"></th>
+            <th *ngFor="let arr of fahrraeder[0].progammplanungInputArray">{{ arr.date | date:'M' }}</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let fahrrad of fahrraeder">
+        <tr>
+            <td rowspan="3">{{ fahrrad.modell }}</td>
+            <td>Planung</td>
+            <td *ngFor="let arr of fahrrad.progammplanungInputArray">
+                <input type="number"
+                class="form control"
+                [(ngModel)]="arr.planning"
+                >
+            </td>
+        </tr>
+        <tr> 
+            <td>Nachfrage</td>
+            <td *ngFor="let arr of fahrrad.progammplanungInputArray">
+                    <input type="number"
+                    class="form control"
+                    [(ngModel)]="arr.demand"
+                    >
+            </td>
+        </tr>
+        <tr>
+            <td>Differenz</td>
+            <td *ngFor="let arr of fahrrad.progammplanungInputArray" [ngClass]="{'down':arr.planning < arr.demand}">
+                {{ arr.planning - arr.demand }}
+            </td>
+        </tr>
+    </tbody>
+</table>
