@@ -18,7 +18,8 @@
                 >
             </td>
         </tr>
-        <tr> 
+        <tr>
+
             <td>Nachfrage</td>
             <td *ngFor="let arr of fahrrad.progammplanungInputArray">
                     <input type="number"
@@ -28,6 +29,7 @@
             </td>
         </tr>
         <tr>
+        
             <td>Differenz</td>
             <td *ngFor="let arr of fahrrad.progammplanungInputArray" [ngClass]="{'down':arr.planning < arr.demand}">
                 {{ arr.planning - arr.demand }}
