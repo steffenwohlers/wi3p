@@ -12,8 +12,6 @@ import { TestTabComponent } from './test-tab/test-tab.component';
 import { FormsModule } from '@angular/forms';
 
 // tslint:disable-next-line:max-line-length
-import { ProgrammplanungFahrradOutputComponent } from './programmplanung/programmplanung-fahrrad-output/programmplanung-fahrrad-output.component';
-import { ProgrammplanungFahrradStartComponent } from './programmplanung/programmplanung-fahrrad-start/programmplanung-fahrrad-start.component';
 
 
 @NgModule({
@@ -23,9 +21,7 @@ import { ProgrammplanungFahrradStartComponent } from './programmplanung/programm
     StuecklisteComponent,
     HeaderComponent,
     StuecklisteItemComponent,
-    TestTabComponent,
-    ProgrammplanungFahrradOutputComponent,
-    ProgrammplanungFahrradStartComponent
+    TestTabComponent
   ],
   imports: [
     BrowserModule,
