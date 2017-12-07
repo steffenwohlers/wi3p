@@ -4,12 +4,19 @@ import { FahrradTeilService } from './fahrrad-teil.service';
 import { FahrradTeil } from './fahrrad-teil.model';
 
 export class FahrradService {
+
+    private fahrradTeilService: FahrradTeilService = new FahrradTeilService();
+
     private fahrraeder: Fahrrad[] = [
         new Fahrrad(
             'MTBAllrounder',
-            'Aluminium 7005DB',
-            'Spark',
-            'Fox32 F100',
+            // 'Aluminium 7005DB',
+            // 'Spark',
+            // 'Fox32 F100',
+            this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
+            this.fahrradTeilService.getFahrradTeil('Spark'),
+            this.fahrradTeilService.getFahrradTeil('Fox32 F100'),
+
             [
                 new ProgrammplanungInput(0, 2220),
                 new ProgrammplanungInput(1, 3330),
@@ -28,9 +35,13 @@ export class FahrradService {
         ),
         new Fahrrad(
             'MTBCompetition',
-            'Carbon Monocoque',
-            'Speed line',
-            'Fox Talas140',
+            // 'Carbon Monocoque',
+            // 'Speed line',
+            // 'Fox Talas140',
+            this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
+            this.fahrradTeilService.getFahrradTeil('Speed line'),
+            this.fahrradTeilService.getFahrradTeil('Fox Talas140'),
+
             [
                 new ProgrammplanungInput(0, 1110),
                 new ProgrammplanungInput(1, 1665),
@@ -48,9 +59,13 @@ export class FahrradService {
         ),
         new Fahrrad(
             'MTBDownhill',
-            'Aluminium 7005TB',
-            'Fizik Tundra',
-            'Fox Talas140',
+            // 'Aluminium 7005TB',
+            // 'Fizik Tundra',
+            // 'Fox Talas140',
+            this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
+            this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
+            this.fahrradTeilService.getFahrradTeil('Fox Talas140'),
+
             [
                 new ProgrammplanungInput(0, 740),
                 new ProgrammplanungInput(1, 1110),
@@ -68,9 +83,13 @@ export class FahrradService {
         ),
         new Fahrrad(
             'MTB Extreme',
-            'Carbon Monocoque',
-            'Spark',
-            'Rock Schox Reba',
+            // 'Carbon Monocoque',
+            // 'Spark',
+            // 'Rock Schox Reba',
+            this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
+            this.fahrradTeilService.getFahrradTeil('Spark'),
+            this.fahrradTeilService.getFahrradTeil('Rock Schox Reba'),
+
             [
                 new ProgrammplanungInput(0, 518),
                 new ProgrammplanungInput(1, 777),

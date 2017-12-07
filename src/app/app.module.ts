@@ -10,6 +10,7 @@ import { StuecklisteItemComponent } from './stueckliste/stueckliste-item/stueckl
 import { FahrradService } from './shared/fahrrad.service';
 import { TestTabComponent } from './test-tab/test-tab.component';
 import { FormsModule } from '@angular/forms';
+import { FahrradTeilService } from './shared/fahrrad-teil.service';
 
 // tslint:disable-next-line:max-line-length
 
@@ -28,7 +29,10 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     routing
   ],
-  providers: [FahrradService],
+  providers: [
+    FahrradService,
+    FahrradTeilService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

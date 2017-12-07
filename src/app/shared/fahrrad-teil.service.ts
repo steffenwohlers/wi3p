@@ -28,12 +28,16 @@ export class FahrradTeilService {
     return this.teile;
   }
 
-  getFahrradTeil(name: String) {
-    this.teile.forEach(element => {
-      if (element.name === name) {
-        return element;
-      }
+  getFahrradTeil(name: String): FahrradTeil  {
+    this.teile.forEach(
+      element => {
+        if (element.name === name) {
+          console.log(element);
+          return element;
+        }
     });
+
+    return new FahrradTeil('nicht geklappt', FahrradTeilTyp.Gabel);
   }
 
 }
