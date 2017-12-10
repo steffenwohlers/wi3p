@@ -32,7 +32,7 @@ export class FahrradTeilService {
     this.teile.forEach(
       element => {
         if (element.name === name) {
-          console.log(element);
+          // console.log(element);
           return element;
         }
     });

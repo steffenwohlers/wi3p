@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Fahrrad } from '../shared/fahrrad.model';
 import { FahrradService } from '../shared/fahrrad.service';
+import { ExtendedDate } from '../shared/extendedDate.model';
 
 @Component({
   selector: 'app-test-tab',
@@ -8,8 +9,11 @@ import { FahrradService } from '../shared/fahrrad.service';
   styles: []
 })
 export class TestTabComponent implements OnInit {
-  date: Date = new Date();
   weeks: number[];
+
+  date: Date = new Date(2017, 1, 1);
+  extendedDate: ExtendedDate = new ExtendedDate(this.date);
+
 
   fahrraeder: Fahrrad[];
   fahrrad: Fahrrad;
