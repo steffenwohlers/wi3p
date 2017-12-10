@@ -80,7 +80,7 @@ export class ExtendedDate {
         while (tempDate.getDate() <= this.getAnzahlTageImMonat()) {
             console.log(tempDate);
             console.log(tempDate.getDay());
-            if (tempDate.getDay() === 5 || 6) {
+            if (tempDate.getDay() !== 5 || 6) {
                 result = result + 1;
                 console.log('Ist Wochentag');
             } else {
