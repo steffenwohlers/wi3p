@@ -1,5 +1,6 @@
 import { FahrradTeil } from './fahrrad-teil.model';
 import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
+import { element } from 'protractor';
 
 
 
@@ -28,16 +29,17 @@ export class FahrradTeilService {
     return this.teile;
   }
 
-  getFahrradTeil(name: String): FahrradTeil  {
-    this.teile.forEach(
-      element => {
-        if (element.name === name) {
-          // console.log(element);
-          return element;
-        }
+  test() {}
+
+  getFahrradTeil(name: string): FahrradTeil {
+    let result: FahrradTeil;
+    // tslint:disable-next-line:no-shadowed-variable
+    this.teile.forEach ( element => {
+      if (name === element.name) {
+        result = element;
+      }
     });
-
-    return new FahrradTeil('nicht geklappt', FahrradTeilTyp.Gabel);
+    console.log(result);
+    return result;
   }
-
 }

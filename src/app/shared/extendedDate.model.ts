@@ -78,13 +78,13 @@ export class ExtendedDate {
         const tempDate: Date = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
 
         while (tempDate.getDate() <= this.getAnzahlTageImMonat()) {
-            console.log(tempDate);
-            console.log(tempDate.getDay());
+            // console.log(tempDate);
+            // console.log(tempDate.getDay());
             if (tempDate.getDay() !== 5 || 6) {
                 result = result + 1;
-                console.log('Ist Wochentag');
+                // console.log('Ist Wochentag');
             } else {
-                console.log('Ist kein Wochentag');
+                // console.log('Ist kein Wochentag');
             }
             tempDate.setDate(tempDate.getDate() + 1);
         }

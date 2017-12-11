@@ -170,7 +170,6 @@ export class FahrradService {
                 new Programmplanung(11, 721.5)
             ]
         ),
-        
     ];
 
     getFahrraeder() {

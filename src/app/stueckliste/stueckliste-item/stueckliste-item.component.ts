@@ -14,6 +14,7 @@ export class StuecklisteItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.fahrrad);
   }
 
 }
