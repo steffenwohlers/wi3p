@@ -39,7 +39,6 @@ export class FahrradTeilService {
         result = element;
       }
     });
-    console.log(result);
     return result;
   }
 }
