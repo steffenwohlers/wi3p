@@ -3,7 +3,7 @@ import { ProgrammplanungComponent } from './programmplanung/programmplanung.comp
 import { StuecklisteComponent } from './stueckliste/stueckliste.component';
 import { TestTabComponent } from './test-tab/test-tab.component';
 
-// TODO SW: Produktionsplanung + Stammdaten einfügen + Components erstellen
+// TODO SW: Produktionsplanung + Stammdaten einfügen + Components erstellengit
 
 const APP_ROUTES: Routes = [
     { path: '', redirectTo: '/programmplanung', pathMatch: 'full'},
