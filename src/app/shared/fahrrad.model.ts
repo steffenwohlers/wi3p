@@ -1,4 +1,4 @@
-import { ProgrammplanungInput } from './programmplanung-input.model';
+import { Programmplanung } from './programmplanung.model';
 import { FahrradTeil } from './fahrrad-teil.model';
 import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
 
@@ -7,5 +7,5 @@ export class Fahrrad {
         public rahmen: FahrradTeil,
         public sattel: FahrradTeil,
         public gabel: FahrradTeil,
-        public progammplanungInputArray: ProgrammplanungInput[] ) {}
+        public progammplanungInputArray: Programmplanung[] ) {}
 }

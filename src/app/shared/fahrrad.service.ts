@@ -1,5 +1,5 @@
 import { Fahrrad } from '../shared/fahrrad.model';
-import { ProgrammplanungInput } from './programmplanung-input.model';
+import { Programmplanung } from './programmplanung.model';
 import { FahrradTeilService } from './fahrrad-teil.service';
 import { FahrradTeil } from './fahrrad-teil.model';
 
@@ -7,6 +7,8 @@ export class FahrradService {
 
     private fahrradTeilService: FahrradTeilService = new FahrradTeilService();
 
+
+    // TODO MS: Alle Fährrader einfügen und umstellen auf Tagesbasis, neu berechnen
     private fahrraeder: Fahrrad[] = [
         new Fahrrad(
             'MTBAllrounder',
@@ -18,18 +20,18 @@ export class FahrradService {
             this.fahrradTeilService.getFahrradTeil('Fox32 F100'),
 
             [
-                new ProgrammplanungInput(0, 2220),
-                new ProgrammplanungInput(1, 3330),
-                new ProgrammplanungInput(2, 5550),
-                new ProgrammplanungInput(3, 8880),
-                new ProgrammplanungInput(4, 7770),
-                new ProgrammplanungInput(5, 7215),
-                new ProgrammplanungInput(6, 6660),
-                new ProgrammplanungInput(7, 4995),
-                new ProgrammplanungInput(8, 3330),
-                new ProgrammplanungInput(9, 1665),
-                new ProgrammplanungInput(10, 2220),
-                new ProgrammplanungInput(11, 1665)
+                new Programmplanung(0, 2220),
+                new Programmplanung(1, 3330),
+                new Programmplanung(2, 5550),
+                new Programmplanung(3, 8880),
+                new Programmplanung(4, 7770),
+                new Programmplanung(5, 7215),
+                new Programmplanung(6, 6660),
+                new Programmplanung(7, 4995),
+                new Programmplanung(8, 3330),
+                new Programmplanung(9, 1665),
+                new Programmplanung(10, 2220),
+                new Programmplanung(11, 1665)
 
             ]
         ),
@@ -43,18 +45,18 @@ export class FahrradService {
             this.fahrradTeilService.getFahrradTeil('Fox Talas140'),
 
             [
-                new ProgrammplanungInput(0, 1110),
-                new ProgrammplanungInput(1, 1665),
-                new ProgrammplanungInput(2, 2775),
-                new ProgrammplanungInput(3, 4440),
-                new ProgrammplanungInput(4, 3885),
-                new ProgrammplanungInput(5, 3607.5),
-                new ProgrammplanungInput(6, 3330),
-                new ProgrammplanungInput(7, 2497.5),
-                new ProgrammplanungInput(8, 1665),
-                new ProgrammplanungInput(9, 832.5),
-                new ProgrammplanungInput(10, 1110),
-                new ProgrammplanungInput(11, 832.5)
+                new Programmplanung(0, 1110),
+                new Programmplanung(1, 1665),
+                new Programmplanung(2, 2775),
+                new Programmplanung(3, 4440),
+                new Programmplanung(4, 3885),
+                new Programmplanung(5, 3607.5),
+                new Programmplanung(6, 3330),
+                new Programmplanung(7, 2497.5),
+                new Programmplanung(8, 1665),
+                new Programmplanung(9, 832.5),
+                new Programmplanung(10, 1110),
+                new Programmplanung(11, 832.5)
             ]
         ),
         new Fahrrad(
@@ -67,18 +69,18 @@ export class FahrradService {
             this.fahrradTeilService.getFahrradTeil('Fox Talas140'),
 
             [
-                new ProgrammplanungInput(0, 740),
-                new ProgrammplanungInput(1, 1110),
-                new ProgrammplanungInput(2, 1850),
-                new ProgrammplanungInput(3, 2960),
-                new ProgrammplanungInput(4, 2590),
-                new ProgrammplanungInput(5, 2405),
-                new ProgrammplanungInput(6, 2220),
-                new ProgrammplanungInput(7, 1665),
-                new ProgrammplanungInput(8, 1110),
-                new ProgrammplanungInput(9, 555),
-                new ProgrammplanungInput(10, 740),
-                new ProgrammplanungInput(11, 555)
+                new Programmplanung(0, 740),
+                new Programmplanung(1, 1110),
+                new Programmplanung(2, 1850),
+                new Programmplanung(3, 2960),
+                new Programmplanung(4, 2590),
+                new Programmplanung(5, 2405),
+                new Programmplanung(6, 2220),
+                new Programmplanung(7, 1665),
+                new Programmplanung(8, 1110),
+                new Programmplanung(9, 555),
+                new Programmplanung(10, 740),
+                new Programmplanung(11, 555)
             ]
         ),
         new Fahrrad(
@@ -91,18 +93,18 @@ export class FahrradService {
             this.fahrradTeilService.getFahrradTeil('Rock Schox Reba'),
 
             [
-                new ProgrammplanungInput(0, 518),
-                new ProgrammplanungInput(1, 777),
-                new ProgrammplanungInput(2, 1295),
-                new ProgrammplanungInput(3, 2072),
-                new ProgrammplanungInput(4, 1813),
-                new ProgrammplanungInput(5, 1683.5),
-                new ProgrammplanungInput(6, 1554),
-                new ProgrammplanungInput(7, 1165.5),
-                new ProgrammplanungInput(8, 777),
-                new ProgrammplanungInput(9, 388.5),
-                new ProgrammplanungInput(10, 518),
-                new ProgrammplanungInput(11, 388.5)
+                new Programmplanung(0, 518),
+                new Programmplanung(1, 777),
+                new Programmplanung(2, 1295),
+                new Programmplanung(3, 2072),
+                new Programmplanung(4, 1813),
+                new Programmplanung(5, 1683.5),
+                new Programmplanung(6, 1554),
+                new Programmplanung(7, 1165.5),
+                new Programmplanung(8, 777),
+                new Programmplanung(9, 388.5),
+                new Programmplanung(10, 518),
+                new Programmplanung(11, 388.5)
             ]
         )
     ];
