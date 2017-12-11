@@ -7,18 +7,12 @@ export class FahrradService {
 
     private fahrradTeilService: FahrradTeilService = new FahrradTeilService();
 
-
-    // TODO MS: Alle Fährrader einfügen und umstellen auf Tagesbasis, neu berechnen
     private fahrraeder: Fahrrad[] = [
         new Fahrrad(
             'MTBAllrounder',
-            // 'Aluminium 7005DB',
-            // 'Spark',
-            // 'Fox32 F100',
             this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
             this.fahrradTeilService.getFahrradTeil('Spark'),
             this.fahrradTeilService.getFahrradTeil('Fox32 F100'),
-
             [
                 new Programmplanung(0, 2220),
                 new Programmplanung(1, 3330),
@@ -37,13 +31,9 @@ export class FahrradService {
         ),
         new Fahrrad(
             'MTBCompetition',
-            // 'Carbon Monocoque',
-            // 'Speed line',
-            // 'Fox Talas140',
             this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
             this.fahrradTeilService.getFahrradTeil('Speed line'),
             this.fahrradTeilService.getFahrradTeil('Fox Talas140'),
-
             [
                 new Programmplanung(0, 1110),
                 new Programmplanung(1, 1665),
@@ -61,9 +51,6 @@ export class FahrradService {
         ),
         new Fahrrad(
             'MTBDownhill',
-            // 'Aluminium 7005TB',
-            // 'Fizik Tundra',
-            // 'Fox Talas140',
             this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
             this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
             this.fahrradTeilService.getFahrradTeil('Fox Talas140'),
@@ -84,14 +71,10 @@ export class FahrradService {
             ]
         ),
         new Fahrrad(
-            'MTB Extreme',
-            // 'Carbon Monocoque',
-            // 'Spark',
-            // 'Rock Schox Reba',
+            'MTBExtreme',
             this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
             this.fahrradTeilService.getFahrradTeil('Spark'),
             this.fahrradTeilService.getFahrradTeil('Rock Schox Reba'),
-
             [
                 new Programmplanung(0, 518),
                 new Programmplanung(1, 777),
@@ -106,7 +89,88 @@ export class FahrradService {
                 new Programmplanung(10, 518),
                 new Programmplanung(11, 388.5)
             ]
-        )
+        ),
+        new Fahrrad(
+            'MTBFreeride',
+            this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
+            this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
+            this.fahrradTeilService.getFahrradTeil('Fox32 F80'),
+            [
+                new Programmplanung(0, 370),
+                new Programmplanung(1, 555),
+                new Programmplanung(2, 925),
+                new Programmplanung(3, 1480),
+                new Programmplanung(4, 1295),
+                new Programmplanung(5, 1202.5),
+                new Programmplanung(6, 1110),
+                new Programmplanung(7, 832.5),
+                new Programmplanung(8, 555),
+                new Programmplanung(9, 277.5),
+                new Programmplanung(10, 370),
+                new Programmplanung(11, 277.5)
+            ]
+        ),
+        new Fahrrad(
+            'MTB Marathon',
+            this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
+            this.fahrradTeilService.getFahrradTeil('Race line'),
+            this.fahrradTeilService.getFahrradTeil('Rock Schox ReconSL'),
+            [
+                new Programmplanung(0, 592),
+                new Programmplanung(1, 888),
+                new Programmplanung(2, 1480),
+                new Programmplanung(3, 2368),
+                new Programmplanung(4, 2072),
+                new Programmplanung(5, 1924),
+                new Programmplanung(6, 1776),
+                new Programmplanung(7, 1332),
+                new Programmplanung(8, 888),
+                new Programmplanung(9, 444),
+                new Programmplanung(10, 592),
+                new Programmplanung(11, 444)
+            ]
+        ),
+        new Fahrrad(
+            'MTBPerformance',
+            this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
+            this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
+            this.fahrradTeilService.getFahrradTeil('Rock Schox Reba'),
+            [
+                new Programmplanung(0, 888),
+                new Programmplanung(1, 1332),
+                new Programmplanung(2, 2220),
+                new Programmplanung(3, 3552),
+                new Programmplanung(4, 3108),
+                new Programmplanung(5, 2886),
+                new Programmplanung(6, 2664),
+                new Programmplanung(7, 1998),
+                new Programmplanung(8, 1332),
+                new Programmplanung(9, 666),
+                new Programmplanung(10, 888),
+                new Programmplanung(11, 666)
+            ]
+        ),
+        new Fahrrad(
+            'MTBTrail',
+            this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
+            this.fahrradTeilService.getFahrradTeil('Speed line'),
+            this.fahrradTeilService.getFahrradTeil('SR Suntour Raidon'),
+            [
+                new Programmplanung(0, 962),
+                new Programmplanung(1, 1443),
+                new Programmplanung(2, 2405),
+                new Programmplanung(3, 3848),
+                new Programmplanung(4, 3367),
+                new Programmplanung(5, 3126.5),
+                new Programmplanung(6, 2886),
+                new Programmplanung(7, 2164.5),
+                new Programmplanung(8, 1443),
+                new Programmplanung(9, 721.5),
+                new Programmplanung(10, 962),
+                new Programmplanung(11, 721.5)
+            ]
+        ),
+        
     ];
 
     getFahrraeder() {
