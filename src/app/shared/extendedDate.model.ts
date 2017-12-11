@@ -68,7 +68,7 @@ export class ExtendedDate {
             return false;
         } else {
             // Ansonsten wird geprüft, ob dieser Tag vielleicht ein Feiertag ist
-            
+
             holiday.setState('nw');
             return !holiday.isHoliday(datum);
         }
