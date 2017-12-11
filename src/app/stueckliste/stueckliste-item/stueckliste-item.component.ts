@@ -9,6 +9,8 @@ import { Fahrrad } from '../../shared/fahrrad.model';
 export class StuecklisteItemComponent implements OnInit {
   @Input() fahrrad: Fahrrad;
 
+  // TODO SW: Änderung, dass die Stückliste auch korrekt angezeigt ja
+
   constructor() { }
 
   ngOnInit() {

@@ -11,4 +11,6 @@ export class Programmplanung {
             this.demand = planning;
         }
     }
+
+    // TODO MS: Ausgabe mit Gettern in Tages + Monatsweise, Berechnung über ExtendedDate
 }
