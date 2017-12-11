@@ -1,3 +1,5 @@
+import * as holiday from '../../../node_modules/holiday-de';
+
 export class ExtendedDate {
 
     private date: Date;
@@ -59,32 +61,27 @@ export class ExtendedDate {
         return tempDate.getDate();
     }
 
-    getAktuellerTagIstArbeitstag() {
-        this.getIstArbeistag(this.date.getDay());
-    }
+    private istArbeitstag(datum: Date) {
 
-    private getIstArbeistag(tag: Number) {
-        if (tag === 5 || 6 ) {
+        // Wenn der Tag ein Samstag oder Sonntag ist, dann ist garantiert kein Arbeitstag
+        if (datum.getDate() === 5 || datum.getDate() === 6) {
             return false;
         } else {
-            return true;
+            // Ansonsten wird geprüft, ob dieser Tag vielleicht ein Feiertag ist
+            
+            holiday.setState('nw');
+            return !holiday.isHoliday(datum);
         }
     }
-
 
     // TODO MS: Korrigieren und mit Urlaubstagen prüfen (https://github.com/jdiehl/holiday-de)
     getAnzahlArbeitstageImMonat() {
         let result = 0;
         const tempDate: Date = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
 
-        while (tempDate.getDate() <= this.getAnzahlTageImMonat()) {
-            console.log(tempDate);
-            console.log(tempDate.getDay());
-            if (tempDate.getDay() !== 5 || 6) {
-                result = result + 1;
-                console.log('Ist Wochentag');
-            } else {
-                console.log('Ist kein Wochentag');
+        while (tempDate.getDate() < this.getAnzahlTageImMonat()) {
+            if ( this.istArbeitstag(tempDate) ) {
+                ++result;
             }
             tempDate.setDate(tempDate.getDate() + 1);
         }
