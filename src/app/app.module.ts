@@ -11,6 +11,8 @@ import { FahrradService } from './shared/fahrrad.service';
 import { TestTabComponent } from './test-tab/test-tab.component';
 import { FormsModule } from '@angular/forms';
 import { FahrradTeilService } from './shared/fahrrad-teil.service';
+import { ProduktionsplanungComponent } from './produktionsplanung/produktionsplanung.component';
+import { ParameterComponent } from './parameter/parameter.component';
 
 // tslint:disable-next-line:max-line-length
 
@@ -22,7 +24,9 @@ import { FahrradTeilService } from './shared/fahrrad-teil.service';
     StuecklisteComponent,
     HeaderComponent,
     StuecklisteItemComponent,
-    TestTabComponent
+    TestTabComponent,
+    ProduktionsplanungComponent,
+    ParameterComponent
   ],
   imports: [
     BrowserModule,
