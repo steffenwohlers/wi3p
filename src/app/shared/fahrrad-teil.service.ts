@@ -29,8 +29,6 @@ export class FahrradTeilService {
     return this.teile;
   }
 
-  test() {}
-
   getFahrradTeil(name: string): FahrradTeil {
     let result: FahrradTeil;
     // tslint:disable-next-line:no-shadowed-variable

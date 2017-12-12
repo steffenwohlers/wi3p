@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { FahrradTeilService } from './shared/fahrrad-teil.service';
 import { ProduktionsplanungComponent } from './produktionsplanung/produktionsplanung.component';
 import { ParameterComponent } from './parameter/parameter.component';
+import { ParameterService } from './shared/parameter.service';
 
 // tslint:disable-next-line:max-line-length
 
@@ -35,7 +36,8 @@ import { ParameterComponent } from './parameter/parameter.component';
   ],
   providers: [
     FahrradService,
-    FahrradTeilService
+    FahrradTeilService,
+    ParameterService
   ],
   bootstrap: [AppComponent]
 })
