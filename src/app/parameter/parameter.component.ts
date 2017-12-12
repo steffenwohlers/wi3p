@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ParameterService } from '../shared/parameter.service';
 
 @Component({
   selector: 'app-parameter',
@@ -8,7 +7,7 @@ import { ParameterService } from '../shared/parameter.service';
 })
 export class ParameterComponent implements OnInit {
 
-  constructor(public parameterService: ParameterService) { }
+  constructor() { }
 
   ngOnInit() {
   }
