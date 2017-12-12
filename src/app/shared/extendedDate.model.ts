@@ -74,7 +74,6 @@ export class ExtendedDate {
         }
     }
 
-    // TODO MS: Korrigieren und mit Urlaubstagen prüfen (https://github.com/jdiehl/holiday-de)
     getAnzahlArbeitstageImMonat() {
         let result = 0;
         const tempDate: Date = new Date(this.date.getFullYear(), this.date.getMonth(), 1);

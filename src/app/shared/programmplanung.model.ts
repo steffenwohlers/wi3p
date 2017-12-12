@@ -1,16 +1,37 @@
 export class Programmplanung {
 
-    public date: Date;
+    public planning: [number];
+    public demand: [number];
 
-    constructor( month: number, public planning: number, public demand?: number ) {
-        this.date = new Date();
-        this.date.setFullYear(2017, month, 1);
 
-        // Demand muss nicht mit angegeben werden, da häufig nicht klar am Anfang
-        if ( !demand ) {
-            this.demand = planning;
+    constructor( planning: [number] ) {
+        // Der erwartete Wert wird natürlich auch bei Demand angenommen zuerst
+        this.planning = planning;
+        this.demand = Object.assign([], planning); // Kopie statt Referenzkopie
+    }
+
+    public getDiff() {
+        const result = Object.assign([], this.planning);
+
+        for (let i = 0; i < result.length; ++i) {
+            result[i] -= this.demand[i];
         }
+
+        return result;
     }
 
     // TODO MS: Ausgabe mit Gettern in Tages + Monatsweise, Berechnung über ExtendedDate
+
+    /*
+        Dazu gibt es einen Getter bei dem man ein Startdatum auswählen kann, sonst wird der 1.1. genommen
+        Dann wird genau gerechnet für jeden Monat wie es aussieht, runter auf jeden Tag und als Array
+        [
+            [
+                Tag1Output,
+                Tag2Output
+            ],
+            Monat2,
+            Monat 3
+        ]
+    */
 }
