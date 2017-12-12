@@ -14,8 +14,10 @@ export class ProgrammplanungComponent implements OnInit {
 
   ngOnInit() {
     this.fahrraeder = this.fahrradService.getFahrraeder();
+  }
 
-    console.log(this.fahrraeder);
+  trackByIndex(index: number, obj: any): any {
+    return index;
   }
 
 }

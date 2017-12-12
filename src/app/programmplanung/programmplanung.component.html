@@ -4,35 +4,37 @@
     <thead>
         <tr>
             <th colspan="2"></th>
-            <th *ngFor="let arr of fahrraeder[0].progammplanungInputArray">{{ arr.date | date:'M' }}</th>
+            <th *ngFor="let wert of [1,2,3,4,5,6,7,8,9,10,11,12]">{{ wert }}</th>
         </tr>
     </thead>
     <tbody *ngFor="let fahrrad of fahrraeder">
         <tr>
             <td rowspan="3">{{ fahrrad.modell }}</td>
             <td>Planung</td>
-            <td *ngFor="let arr of fahrrad.progammplanungInputArray">
+            <td *ngFor="let planung of fahrrad.programmplanung.planning;let i = index;trackBy:trackByIndex;">
                 <input type="number"
                 class="form control"
-                [(ngModel)]="arr.planning"
+                [(ngModel)]="fahrrad.programmplanung.planning[i]"
                 >
             </td>
         </tr>
         <tr>
 
             <td>Nachfrage</td>
-            <td *ngFor="let arr of fahrrad.progammplanungInputArray">
-                    <input type="number"
-                    class="form control"
-                    [(ngModel)]="arr.demand"
-                    >
+            <td *ngFor="let demand of fahrrad.programmplanung.demand;let i = index;trackBy:trackByIndex;">
+                <input type="number"
+                class="form control"
+                [(ngModel)]="fahrrad.programmplanung.demand[i]"
+                >
             </td>
         </tr>
         <tr>
-        
+
             <td>Differenz</td>
-            <td *ngFor="let arr of fahrrad.progammplanungInputArray" [ngClass]="{'down':arr.planning < arr.demand}">
-                {{ arr.planning - arr.demand }}
+            <td *ngFor="let wert of fahrrad.programmplanung.getDiff()"
+                [ngClass]="{'down': wert < 0}"
+                >
+                    {{wert}}
             </td>
         </tr>
     </tbody>
