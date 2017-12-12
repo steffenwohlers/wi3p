@@ -1,52 +1,8 @@
-<table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th *ngFor="let i of fahrrad.progammplanungInputArray">Month: {{i.date.getMonth()}}</th>
-            </tr>
-        </thead>
-        <tbody>
-                <tr>
-                    <td *ngFor="let programmplanung of fahrrad.progammplanungInputArray">
-                        <input type="number" 
-                        id="modell" 
-                        class="form control"
-                        [(ngModel)]="programmplanung.planning"
-                        >
-                    </td>
-                </tr>
-                <tr>
-                    <td *ngFor="let programmplanung of fahrrad.progammplanungInputArray">
-                        <input type="number" 
-                        id="modell" 
-                        class="form control"
-                        [(ngModel)]="programmplanung.demand"
-                        >
-                    </td>
-                </tr>
-                <tr>
-                    <td *ngFor="let programmplanung of fahrrad.progammplanungInputArray">{{programmplanung.planning - programmplanung.demand}}</td>
-                </tr>        
-        </tbody>
-    </table>
-<hr>
-<hr>
+{{fahrrad.gabel.lieferdaten.losgroesse}}
+{{fahrrad2.gabel.lieferdaten.losgroesse}}
 
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th *ngFor="let week of weeks">week: {{week}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td *ngFor="let week of weeks">Zweite SPalte</td>
-        </tr>
-    </tbody>
-</table>
-
-<h4>Date</h4>
-{{date.getDate()}}
-<h4>ExtendedDate</h4>
-{{extendedDate.getMonthAsString()}}
-{{extendedDate.getAnzahlTageImMonat()}}
-{{extendedDate.getAnzahlArbeitstageImMonat()}}
+<input type="number"
+class="form control"
+[(ngModel)]="fahrrad.gabel.lieferdaten.losgroesse"
+>
+{{lieferdatenService.lieferdatenGabel.losgroesse}}

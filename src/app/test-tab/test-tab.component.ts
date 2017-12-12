@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Fahrrad } from '../shared/fahrrad.model';
 import { FahrradService } from '../shared/fahrrad.service';
-import { ExtendedDate } from '../shared/extendedDate.model';
+import { LieferdatenService } from '../shared/lieferdaten.service';
 
 @Component({
   selector: 'app-test-tab',
@@ -9,19 +9,16 @@ import { ExtendedDate } from '../shared/extendedDate.model';
   styles: []
 })
 export class TestTabComponent implements OnInit {
-  weeks: number[];
-
-  date: Date = new Date(2017, 1, 1);
-  extendedDate: ExtendedDate = new ExtendedDate(this.date);
-
 
   fahrraeder: Fahrrad[];
   fahrrad: Fahrrad;
+  fahrrad2: Fahrrad;
 
-    constructor(private fahrradService: FahrradService) {
-      this.weeks = Array(52).fill(0).map((x, i) => i);
+    constructor(private fahrradService: FahrradService, public lieferdatenService: LieferdatenService) {
+
       this.fahrraeder = fahrradService.getFahrraeder();
       this.fahrrad = this.fahrraeder[0];
+      this.fahrrad2 = this.fahrraeder[1];
      }
 
     ngOnInit() {

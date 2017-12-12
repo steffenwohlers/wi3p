@@ -7,7 +7,12 @@ import { LieferdatenService } from './lieferdaten.service';
 
 export class FahrradTeilService {
 
-  private lieferdatenService: LieferdatenService = new LieferdatenService()
+  constructor() {
+
+  }
+
+  private ls: LieferdatenService;
+  private lieferdatenService: LieferdatenService = new LieferdatenService();
 
   private teile: FahrradTeil[] = [
     new FahrradTeil('Aluminium 7005DB', FahrradTeilTyp.Rahmen, this.lieferdatenService.lieferdatenRahmen),
