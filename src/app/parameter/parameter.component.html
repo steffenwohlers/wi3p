@@ -1,1 +1,95 @@
-{{lieferdatenService.lieferdatenGabel.losgroesse}}
+<!-- Losgröße -->
+<div class="row">
+    <div class="col-md-6">
+        <h3>Losgrößen</h3>
+        <table class="table table-striped">
+            <thead>
+                <th>Modell</th>
+                <th>Anzahl</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Gabel</td>
+                    <td><input type="number" class="form control" [(ngModel)]="fahrrad.gabel.lieferdaten.losgroesse"></td>
+                </tr>
+                <tr>
+                        <td>Sattel</td>
+                        <td><input type="number" class="form control" [(ngModel)]="fahrrad.sattel.lieferdaten.losgroesse"></td>
+                </tr>
+                <tr>
+                        <td>Gabel</td>
+                        <td><input type="number" class="form control" [(ngModel)]="fahrrad.gabel.lieferdaten.losgroesse"></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+
+<!-- Vorlaufzeit -->
+<div class="row">
+        <div class="col-md-6">
+            <h3>Vorlaufzeit</h3>
+            <table class="table table-striped">
+                <thead>
+                    <th>Modell</th>
+                    <th>Anzahl</th>
+                    <th>Typ</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Gabel</td>
+                        <td><input type="number" class="form control" [(ngModel)]="fahrrad.gabel.lieferdaten.vorlaufzeit.anzahl"></td>
+                        <td>{{fahrrad.gabel.lieferdaten.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    </tr>
+                    <tr>
+                            <td>Sattel</td>
+                            <td><input type="number" class="form control" [(ngModel)]="fahrrad.sattel.lieferdaten.vorlaufzeit.anzahl"></td>
+                            <td>{{fahrrad.sattel.lieferdaten.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    </tr>
+                    <tr>
+                            <td>Gabel</td>
+                            <td><input type="number" class="form control" [(ngModel)]="fahrrad.gabel.lieferdaten.vorlaufzeit.anzahl"></td>
+                            <td>{{fahrrad.gabel.lieferdaten.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+
+<!-- Bestelleingang bis Produktion -->
+<div class="row">
+        <div class="col-md-6">
+            <h3>Bestelleingang bis Produktion</h3>
+            <table class="table table-striped">
+                <thead>
+                    <th>Modell</th>
+                    <th>Anzahl</th>
+                    <th>Typ</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Gabel</td>
+                        <td><input type="number" class="form control" [(ngModel)]="fahrrad.gabel.lieferdaten.bestelleingangBisProduktion.anzahl"></td>
+                        <td>{{fahrrad.gabel.lieferdaten.bestelleingangBisProduktion.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    </tr>
+                    <tr>
+                            <td>Sattel</td>
+                            <td><input type="number" class="form control" [(ngModel)]="fahrrad.sattel.lieferdaten.bestelleingangBisProduktion.anzahl"></td>
+                            <td>{{fahrrad.sattel.lieferdaten.bestelleingangBisProduktion.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    </tr>
+                    <tr>
+                            <td>Gabel</td>
+                            <td><input type="number" class="form control" [(ngModel)]="fahrrad.gabel.lieferdaten.bestelleingangBisProduktion.anzahl"></td>
+                            <td>{{fahrrad.gabel.lieferdaten.bestelleingangBisProduktion.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+ 
