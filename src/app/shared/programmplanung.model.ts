@@ -4,6 +4,8 @@ export class Programmplanung {
     public demand: [number];
 
 
+    // TODO MS: Startdatum wird static Date, dazu static Methode zum getten + setten
+    // TODO MS: Methode, die mit Jahresplan + Startdatum für ein Jahr tageweise aufsplittet
     constructor( planning: [number] ) {
         // Der erwartete Wert wird natürlich auch bei Demand angenommen zuerst
         this.planning = planning;
