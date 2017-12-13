@@ -14,6 +14,7 @@ import { FahrradTeilService } from './shared/fahrrad-teil.service';
 import { ProduktionsplanungComponent } from './produktionsplanung/produktionsplanung.component';
 import { ParameterComponent } from './parameter/parameter.component';
 import { LieferdatenService } from './shared/lieferdaten.service';
+import { ProduktionskapazitaetenService } from './shared/produktionskapazitaeten.service';
 
 // tslint:disable-next-line:max-line-length
 
@@ -37,7 +38,8 @@ import { LieferdatenService } from './shared/lieferdaten.service';
   providers: [
     FahrradService,
     FahrradTeilService,
-    LieferdatenService
+    LieferdatenService,
+    ProduktionskapazitaetenService
   ],
   bootstrap: [AppComponent]
 })
