@@ -44,6 +44,7 @@ export class Programmplanung {
                     const monat = aktuellesDatum.getMonth();
                     const monthlyOutput = this.vorlage[monat];
                     const arbeitsTageVonMonat = DatumService.getArbeitstageMonat(aktuellesDatum);
+                    console.log('Der Monat ' + aktuellesDatum.getMonth() + ' hat ' + arbeitsTageVonMonat + ' Arbeitstage');
 
                     output += (1 / arbeitsTageVonMonat) * monthlyOutput; // Addiere diesen Wert
                 }
