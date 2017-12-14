@@ -31,8 +31,6 @@ export class Programmplanung {
     public calculateOutput() {
         const aktuellesDatum = new Date(Programmplanung.startDatum);
 
-        let summe = 0;
-
         // Gehe durch die nächsten 52 Wochen
         for (let tag = 0; tag < 52; ++tag) {
             const montag = new Date(aktuellesDatum);
@@ -50,8 +48,6 @@ export class Programmplanung {
                 aktuellesDatum.setDate(aktuellesDatum.getDate() + 1);
             }
 
-            summe += output;
-
             // Speichere Werte ab
             moment.locale('de');
             this.werte[tag] = { startDate: montag,  planning: output, demand: output, calendarWeek: moment(montag).format('ww')};
@@ -59,7 +55,5 @@ export class Programmplanung {
             // Gehe weiter zur nächsten Woche
             aktuellesDatum.setDate(aktuellesDatum.getDate() + 1);
         }
-
-        console.log(summe);
     }
 }
