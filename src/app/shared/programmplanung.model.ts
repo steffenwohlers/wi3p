@@ -1,39 +1,65 @@
+import * as moment from '../../../node_modules/moment';
+import '../../../node_modules/moment/locale/de';
+import { DatumService } from './datum.service';
+
 export class Programmplanung {
+    public static startDatum: Date = new Date(2017, 0, 2);
 
-    public planning: [number];
-    public demand: [number];
+    public vorlage: [number];
+    public werte = [];
 
-
-    // TODO MS: Startdatum wird static Date, dazu static Methode zum getten + setten
-    // TODO MS: Methode, die mit Jahresplan + Startdatum für ein Jahr tageweise aufsplittet
-    constructor( planning: [number] ) {
-        // Der erwartete Wert wird natürlich auch bei Demand angenommen zuerst
-        this.planning = planning;
-        this.demand = Object.assign([], planning); // Kopie statt Referenzkopie
-    }
-
-    public getDiff() {
-        const result = Object.assign([], this.planning);
-
-        for (let i = 0; i < result.length; ++i) {
-            result[i] -= this.demand[i];
+    static setStartDatum(start: Date) {
+        // Durch die Planung auf Wochenbasis wird nur ein Montag als Startdatum akzeptiert
+        if (start.getDay() === 1) {
+            Programmplanung.startDatum = start;
         }
 
-        return result;
+        // Wichtig: Wenn in Programmplanung ein Datum eingestellt wird, muss anschließend für jedes Fahrrad
+        // die calculate Methode neu aufgerufen werden
     }
 
-    // TODO MS: Ausgabe mit Gettern in Tages + Monatsweise, Berechnung über ExtendedDate
+    // Nimmt Planwerte für Jahr entgegen und speichert ab, startet dann Outputberechnung
+    constructor(vorlage: [number]) {
+        this.vorlage = vorlage;
+        this.calculateOutput();
+    }
 
-    /*
-        Dazu gibt es einen Getter bei dem man ein Startdatum auswählen kann, sonst wird der 1.1. genommen
-        Dann wird genau gerechnet für jeden Monat wie es aussieht, runter auf jeden Tag und als Array
-        [
-            [
-                Tag1Output,
-                Tag2Output
-            ],
-            Monat2,
-            Monat 3
-        ]
-    */
+    /**
+     *  Berechnet den Output auf Wochenbasis ab dem aktuellen Startdatum und speichert Ihn unter planning ab
+     *  Problem: Ungerade Werte, Bugfixing
+     */
+    public calculateOutput() {
+        const aktuellesDatum = new Date(Programmplanung.startDatum);
+
+        let summe = 0;
+
+        // Gehe durch die nächsten 52 Wochen
+        for (let tag = 0; tag < 52; ++tag) {
+            const montag = new Date(aktuellesDatum);
+            let output = 0;
+
+            // Finde Anzahl Arbeitstage in diesem Zeitraum heraus und iteriere für jeden
+            for (let i = 0; i < 6; ++i) {
+                if (DatumService.istArbeitstag(aktuellesDatum)) {
+                    const monat = aktuellesDatum.getMonth();
+                    const monthlyOutput = this.vorlage[monat];
+                    const arbeitsTageVonMonat = DatumService.getArbeitstageMonat(aktuellesDatum);
+
+                    output += (1 / arbeitsTageVonMonat) * monthlyOutput; // Addiere diesen Wert
+                }
+                aktuellesDatum.setDate(aktuellesDatum.getDate() + 1);
+            }
+
+            summe += output;
+
+            // Speichere Werte ab
+            moment.locale('de');
+            this.werte[tag] = { startDate: montag,  planning: output, demand: output, calendarWeek: moment(montag).format('ww')};
+
+            // Gehe weiter zur nächsten Woche
+            aktuellesDatum.setDate(aktuellesDatum.getDate() + 1);
+        }
+
+        console.log(summe);
+    }
 }
