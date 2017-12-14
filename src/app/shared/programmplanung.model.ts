@@ -31,11 +31,13 @@ export class Programmplanung {
     public calculateOutput() {
         const aktuellesDatum = new Date(Programmplanung.startDatum);
 
+        // Anmerkung: Sollte Variable nicht Woche heißen?
         // Gehe durch die nächsten 52 Wochen
         for (let tag = 0; tag < 52; ++tag) {
             const montag = new Date(aktuellesDatum);
             let output = 0;
 
+            // Müsste hier nicht i < 7 stehen? so iterieren wir im Moment nur 6 mal durch.
             // Finde Anzahl Arbeitstage in diesem Zeitraum heraus und iteriere für jeden
             for (let i = 0; i < 6; ++i) {
                 if (DatumService.istArbeitstag(aktuellesDatum)) {
