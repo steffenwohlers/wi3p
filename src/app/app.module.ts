@@ -15,6 +15,7 @@ import { ProduktionsplanungComponent } from './produktionsplanung/produktionspla
 import { ParameterComponent } from './parameter/parameter.component';
 import { LieferdatenService } from './shared/lieferdaten.service';
 import { ProduktionskapazitaetenService } from './shared/produktionskapazitaeten.service';
+import { ScInboundComponent } from './sc-inbound/sc-inbound.component';
 
 // tslint:disable-next-line:max-line-length
 
@@ -28,7 +29,8 @@ import { ProduktionskapazitaetenService } from './shared/produktionskapazitaeten
     StuecklisteItemComponent,
     TestTabComponent,
     ProduktionsplanungComponent,
-    ParameterComponent
+    ParameterComponent,
+    ScInboundComponent
   ],
   imports: [
     BrowserModule,
