@@ -1,3 +1,27 @@
-<p>
-  sc-inbound works!
-</p>
+<h4>Sattel</h4>
+Produktionstag: {{datumAsString(produktionsplanungSattel[0].datum)}}
+<hr>
+
+Start der Produktion im Werk: {{ datumAsString(berechneStartimWerk(produktionsplanungSattel[0].datum))}}
+<br>
+Fertigstellung im Werk:
+<br>
+Verzögerung : <input type="number" [(ngModel)]="werkVerzoegerung">
+<br>
+{{ werkVerzoegerung }}
+<hr>
+1. Transportweg Start:
+<br>
+2. Transportweg Ende:
+<br>
+Verzögerung : <input type="number" [(ngModel)]="transport1Verzoegerung">
+<br>
+
+<hr>
+Eingang OEM: 
+
+<hr>
+<hr>
+{{dateTest}}
+<br>
+{{dateTest.getDay()}}

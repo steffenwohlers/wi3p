@@ -9,7 +9,7 @@ export class DatumService {
   public static istArbeitstag(datum: Date) {
 
     // Wenn der Tag ein Samstag oder Sonntag ist, dann ist garantiert kein Arbeitstag
-    if (datum.getDate() === 5 || datum.getDate() === 6) {
+    if (datum.getDay() === 0 || datum.getDay() === 6) {
       return false;
     } else {
       // Ansonsten wird geprüft, ob dieser Tag vielleicht ein Feiertag ist
@@ -37,6 +37,14 @@ export class DatumService {
     date = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
     return date.getDate();
+  }
+
+  public static getDatumAsString(date: Date): String {
+    let result: string;
+
+    result = '' + date.getDate() + date.getMonth() + date.getFullYear();
+
+    return result;
   }
 
 }

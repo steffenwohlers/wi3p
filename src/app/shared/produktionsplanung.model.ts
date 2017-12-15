@@ -1,3 +1,3 @@
 export class Produktionsplanung {
-    constructor (date: Date, menge: Number) {}
+    constructor ( public datum: Date, public menge: Number) {}
 }
