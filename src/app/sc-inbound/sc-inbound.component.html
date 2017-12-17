@@ -2,7 +2,7 @@
 Produktionstag: {{datumAsString(produktionsplanungSattel[0].datum)}}
 <hr>
 
-Start der Produktion im Werk: {{ datumAsString(berechneStartimWerk(produktionsplanungSattel[0].datum))}}
+Start der Produktion im Werk: {{ datumAsString(berechneStartImWerk(produktionsplanungSattel[0].datum))}}
 <br>
 Fertigstellung im Werk:
 <br>
@@ -18,10 +18,17 @@ Verzögerung : <input type="number" [(ngModel)]="transport1Verzoegerung">
 <br>
 
 <hr>
-Eingang OEM: 
+<hr>
+<hr>
 
-<hr>
-<hr>
-{{dateTest}}
+Eingang OEM: {{datumAsString(dateTest)}}
 <br>
-{{dateTest.getDay()}}
+Ankunft OEM: {{datumAsString(berechneAnkunftBeiOem(dateTest))}}
+<br>
+Start LKW: {{datumAsString(berechneStartLkwFahrt(berechneAnkunftBeiOem(dateTest)))}}
+<br>
+Start Schiff: {{datumAsString(berechneStartSchiffFahrt(berechneStartLkwFahrt(berechneAnkunftBeiOem(dateTest))))}}
+<br>
+Start LKW: {{datumAsString(berechneStartLkwFahrt(berechneStartSchiffFahrt(berechneStartLkwFahrt(berechneAnkunftBeiOem(dateTest)))))}}
+<br>
+Start Produktion: {{datumAsString(berechneStartImWerk(berechneStartLkwFahrt(berechneStartSchiffFahrt(berechneStartLkwFahrt(berechneAnkunftBeiOem(dateTest))))))}}

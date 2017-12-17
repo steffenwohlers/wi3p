@@ -38,6 +38,67 @@ export class ScInboundComponent implements OnInit {
 
   }
 
+  berechneAnkunftBeiOem(date: Date) {
+    let tempDate: Date;
+    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - 1);
+
+    tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
+
+    return tempDate;
+
+  }
+
+  berechneStartLkwFahrt(date: Date) {
+    let tempDate: Date;
+    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - 2);
+
+    tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
+
+    return tempDate;
+  }
+
+  berechneStartSchiffFahrt(date: Date) {
+    let tempDate: Date;
+    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - 30);
+
+    return tempDate;
+  }
+
+  berechneStartImWerk(date: Date) {
+
+    let tempDate: Date;
+    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - 5);
+
+    tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
+
+    return tempDate;
+  }
+
+  /**
+   *
+   *
+   *
+   *
+   * HILFSFUNKTIONEN
+   *
+   *
+   *
+   *
+   */
+  private berechneVorherigenLetztenArbeitstag(date: Date): Date {
+
+    let tempDate: Date;
+
+    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate());
+
+    while (!DatumService.istArbeitstag(tempDate)) {
+      tempDate.setDate(tempDate.getDate() - 1);
+    }
+
+    return tempDate;
+
+  }
+
   /**
    * Datum im Format  Day,  DD.MM.YYYY
    */
@@ -46,54 +107,43 @@ export class ScInboundComponent implements OnInit {
 
     switch (date.getDay()) {
       case 0 :
-        result = 'Sonntag, ';
-        break;
+      result = 'Sonntag, ';
+      break;
 
-        case 1 :
-        result = 'Montag, ';
-        break;
+      case 1 :
+      result = 'Montag, ';
+      break;
 
-        case 2 :
-        result = 'Dienstag, ';
-        break;
+      case 2 :
+      result = 'Dienstag, ';
+      break;
 
-        case 3 :
-        result = 'Mittwoch, ';
-        break;
+      case 3 :
+      result = 'Mittwoch, ';
+      break;
 
-        case 4 :
-        result = 'Donnerstag, ';
-        break;
+      case 4 :
+      result = 'Donnerstag, ';
+      break;
 
-        case 5 :
-        result = 'Freitag, ';
-        break;
+      case 5 :
+      result = 'Freitag, ';
+      break;
 
-        case 6 :
-        result = 'Samstag, ';
-        break;
+      case 6 :
+      result = 'Samstag, ';
+      break;
 
       default:
-        result = 'falsch';
-        console.log(date.getDate + '');
-        break;
+      result = 'falsch';
+      console.log(date.getDate + '');
+      break;
     }
 
     result = result + date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
     return result;
 
   }
-
-  berechneStartimWerk(date: Date) {
-
-    let tempDate: Date;
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdatenSattel.vorlaufzeit.anzahl);
-
-    // Prüfe ob der Starttag ein Arbeitstag ist, wenn nicht, ändere tempDate solange bis es einer ist
-    while (!DatumService.istArbeitstag(tempDate)) {
-      tempDate.setDate(tempDate.getDate() - 1);
-    }
-
-    return tempDate;
-  }
 }
+
+
