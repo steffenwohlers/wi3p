@@ -22,7 +22,7 @@ export class ScInboundComponent implements OnInit {
   transport1Verzoegerung = 0;
 
   // Testdaten
-  dateTest: Date = new Date(2017, 6, 9);
+  dateTest: Date = new Date(2017, 6, 12);
 
 
   constructor(
@@ -38,30 +38,28 @@ export class ScInboundComponent implements OnInit {
 
   }
 
+
   berechneAnkunftBeiOem(date: Date) {
-    let tempDate: Date;
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - 1);
 
-    tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
-
-    return tempDate;
-
+    return this.berechneRetrogradesStartDatum(date, 1);
   }
 
-  berechneStartLkwFahrt(date: Date) {
-    let tempDate: Date;
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - 2);
 
-    tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
+  berechneStartLkwFahrt2(date: Date) {
 
-    return tempDate;
+    return this.berechneRetrogradesStartDatum(date, this.lieferdatenSattel.supplychain[2].anzahl);
   }
 
   berechneStartSchiffFahrt(date: Date) {
     let tempDate: Date;
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - 30);
+    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdatenSattel.supplychain[1].anzahl);
 
     return tempDate;
+  }
+
+  berechneStartLkwFahrt1(date: Date) {
+
+    return this.berechneRetrogradesStartDatum(date, 2);
   }
 
   berechneStartImWerk(date: Date) {
@@ -85,7 +83,17 @@ export class ScInboundComponent implements OnInit {
    *
    *
    */
-  private berechneVorherigenLetztenArbeitstag(date: Date): Date {
+
+  private berechneRetrogradesStartDatum(date: Date, dauer: number): Date {
+    let tempDate: Date;
+    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - dauer);
+
+    tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
+
+    return tempDate;
+  }
+
+  berechneVorherigenLetztenArbeitstag(date: Date): Date {
 
     let tempDate: Date;
 

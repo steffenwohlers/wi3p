@@ -8,7 +8,7 @@ export class LieferdatenService {
         // Supplychain
         [
             new TagElement(2, Tag.Arbeitstag),
-            new TagElement(14, Tag.Kalendertag),
+            new TagElement(30, Tag.Kalendertag),
             new TagElement(2, Tag.Arbeitstag)
         ],
         // Vorlaufzeit

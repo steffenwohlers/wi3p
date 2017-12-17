@@ -25,10 +25,10 @@ Eingang OEM: {{datumAsString(dateTest)}}
 <br>
 Ankunft OEM: {{datumAsString(berechneAnkunftBeiOem(dateTest))}}
 <br>
-Start LKW: {{datumAsString(berechneStartLkwFahrt(berechneAnkunftBeiOem(dateTest)))}}
+Start LKW2: {{datumAsString(berechneStartLkwFahrt2(berechneAnkunftBeiOem(dateTest)))}}
 <br>
-Start Schiff: {{datumAsString(berechneStartSchiffFahrt(berechneStartLkwFahrt(berechneAnkunftBeiOem(dateTest))))}}
+Start Schiff: {{datumAsString(berechneStartSchiffFahrt(berechneStartLkwFahrt2(berechneAnkunftBeiOem(dateTest))))}}
 <br>
-Start LKW: {{datumAsString(berechneStartLkwFahrt(berechneStartSchiffFahrt(berechneStartLkwFahrt(berechneAnkunftBeiOem(dateTest)))))}}
+Start LKW1: {{datumAsString(berechneStartLkwFahrt1(berechneStartSchiffFahrt(berechneStartLkwFahrt2(berechneAnkunftBeiOem(dateTest)))))}}
 <br>
-Start Produktion: {{datumAsString(berechneStartImWerk(berechneStartLkwFahrt(berechneStartSchiffFahrt(berechneStartLkwFahrt(berechneAnkunftBeiOem(dateTest))))))}}
+Start Produktion: {{datumAsString(berechneStartImWerk(berechneStartLkwFahrt1(berechneStartSchiffFahrt(berechneStartLkwFahrt2(berechneAnkunftBeiOem(dateTest))))))}}
