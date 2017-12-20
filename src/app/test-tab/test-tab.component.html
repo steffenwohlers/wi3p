@@ -1,8 +1,11 @@
-{{fahrrad.gabel.lieferdaten.losgroesse}}
-{{fahrrad2.gabel.lieferdaten.losgroesse}}
 
-<input type="number"
-class="form control"
-[(ngModel)]="fahrrad.gabel.lieferdaten.losgroesse"
->
-{{lieferdatenService.lieferdatenGabel.losgroesse}}
+Value 1 = <input type="number" [(ngModel)]="value1">
+<br>
+Value 2 = <input type="number" [(ngModel)]="value2">
+<br>
+<!-- Losgröße = <input type="number" [ngModel]="losgroesse = value1 + value2"> -->
+<br>
+{{losgroesse}}
+{{losgroesseErreicht()}}
+<br>
+
