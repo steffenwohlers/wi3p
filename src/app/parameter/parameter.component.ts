@@ -16,7 +16,12 @@ export class ParameterComponent implements OnInit {
 
   ngOnInit() {
     this.fahrrad = this.fahrradService.getFahrrad(0);
-    console.log(this.fahrrad.gabel.lieferdaten.vorlaufzeit);
+  }
+
+  add(value: number): number {
+    value += 1;
+
+    return value;
   }
 
 }

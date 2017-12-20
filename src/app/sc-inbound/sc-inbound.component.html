@@ -1,34 +1,97 @@
+<h3>Supply-Chain Inbound Sattel</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Produktionsstart bei OEM:</th>
+            <th *ngFor="let produktionstag of produktionsplanungSattel">{{datumAsString(produktionstag.datum)}}</th> 
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="font-weight:bold">Start Produktion Hersteller:</td>
+            <td *ngFor="let produktionstag of produktionsplanungSattel">{{datumAsString(berechneStartImWerkSattel(berechneStartLkwFahrt1Sattel(berechneStartSchiffFahrtSattel(berechneStartLkwFahrt2Sattel(berechneAnkunftBeiOem(produktionstag.datum))))))}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold">Start LKW vom Hersteller:</td>
+            <td *ngFor="let produktionstag of produktionsplanungSattel">{{datumAsString(berechneStartLkwFahrt1Sattel(berechneStartSchiffFahrtSattel(berechneStartLkwFahrt2Sattel(berechneAnkunftBeiOem(produktionstag.datum)))))}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold">Start Verschiffung nach Deutschland:</td>
+            <td *ngFor="let produktionstag of produktionsplanungSattel">{{datumAsString(berechneStartSchiffFahrtSattel(berechneStartLkwFahrt2Sattel(berechneAnkunftBeiOem(produktionstag.datum))))}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold">Start LWK zum OEM:</td>
+            <td *ngFor="let produktionstag of produktionsplanungSattel">{{datumAsString(berechneStartLkwFahrt2Sattel(berechneAnkunftBeiOem(produktionstag.datum)))}}</td>
+        </tr>
+        <tr style="font-weight:bold">
+            <td>Ankunft beim OEM:</td>
+            <td *ngFor="let produktionstag of produktionsplanungSattel">{{datumAsString(berechneAnkunftBeiOem(produktionstag.datum))}}</td>
+        </tr>
+    </tbody>
+
+</table>
+<hr>
+<h3>Supply-Chain Inbound Gabel</h3>
+<table class="table table-striped">
+    <thead>
+            <th>Produktionsstart bei OEM:</th>
+            <th *ngFor="let produktionstag of produktionsplanungGabel">{{datumAsString(produktionstag.datum)}}</th> 
+    </thead>
+    <tbody>
+        <tr>
+            <td style="font-weight:bold">Start Produktion Hersteller</td>
+            <td *ngFor="let produktionstag of produktionsplanungGabel">{{datumAsString(berechneStartImWerkGabel(berechneStartZugFahrtGabel(berechneAnkunftBeiOem(produktionstag.datum))))}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold">Start Zug zum OEM:</td>
+            <td *ngFor="let produktionstag of produktionsplanungGabel">{{datumAsString(berechneStartZugFahrtGabel(berechneAnkunftBeiOem(produktionstag.datum)))}}</td>
+        </tr>
+        <tr style="font-weight:bold">
+            <td>Ankunft beim OEM:</td>
+            <td *ngFor="let produktionstag of produktionsplanungGabel">{{datumAsString(berechneAnkunftBeiOem(produktionstag.datum))}}</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+
+<h3>Supply-Chain Inbound Rahmen</h3>
+<table class="table table-striped">
+    <thead>
+        <th>Produktionsstart bei OEM:</th>
+            <th *ngFor="let produktionstag of produktionsplanungRahmen">{{datumAsString(produktionstag.datum)}}</th> 
+    </thead>
+    <tbody>
+        <tr>
+            <td style="font-weight:bold">Start Produktion Hersteller</td>
+            <td *ngFor="let produktionstag of produktionsplanungRahmen">{{datumAsString(berechneStartImWerkRahmen(berechneStartLkwFahrtRahmen(berechneAnkunftBeiOem(produktionstag.datum))))}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold">Start Zug zum OEM:</td>
+            <td *ngFor="let produktionstag of produktionsplanungRahmen">{{datumAsString(berechneStartLkwFahrtRahmen(berechneAnkunftBeiOem(produktionstag.datum)))}}</td>
+        </tr>
+        <tr style="font-weight:bold">
+            <td>Ankunft beim OEM:</td>
+            <td *ngFor="let produktionstag of produktionsplanungRahmen">{{datumAsString(berechneAnkunftBeiOem(produktionstag.datum))}}</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+
+
+<hr>
 <h4>Sattel</h4>
-Produktionstag: {{datumAsString(produktionsplanungSattel[0].datum)}}
-<hr>
-
-Start der Produktion im Werk: {{ datumAsString(berechneStartImWerk(produktionsplanungSattel[0].datum))}}
+Dauer LKW 2: 
+<input type="number" [(ngModel)]="lieferdaten.sattel.lieferdaten.supplychain[2].anzahl">
 <br>
-Fertigstellung im Werk:
+Dauer Schiff: 
+<input type="number" [(ngModel)]="lieferdaten.sattel.lieferdaten.supplychain[1].anzahl">
 <br>
-Verzögerung : <input type="number" [(ngModel)]="werkVerzoegerung">
+Dauer LKW 1: 
+<input type="number" [(ngModel)]="lieferdaten.sattel.lieferdaten.supplychain[0].anzahl">
 <br>
-{{ werkVerzoegerung }}
-<hr>
-1. Transportweg Start:
-<br>
-2. Transportweg Ende:
-<br>
-Verzögerung : <input type="number" [(ngModel)]="transport1Verzoegerung">
-<br>
-
-<hr>
-<hr>
-<hr>
-
-Eingang OEM: {{datumAsString(dateTest)}}
-<br>
-Ankunft OEM: {{datumAsString(berechneAnkunftBeiOem(dateTest))}}
-<br>
-Start LKW2: {{datumAsString(berechneStartLkwFahrt2(berechneAnkunftBeiOem(dateTest)))}}
-<br>
-Start Schiff: {{datumAsString(berechneStartSchiffFahrt(berechneStartLkwFahrt2(berechneAnkunftBeiOem(dateTest))))}}
-<br>
-Start LKW1: {{datumAsString(berechneStartLkwFahrt1(berechneStartSchiffFahrt(berechneStartLkwFahrt2(berechneAnkunftBeiOem(dateTest)))))}}
-<br>
-Start Produktion: {{datumAsString(berechneStartImWerk(berechneStartLkwFahrt1(berechneStartSchiffFahrt(berechneStartLkwFahrt2(berechneAnkunftBeiOem(dateTest))))))}}
+<h4>Gabel</h4>
+Dauer Zug: 
+<input type="number" [(ngModel)]="lieferdaten.gabel.lieferdaten.supplychain[0].anzahl">
+<h4>Rahmen</h4>
+Dauer LKW: 
+<input type="number" [(ngModel)]="lieferdaten.rahmen.lieferdaten.supplychain[0].anzahl">
