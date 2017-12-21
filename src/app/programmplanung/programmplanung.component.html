@@ -4,7 +4,7 @@
     <thead>
         <tr>
             <th colspan="2"></th>
-            <th *ngFor="let item of fahrraeder[0].programmplanung.werte">{{ item.calendarWeek }}</th>
+            <th *ngFor="let item of fahrraeder[0].programmplanung.werte">KW {{ item.calendarWeek + "/" + item.calendarYear }}</th>
         </tr>
     </thead>
     <tbody *ngFor="let fahrrad of fahrraeder">

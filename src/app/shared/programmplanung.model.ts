@@ -6,6 +6,7 @@ export class Programmplanung {
     public static startDatum: Date = new Date(2017, 0, 2);
 
     public vorlage: [number];
+    public jahresWerte = [];
     public werte = [];
 
     static setStartDatum(start: Date) {
@@ -13,50 +14,94 @@ export class Programmplanung {
         if (start.getDay() === 1) {
             Programmplanung.startDatum = start;
         }
-
-        // Wichtig: Wenn in Programmplanung ein Datum eingestellt wird, muss anschließend für jedes Fahrrad
-        // die calculate Methode neu aufgerufen werden
     }
 
     // Nimmt Planwerte für Jahr entgegen und speichert ab, startet dann Outputberechnung
     constructor(vorlage: [number]) {
+        moment.locale('de');
+
         this.vorlage = vorlage;
         this.calculateOutput();
     }
 
     /**
+     * Die Methode generiert ein großes 3-dim Array mit jedem Jahr, jedem Monat und jedem Tag und dem jeweiligen Output
+     * Das Array wird einmal generiert, dann wird nur noch der entsprechende Wert zurückgegeben
+     */
+    private getOutputPerDay(datum: Date) {
+        const jahr = datum.getFullYear();
+        const monat = datum.getMonth();
+        const tag = datum.getDate();
+
+        // Prüfe, ob in den Jahreswerten ein Eintrag für dieses Jahr ist
+        if (typeof this.jahresWerte[jahr] !== 'undefined') {
+
+            // Da für dieses Jahr schon Werte errechnet wurden, gebe den entsprechenden Wert zurück
+            return this.jahresWerte[jahr][monat][tag];
+
+        } else {
+
+            // Da in diesem Jahr noch nichts berechnet wurde, tue dies jetzt
+            // Erstelle Leere Arrays jeweils als Initialisierung
+            this.jahresWerte[jahr] = [];
+            for (let m = 0; m < 12; ++m) {
+                this.jahresWerte[jahr][m] = [];
+
+                // Berechne, wie der theoretische Output pro Tag wäre
+                const monthlyOutput = this.vorlage[m];
+                const arbeitsTageVonMonat = DatumService.getArbeitstageMonat(datum);
+                const dailyOutput = monthlyOutput / arbeitsTageVonMonat;
+                console.log('Output des Monats: ' + monthlyOutput + ', Arbeitstage: ' + arbeitsTageVonMonat + ', täglich: ' + dailyOutput);
+
+                // Iteriere durch jeden Tag und weise den Tagesoutput zu
+                // Runde jede Zahl ab und merke die Differenz, um diese auf den nächsten Wert drauf zu addieren
+                const anzahlTage = new Date(jahr, m + 1, 0).getDate();
+                let rest = 0;
+                for (let t = 1; t <= anzahlTage; ++t) {
+                    const aktuellerTag = new Date(jahr, m, t);
+                    if ( DatumService.istArbeitstag( aktuellerTag ) ) {
+                        const abgerundet = Math.floor(dailyOutput + rest); // TODO: @Steffen, hast du eine andere Idee? Das Ergebnis weicht um ein Fahrrad pro Monat ab vom erwarteten Wert
+                        this.jahresWerte[jahr][m][t] = abgerundet;
+
+                        rest += dailyOutput - abgerundet;
+                        console.log('Abgerundet, Rest: ' + abgerundet + ', ' + rest);
+                    } else {
+                        this.jahresWerte[jahr][m][t] = 0;
+                    }
+                }
+            }
+
+            // Nach der Berechnung: Gebe den passenden Wert jetzt aus
+            console.log(this.jahresWerte);
+            return this.jahresWerte[jahr][monat][tag];
+        }
+    }
+
+    /**
      *  Berechnet den Output auf Wochenbasis ab dem aktuellen Startdatum und speichert Ihn unter planning ab
-     *  Problem: Ungerade Werte, Bugfixing
      */
     public calculateOutput() {
         const aktuellesDatum = new Date(Programmplanung.startDatum);
 
-        // Anmerkung: Sollte Variable nicht Woche heißen?
         // Gehe durch die nächsten 52 Wochen
-        for (let tag = 0; tag < 52; ++tag) {
+        for (let woche = 0; woche < 52; ++woche) {
             const montag = new Date(aktuellesDatum);
             let output = 0;
 
-            // Müsste hier nicht i < 7 stehen? so iterieren wir im Moment nur 6 mal durch.
             // Finde Anzahl Arbeitstage in diesem Zeitraum heraus und iteriere für jeden
-            for (let i = 0; i < 6; ++i) {
-                if (DatumService.istArbeitstag(aktuellesDatum)) {
-                    const monat = aktuellesDatum.getMonth();
-                    const monthlyOutput = this.vorlage[monat];
-                    const arbeitsTageVonMonat = DatumService.getArbeitstageMonat(aktuellesDatum);
-                    console.log('Der Monat ' + aktuellesDatum.getMonth() + ' hat ' + arbeitsTageVonMonat + ' Arbeitstage');
-
-                    output += (1 / arbeitsTageVonMonat) * monthlyOutput; // Addiere diesen Wert
-                }
+            for (let i = 0; i < 7; ++i) {
+                output += this.getOutputPerDay(aktuellesDatum); // Addiere diesen Wert
                 aktuellesDatum.setDate(aktuellesDatum.getDate() + 1);
             }
 
             // Speichere Werte ab
-            moment.locale('de');
-            this.werte[tag] = { startDate: montag,  planning: output, demand: output, calendarWeek: moment(montag).format('ww')};
-
-            // Gehe weiter zur nächsten Woche
-            aktuellesDatum.setDate(aktuellesDatum.getDate() + 1);
+            this.werte[woche] = {
+                startDate: montag,
+                planning: output,
+                demand: output,
+                calendarWeek: moment(montag).format('ww'),
+                calendarYear: moment(montag).format('YY')
+            };
         }
     }
 }

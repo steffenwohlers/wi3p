@@ -22,7 +22,7 @@ export class DatumService {
     let result = 0;
     const tempDate: Date = new Date(date.getFullYear(), date.getMonth(), 1);
 
-    while (tempDate.getDate() < this.getAnzahlTageImMonat(tempDate)) {
+    while (tempDate.getMonth() === date.getMonth()) {
       if (this.istArbeitstag(tempDate)) {
         ++result;
       }
