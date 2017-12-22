@@ -72,6 +72,9 @@ export class ScInboundComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.sattel.lieferdaten.bestelleingangBisProduktion.anzahl);
 
+    // Wenn Losgröße nicht erreicht, summiere mit folgendem Tag
+
+
     tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
 
     return tempDate;
