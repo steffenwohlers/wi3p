@@ -61,17 +61,17 @@ export class ScInboundSattel {
 
     }
 
-    berechneAnkunftBeiOem(date: Date) {
+    private berechneAnkunftBeiOem(date: Date) {
 
         return this.berechneRetrogradesStartDatum(date, 1);
     }
 
-    berechneStartLkwFahrt2(date: Date) {
+    private berechneStartLkwFahrt2(date: Date) {
 
         return this.berechneRetrogradesStartDatum(date, this.lieferdaten.sattel.lieferdaten.supplychain[2].anzahl);
     }
 
-    berechneStartSchiffFahrt(date: Date) {
+    private berechneStartSchiffFahrt(date: Date) {
         let tempDate: Date;
         // tslint:disable-next-line:max-line-length
         tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.sattel.lieferdaten.supplychain[1].anzahl);
@@ -79,12 +79,12 @@ export class ScInboundSattel {
         return tempDate;
     }
 
-    berechneStartLkwFahrt1(date: Date) {
+    private berechneStartLkwFahrt1(date: Date) {
 
         return this.berechneRetrogradesStartDatum(date, this.lieferdaten.sattel.lieferdaten.supplychain[0].anzahl);
     }
 
-    berechneStartImWerk(date: Date) {
+    private berechneStartImWerk(date: Date) {
         // const date = produktionsplanung.datum;
         let tempDate: Date;
         // tslint:disable-next-line:max-line-length

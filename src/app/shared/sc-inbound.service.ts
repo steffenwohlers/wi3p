@@ -11,14 +11,9 @@ export class ScInboundService {
     constructor(produktionsplanungService: ProduktionsplanungService, private fahrradService: FahrradService) {
         const produktionsplanungSattel = produktionsplanungService.getSattel();
 
-        for (const e of produktionsplanungSattel) {
-            console.log(e);
-        }
-
         for (let i = 0; i < produktionsplanungSattel.length; i++) {
 
             this.sattel[i] = new ScInboundSattel(produktionsplanungSattel[i], fahrradService);
-            console.log(this.sattel[i]);
         }
     }
 

@@ -2,12 +2,31 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th *ngFor="let e of scInboundSattel"> {{e}} </th>
+            <th>Produktionsstart OEM:</th>
+            <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.produktionsstartOem)}} </th>
         </tr>
-
     </thead>
     <tbody>
-
+        <tr>
+            <th>Produktionsstart Hersteller:</th>
+            <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.produktionsstartOem)}} </th>            
+        </tr>
+        <tr>
+                <th>Start LKW zum Hafen:</th>
+                <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.startLkw1)}} </th>            
+        </tr>
+        <tr>
+            <th>Start Schiff nach Deutschland:</th>
+            <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.startSchiff)}} </th>            
+        </tr>
+        <tr>
+            <th>Start LKW zum OEM:</th>
+            <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.startLkw2)}} </th>            
+        </tr>
+        <tr>
+            <th>Ankunft beim OEM:</th>
+            <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.ankunftOEM)}} </th>            
+        </tr>
     </tbody>
 </table>
 
