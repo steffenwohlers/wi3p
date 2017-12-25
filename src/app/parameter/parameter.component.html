@@ -36,19 +36,19 @@
                 <tr>
                     <td>Gabel</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.gabel.lieferdaten.losgroesse">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenGabel.losgroesse">
                     </td>
                 </tr>
                 <tr>
                     <td>Sattel</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.sattel.lieferdaten.losgroesse">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenSattel.losgroesse">
                     </td>
                 </tr>
                 <tr>
                     <td>Rahmen</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.rahmen.lieferdaten.losgroesse">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenRahmen.losgroesse">
                     </td>
                 </tr>
 
@@ -67,23 +67,23 @@
                 <tr>
                     <td>Gabel</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.gabel.lieferdaten.vorlaufzeit.anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenGabel.vorlaufzeit.anzahl">
                     </td>
-                    <td>{{fahrrad.gabel.lieferdaten.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenGabel.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
                 <tr>
                     <td>Sattel</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.sattel.lieferdaten.vorlaufzeit.anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenSattel.vorlaufzeit.anzahl">
                     </td>
-                    <td>{{fahrrad.sattel.lieferdaten.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenSattel.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
                 <tr>
                     <td>Rahmen</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.rahmen.lieferdaten.vorlaufzeit.anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenRahmen.vorlaufzeit.anzahl">
                     </td>
-                    <td>{{fahrrad.rahmen.lieferdaten.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenRahmen.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
 
             </tbody>
@@ -101,23 +101,23 @@
                 <tr>
                     <td>Gabel</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.gabel.lieferdaten.bestelleingangBisProduktion.anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenGabel.bestelleingangBisProduktion.anzahl">
                     </td>
-                    <td>{{fahrrad.gabel.lieferdaten.bestelleingangBisProduktion.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenGabel.bestelleingangBisProduktion.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
                 <tr>
                     <td>Sattel</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.sattel.lieferdaten.bestelleingangBisProduktion.anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenSattel.bestelleingangBisProduktion.anzahl">
                     </td>
-                    <td>{{fahrrad.sattel.lieferdaten.bestelleingangBisProduktion.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenSattel.bestelleingangBisProduktion.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
                 <tr>
                     <td>Rahmen</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.rahmen.lieferdaten.bestelleingangBisProduktion.anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenRahmen.bestelleingangBisProduktion.anzahl">
                     </td>
-                    <td>{{fahrrad.rahmen.lieferdaten.bestelleingangBisProduktion.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenRahmen.bestelleingangBisProduktion.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
 
             </tbody>
@@ -150,9 +150,9 @@
                 <tr>
                     <td>Gabel</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.gabel.lieferdaten.supplychain[0].anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenGabel.supplychain[0].anzahl">
                     </td>
-                    <td>{{fahrrad.gabel.lieferdaten.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenGabel.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -161,26 +161,26 @@
                 <tr>
                     <td>Sattel</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.sattel.lieferdaten.supplychain[0].anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenSattel.supplychain[0].anzahl">
                     </td>
-                    <td>{{fahrrad.sattel.lieferdaten.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenSattel.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
 
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.sattel.lieferdaten.supplychain[1].anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenSattel.supplychain[1].anzahl">
                     </td>
-                    <td>{{fahrrad.sattel.lieferdaten.supplychain[1].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenSattel.supplychain[1].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
 
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.sattel.lieferdaten.supplychain[2].anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenSattel.supplychain[2].anzahl">
                     </td>
-                    <td>{{fahrrad.sattel.lieferdaten.supplychain[2].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenSattel.supplychain[2].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
                 <tr>
                     <td>Rahmen</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="fahrrad.rahmen.lieferdaten.supplychain[0].anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenRahmen.supplychain[0].anzahl">
                     </td>
-                    <td>{{fahrrad.rahmen.lieferdaten.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    <td>{{lieferdatenRahmen.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -190,7 +190,3 @@
         </table>
     </div>
 </div>
-<hr>
-{{fahrrad.sattel.lieferdaten.supplychain[0].anzahl}}
-<br>
-{{ add(fahrrad.sattel.lieferdaten.supplychain[0].anzahl)}}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Fahrrad } from '../shared/fahrrad.model';
 import { FahrradService } from '../shared/fahrrad.service';
 import { LieferdatenService } from '../shared/lieferdaten.service';
+import { Lieferdaten } from '../shared/lieferdaten.model';
 
 @Component({
   selector: 'app-test-tab',
@@ -10,24 +11,16 @@ import { LieferdatenService } from '../shared/lieferdaten.service';
 })
 export class TestTabComponent implements OnInit {
 
-  fahrraeder: Fahrrad[];
-  fahrrad: Fahrrad;
-  fahrrad2: Fahrrad;
-
   value1 = 0;
   value2 = 0;
   value3 = this.value2 + this.value1;
 
-  testArray: number[] = [100, 200, 300, 400, 500];
-
-  losgroesse = 0;
-
+  fahrrad: Fahrrad;
+  lieferdatenSattel: Lieferdaten;
 
   constructor(private fahrradService: FahrradService, public lieferdatenService: LieferdatenService) {
-
-    this.fahrraeder = fahrradService.getFahrraeder();
-    this.fahrrad = this.fahrraeder[0];
-    this.fahrrad2 = this.fahrraeder[1];
+    this.fahrrad = fahrradService.getFahrrad(0);
+    this.lieferdatenSattel = lieferdatenService.lieferdatenSattel;
   }
 
   ngOnInit() {
@@ -36,25 +29,5 @@ export class TestTabComponent implements OnInit {
 
   aendereLosgroesse() {
     this.value3 = this.value1 + this.value2;
-  }
-
-  berechne(index: number): number {
-
-    let result = 0;
-
-    for ( let i = index; i > 0; i--) {
-      result = result + this.testArray[i];
-    }
-    return result;
-  }
-
-  berechne2(index: number): number {
-
-    // let result = 0;
-
-    for ( let i = index; i > 0; i--) {
-      this.losgroesse = this.losgroesse + 1;
-    }
-    return this.losgroesse;
   }
 }

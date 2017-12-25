@@ -4,37 +4,14 @@ Value 1 = <input type="number" [(ngModel)]="value1" (ngModelChange)="aendereLosg
 <br>
 Value 2 = <input type="number" [(ngModel)]="value2" (ngModelChange)="aendereLosgroesse()">
 <br>
-<!-- Losgröße = <input type="number" [ngModel]="losgroesse = value1 + value2"> -->
-<br>
 Value 3: {{value3}}
-<br>
 <hr>
-<h2>Test rückwärts iterieren</h2>
- Länge Array: {{ testArray.length }}
- <br>
- Array vorwärts: <li *ngFor="let e of testArray">{{e}}</li>
+<h2>Lieferdaten Test</h2>
+{{fahrrad.sattel.lieferdaten.losgroesse}}
 <br>
-<!-- Array rückwärts: <li *ngFor="let e of testArray.reverse()">{{e}}</li> -->
+{{lieferdatenSattel.losgroesse}}
+<br>
+Veränderung Fahrrad: <input type="number" [(ngModel)]="fahrrad.sattel.lieferdaten.losgroesse">
+<br>
+Veränderung Lieferdaten: <input type="number" [(ngModel)]="lieferdatenSattel.losgroesse">
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <td>Index</td>
-            <th *ngFor="let e of testArray; let i = index"> {{i}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Value</td>
-            <td *ngFor="let e of testArray; let i = index"> {{e}}</td>
-        </tr>
-        <tr>
-            <td>berechne1</td>
-            <td *ngFor="let e of testArray; let i = index"> {{berechne(i)}}</td>
-        </tr>
-        <tr>
-            <td>berechne2</td>
-            <td *ngFor="let e of testArray; let i = index"> {{berechne2(i)}}</td>            
-        </tr>
-    </tbody>
-</table>

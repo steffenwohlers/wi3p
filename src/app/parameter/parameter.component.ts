@@ -3,6 +3,7 @@ import { LieferdatenService } from '../shared/lieferdaten.service';
 import { FahrradService } from '../shared/fahrrad.service';
 import { Fahrrad } from '../shared/fahrrad.model';
 import { ProduktionskapazitaetenService } from '../shared/produktionskapazitaeten.service';
+import { Lieferdaten } from '../shared/lieferdaten.model';
 
 @Component({
   selector: 'app-parameter',
@@ -10,12 +11,17 @@ import { ProduktionskapazitaetenService } from '../shared/produktionskapazitaete
   styles: []
 })
 export class ParameterComponent implements OnInit {
-  fahrrad: Fahrrad;
+  lieferdatenSattel: Lieferdaten;
+  lieferdatenGabel: Lieferdaten;
+  lieferdatenRahmen: Lieferdaten;
 
-  constructor(private fahrradService: FahrradService, public produktionskapazitaetenService: ProduktionskapazitaetenService) { }
+
+  constructor(private lieferdatenService: LieferdatenService, public produktionskapazitaetenService: ProduktionskapazitaetenService) { }
 
   ngOnInit() {
-    this.fahrrad = this.fahrradService.getFahrrad(0);
+    this.lieferdatenSattel = this.lieferdatenService.lieferdatenSattel;
+    this.lieferdatenGabel = this.lieferdatenService.lieferdatenGabel;
+    this.lieferdatenRahmen = this.lieferdatenService.lieferdatenRahmen;
   }
 
   add(value: number): number {
