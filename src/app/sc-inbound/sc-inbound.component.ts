@@ -6,6 +6,9 @@ import { Lieferdaten } from '../shared/lieferdaten.model';
 import { DatumService } from '../shared/datum.service';
 import { FahrradService } from '../shared/fahrrad.service';
 import { Fahrrad } from '../shared/fahrrad.model';
+import { Programmplanung } from '../shared/programmplanung.model';
+import { ScInboundService } from '../shared/sc-inbound.service';
+import { ScInboundSattel } from '../shared/sc-inbound-sattel.model';
 
 @Component({
   selector: 'app-sc-inbound',
@@ -14,24 +17,13 @@ import { Fahrrad } from '../shared/fahrrad.model';
 })
 export class ScInboundComponent implements OnInit {
 
-  produktionsplanungSattel: Produktionsplanung[];
-  produktionsplanungGabel: Produktionsplanung[];
-  produktionsplanungRahmen: Produktionsplanung[];
+  scInboundSattel: ScInboundSattel[];
+  public lieferdaten: Fahrrad;
 
-  // Lieferdaten
-  lieferdaten: Fahrrad;
-
-  constructor(
-    private produktionsplanungService: ProduktionsplanungService,
-    private lieferdatenService: LieferdatenService,
-    private fahrradService: FahrradService
-    ) {
-      this.produktionsplanungSattel = produktionsplanungService.getSattel();
-      this.produktionsplanungGabel = produktionsplanungService.getGabel();
-      this.produktionsplanungRahmen = produktionsplanungService.getRahmen();
+  constructor(private fahrradService: FahrradService, scInboundService: ScInboundService) {
 
       this.lieferdaten = fahrradService.getFahrrad(0);
-
+      this.scInboundSattel = scInboundService.getScInboundSattel();
   }
 
   ngOnInit() {
@@ -39,129 +31,10 @@ export class ScInboundComponent implements OnInit {
   }
 
 
-  berechneAnkunftBeiOem(date: Date) {
-
-    return this.berechneRetrogradesStartDatum(date, 1);
-  }
-
-
-/**
- * Funktionen Sattel
- */
-
-  berechneStartLkwFahrt2Sattel(date: Date) {
-
-    return this.berechneRetrogradesStartDatum(date, this.lieferdaten.sattel.lieferdaten.supplychain[2].anzahl);
-  }
-
-  berechneStartSchiffFahrtSattel(date: Date) {
-    let tempDate: Date;
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.sattel.lieferdaten.supplychain[1].anzahl);
-
-    return tempDate;
-  }
-
-  berechneStartLkwFahrt1Sattel(date: Date) {
-
-    return this.berechneRetrogradesStartDatum(date, this.lieferdaten.sattel.lieferdaten.supplychain[0].anzahl);
-  }
-
-  berechneStartImWerkSattel(date: Date) {
-
-    let tempDate: Date;
-    // tslint:disable-next-line:max-line-length
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.sattel.lieferdaten.bestelleingangBisProduktion.anzahl);
-
-    // Wenn Losgröße nicht erreicht, summiere mit folgendem Tag
-
-
-    tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
-
-    return tempDate;
-  }
 
   /**
-   * Funktionen Gabel
-   */
-
-  berechneStartZugFahrtGabel(date: Date) {
-    let tempDate: Date;
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.gabel.lieferdaten.supplychain[0].anzahl);
-
-    return tempDate;
-  }
-
-  berechneStartImWerkGabel(date: Date) {
-
-    let tempDate: Date;
-    // tslint:disable-next-line:max-line-length
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.gabel.lieferdaten.bestelleingangBisProduktion.anzahl);
-
-    tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
-
-    return tempDate;
-  }
-
-
-  /**
-   * Funktionen Rahmen
-   */
-
-  berechneStartLkwFahrtRahmen(date: Date) {
-    let tempDate: Date;
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.rahmen.lieferdaten.supplychain[0].anzahl);
-
-    return tempDate;
-  }
-
-  berechneStartImWerkRahmen(date: Date) {
-
-    let tempDate: Date;
-    // tslint:disable-next-line:max-line-length
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.rahmen.lieferdaten.bestelleingangBisProduktion.anzahl);
-
-    tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
-
-    return tempDate;
-  }
-
-
-  /**
-   *
-   *
-   *
-   *
    * HILFSFUNKTIONEN
-   *
-   *
-   *
-   *
    */
-
-  private berechneRetrogradesStartDatum(date: Date, dauer: number): Date {
-    let tempDate: Date;
-
-    // TODO SW: testValue entfernen
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - dauer - this.testValue);
-
-    tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
-
-    return tempDate;
-  }
-
-  berechneVorherigenLetztenArbeitstag(date: Date): Date {
-
-    let tempDate: Date;
-
-    tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate());
-
-    while (!DatumService.istArbeitstag(tempDate)) {
-      tempDate.setDate(tempDate.getDate() - 1);
-    }
-
-    return tempDate;
-
-  }
 
   /**
    * Datum im Format  Day,  DD.MM.YYYY
@@ -208,29 +81,6 @@ export class ScInboundComponent implements OnInit {
     return result;
 
   }
-
-    /**
-   *
-   *
-   *
-   *
-   * TESTS
-   *
-   *
-   *
-   *
-   */
-
-
-  // tslint:disable-next-line:member-ordering
-  testValue = 0;
-
-  vorherigerTag(date: Date) {
-    const resultDate: Date = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.testValue);
-
-    return resultDate;
-  }
-
 }
 
 

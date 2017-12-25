@@ -51,7 +51,8 @@ export class Programmplanung {
                 const monthlyOutput = this.vorlage[m];
                 const arbeitsTageVonMonat = DatumService.getArbeitstageMonat(datum);
                 const dailyOutput = monthlyOutput / arbeitsTageVonMonat;
-                console.log('Output des Monats: ' + monthlyOutput + ', Arbeitstage: ' + arbeitsTageVonMonat + ', täglich: ' + dailyOutput);
+                // tslint:disable-next-line:max-line-length
+                // console.log('Output des Monats: ' + monthlyOutput + ', Arbeitstage: ' + arbeitsTageVonMonat + ', täglich: ' + dailyOutput);
 
                 // Iteriere durch jeden Tag und weise den Tagesoutput zu
                 // Runde jede Zahl ab und merke die Differenz, um diese auf den nächsten Wert drauf zu addieren
@@ -60,11 +61,12 @@ export class Programmplanung {
                 for (let t = 1; t <= anzahlTage; ++t) {
                     const aktuellerTag = new Date(jahr, m, t);
                     if ( DatumService.istArbeitstag( aktuellerTag ) ) {
+                        // tslint:disable-next-line:max-line-length
                         const abgerundet = Math.floor(dailyOutput + rest); // TODO: @Steffen, hast du eine andere Idee? Das Ergebnis weicht um ein Fahrrad pro Monat ab vom erwarteten Wert
                         this.jahresWerte[jahr][m][t] = abgerundet;
 
                         rest += dailyOutput - abgerundet;
-                        console.log('Abgerundet, Rest: ' + abgerundet + ', ' + rest);
+                        // console.log('Abgerundet, Rest: ' + abgerundet + ', ' + rest);
                     } else {
                         this.jahresWerte[jahr][m][t] = 0;
                     }
@@ -72,7 +74,7 @@ export class Programmplanung {
             }
 
             // Nach der Berechnung: Gebe den passenden Wert jetzt aus
-            console.log(this.jahresWerte);
+            // console.log(this.jahresWerte);
             return this.jahresWerte[jahr][monat][tag];
         }
     }

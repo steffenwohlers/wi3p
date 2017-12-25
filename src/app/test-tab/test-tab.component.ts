@@ -16,7 +16,13 @@ export class TestTabComponent implements OnInit {
 
   value1 = 0;
   value2 = 0;
-  losgroesse = this.value2 + this.value1;
+  value3 = this.value2 + this.value1;
+
+  testArray: number[] = [100, 200, 300, 400, 500];
+
+  losgroesse = 0;
+
+
   constructor(private fahrradService: FahrradService, public lieferdatenService: LieferdatenService) {
 
     this.fahrraeder = fahrradService.getFahrraeder();
@@ -28,15 +34,27 @@ export class TestTabComponent implements OnInit {
 
   }
 
-  losgroesseErreicht(): boolean {
-    let result: boolean;
+  aendereLosgroesse() {
+    this.value3 = this.value1 + this.value2;
+  }
 
-    if (this.losgroesse >= 500) {
-      result = true;
-    } else {
-      result = false;
+  berechne(index: number): number {
+
+    let result = 0;
+
+    for ( let i = index; i > 0; i--) {
+      result = result + this.testArray[i];
     }
     return result;
   }
 
+  berechne2(index: number): number {
+
+    // let result = 0;
+
+    for ( let i = index; i > 0; i--) {
+      this.losgroesse = this.losgroesse + 1;
+    }
+    return this.losgroesse;
+  }
 }

@@ -17,6 +17,7 @@ import { LieferdatenService } from './shared/lieferdaten.service';
 import { ProduktionskapazitaetenService } from './shared/produktionskapazitaeten.service';
 import { ScInboundComponent } from './sc-inbound/sc-inbound.component';
 import { ProduktionsplanungService } from './shared/produktionsplanung.service';
+import { ScInboundService } from './shared/sc-inbound.service';
 
 // tslint:disable-next-line:max-line-length
 
@@ -43,7 +44,8 @@ import { ProduktionsplanungService } from './shared/produktionsplanung.service';
     FahrradTeilService,
     LieferdatenService,
     ProduktionskapazitaetenService,
-    ProduktionsplanungService
+    ProduktionsplanungService,
+    ScInboundService
   ],
   bootstrap: [AppComponent]
 })
