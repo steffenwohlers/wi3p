@@ -2,19 +2,19 @@ import { FahrradTeil } from './fahrrad-teil.model';
 import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
 import { element } from 'protractor';
 import { LieferdatenService } from './lieferdaten.service';
+import { Injectable } from '@angular/core';
 
 
-
+@Injectable()
 export class FahrradTeilService {
 
-  constructor() {
+  private teile: FahrradTeil[];
 
-  }
+  constructor(private lieferdatenService: LieferdatenService) {
 
-  private ls: LieferdatenService;
-  private lieferdatenService: LieferdatenService = new LieferdatenService();
 
-  private teile: FahrradTeil[] = [
+
+  this.teile = [
     new FahrradTeil('Aluminium 7005DB', FahrradTeilTyp.Rahmen, this.lieferdatenService.lieferdatenRahmen),
     new FahrradTeil('Aluminium 7005TB', FahrradTeilTyp.Rahmen, this.lieferdatenService.lieferdatenRahmen),
     new FahrradTeil('Carbon Monocoque', FahrradTeilTyp.Rahmen, this.lieferdatenService.lieferdatenRahmen),
@@ -32,6 +32,8 @@ export class FahrradTeilService {
     new FahrradTeil('Rock Schox ReconSL', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel),
     new FahrradTeil('SR Suntour Raidon', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel)
   ];
+
+ }
 
   getFahrradTeile() {
     return this.teile;
