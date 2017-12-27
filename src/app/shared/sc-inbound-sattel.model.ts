@@ -24,7 +24,8 @@ export class ScInboundSattel {
         this.startLkw2 = this.berechneStartLkwFahrt2(this.ankunftOEM);
         this.startSchiff = this.berechneStartSchiffFahrt(this.startLkw2);
         this.startLkw1 = this.berechneStartLkwFahrt1(this.startSchiff);
-        this.produktionsstartHersteller = this.berechneStartImWerk(this.startLkw1);
+        this.produktionsstartHersteller = this.berechneStartBeimHersteller(this.startLkw1, 0);
+        // this.produktionsstartHersteller = new Date(1975, 0, 1);
 
         this.menge = produktionsplanung.menge;
 
@@ -84,19 +85,11 @@ export class ScInboundSattel {
         return this.berechneRetrogradesStartDatum(date, this.lieferdaten.sattel.lieferdaten.supplychain[0].anzahl);
     }
 
-    private berechneStartImWerk(date: Date) {
-        // const date = produktionsplanung.datum;
+    public berechneStartBeimHersteller(date: Date, verzoegerungDurchLosgroesse: number) {
+
         let tempDate: Date;
         // tslint:disable-next-line:max-line-length
-        tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.sattel.lieferdaten.bestelleingangBisProduktion.anzahl);
-
-        // Wenn Losgröße nicht erreicht, summiere mit folgendem Tag
-        // if (this.losgroessErreichtSattel()) {
-
-        // } else {
-        //   this.kummullierteBestellmengeSattel = + produktionsplanung.menge;
-        // }
-
+        tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.sattel.lieferdaten.bestelleingangBisProduktion.anzahl - verzoegerungDurchLosgroesse);
 
         tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
 
