@@ -4,7 +4,7 @@ export class Lieferdaten {
     constructor(
         public supplychain: [TagElement],
         public vorlaufzeit: TagElement,
-        public losgroesse: number,
+        public losgroesseHersteller: number,
         public bestelleingangBisProduktion: TagElement
     ) {}
 }

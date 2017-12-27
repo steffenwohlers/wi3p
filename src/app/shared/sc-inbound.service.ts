@@ -17,7 +17,7 @@ export class ScInboundService implements OnInit {
 
         // TODO SW: Hier die richtige Losgröße wieder verwenden
         this.losgroesse = 200;
-        // this.losgroesse = fahrradService.getFahrrad(0).sattel.lieferdaten.losgroesse;
+        // this.losgroesse = fahrradService.getFahrrad(0).sattel.lieferdaten.losgroesseHersteller;
 
 
         for (let i = 0; i < produktionsplanungSattel.length; i++) {
