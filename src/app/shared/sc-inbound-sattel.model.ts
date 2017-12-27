@@ -1,24 +1,22 @@
 import { Produktionsplanung } from './produktionsplanung.model';
-import { Fahrrad } from './fahrrad.model';
-import { FahrradService } from './fahrrad.service';
 import { DatumService } from './datum.service';
+import { Lieferdaten } from './lieferdaten.model';
+import { LieferdatenService } from './lieferdaten.service';
 
 export class ScInboundSattel {
-    lieferdaten: Fahrrad;
-
+    lieferdaten: Lieferdaten;
     produktionsstartOem: Date;
+    ankunftOEM: Date;
     startLkw1: Date;
     startSchiff: Date;
     startLkw2: Date;
-    ankunftOEM: Date;
     produktionsstartHersteller: Date;
 
     menge: number;
 
-    constructor(produktionsplanung: Produktionsplanung, private fahrradService: FahrradService ) {
+    constructor(private produktionsplanung: Produktionsplanung, private lieferdatenService: LieferdatenService ) {
 
-        this.lieferdaten = fahrradService.getFahrrad(0);
-
+        this.lieferdaten = lieferdatenService.lieferdatenSattel;
         this.produktionsstartOem = produktionsplanung.datum;
         this.ankunftOEM = this.berechneAnkunftBeiOem(this.produktionsstartOem);
         this.startLkw2 = this.berechneStartLkwFahrt2(this.ankunftOEM);
@@ -69,27 +67,27 @@ export class ScInboundSattel {
 
     private berechneStartLkwFahrt2(date: Date) {
 
-        return this.berechneRetrogradesStartDatum(date, this.lieferdaten.sattel.lieferdaten.supplychain[2].anzahl);
+        return this.berechneRetrogradesStartDatum(date, this.lieferdaten.supplychain[2].anzahl);
     }
 
     private berechneStartSchiffFahrt(date: Date) {
         let tempDate: Date;
         // tslint:disable-next-line:max-line-length
-        tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.sattel.lieferdaten.supplychain[1].anzahl);
+        tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.supplychain[1].anzahl);
 
         return tempDate;
     }
 
     private berechneStartLkwFahrt1(date: Date) {
 
-        return this.berechneRetrogradesStartDatum(date, this.lieferdaten.sattel.lieferdaten.supplychain[0].anzahl);
+        return this.berechneRetrogradesStartDatum(date, this.lieferdaten.supplychain[0].anzahl);
     }
 
     public berechneStartBeimHersteller(date: Date, verzoegerungDurchLosgroesse: number) {
 
         let tempDate: Date;
         // tslint:disable-next-line:max-line-length
-        tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.sattel.lieferdaten.bestelleingangBisProduktion.anzahl - verzoegerungDurchLosgroesse);
+        tempDate = new Date (date.getFullYear(), date.getMonth(), date.getDate() - this.lieferdaten.bestelleingangBisProduktion.anzahl - verzoegerungDurchLosgroesse);
 
         tempDate = this.berechneVorherigenLetztenArbeitstag(tempDate);
 

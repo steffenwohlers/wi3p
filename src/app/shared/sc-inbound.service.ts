@@ -2,6 +2,8 @@ import { ScInboundSattel } from './sc-inbound-sattel.model';
 import { ProduktionsplanungService } from './produktionsplanung.service';
 import { FahrradService } from './fahrrad.service';
 import { Injectable, OnInit } from '@angular/core';
+import { LieferdatenService } from './lieferdaten.service';
+import { Lieferdaten } from './lieferdaten.model';
 
 @Injectable()
 export class ScInboundService implements OnInit {
@@ -9,29 +11,42 @@ export class ScInboundService implements OnInit {
 
     scInboundSattel: ScInboundSattel[] = new Array<ScInboundSattel>();
     lagerbestandSattel: number;
-    losgroesse: number;
+    losgroesseSattel: number;
+    lieferdatenSattel: Lieferdaten;
 
-    constructor(produktionsplanungService: ProduktionsplanungService, private fahrradService: FahrradService) {
+    lieferdatenGabel: Lieferdaten;
+
+    lieferdatenRahmen: Lieferdaten;
+
+
+    // tslint:disable-next-line:max-line-length
+    constructor(produktionsplanungService: ProduktionsplanungService, private fahrradService: FahrradService, private lieferdatenService: LieferdatenService) {
         const produktionsplanungSattel = produktionsplanungService.getSattel();
+
         this.lagerbestandSattel = 0;
 
+        this.lieferdatenSattel = this.lieferdatenService.lieferdatenSattel;
+        this.lieferdatenGabel = this.lieferdatenService.lieferdatenGabel;
+        this.lieferdatenRahmen = this.lieferdatenService.lieferdatenRahmen;
+
+
         // TODO SW: Hier die richtige Losgröße wieder verwenden
-        this.losgroesse = 200;
-        // this.losgroesse = fahrradService.getFahrrad(0).sattel.lieferdaten.losgroesseHersteller;
+        this.losgroesseSattel = 200;
+        // this.losgroesseSattel = this.lieferdatenSattel.losgroesseHersteller;
 
 
         for (let i = 0; i < produktionsplanungSattel.length; i++) {
 
-            this.scInboundSattel[i] = new ScInboundSattel(produktionsplanungSattel[i], fahrradService);
+            this.scInboundSattel[i] = new ScInboundSattel(produktionsplanungSattel[i], lieferdatenService);
         }
-        this.beachteLosgroesseHersteller();
+        this.beachteLosgroesseHerstellerSattel();
     }
 
     ngOnInit() {
     }
 
 
-    kloneArray(array: Array<ScInboundSattel>): Array<number> {
+    kloneArraySattel(array: Array<ScInboundSattel>): Array<number> {
         const klon: Array<number> = new Array(array.length);
         for ( let i = 0; i < array.length; i++) {
           klon[i] = array[i].menge;
@@ -40,26 +55,22 @@ export class ScInboundService implements OnInit {
       }
 
 
-    beachteLosgroesseHersteller() {
-        console.log('In beachteLosgroesseHersteller');
+    beachteLosgroesseHerstellerSattel() {
         // Mengen-Werte des Datums zum Abgleich
-        const wertArr = this.kloneArray(this.scInboundSattel);
-        console.log('Vor erster Schleife');
+        const wertArr = this.kloneArraySattel(this.scInboundSattel);
         // Iteriere von hinten durch das Original-Array
         for (let i = this.scInboundSattel.length - 1; i >= 0; i--) {
           // Hersteller produziert die benötigte Menge und legt sie ins Lager
           this.lagerbestandSattel = this.lagerbestandSattel + this.scInboundSattel[i].menge;
-          console.log(i + '. Iteration. Nach Lagerbestand = ' + this.lagerbestandSattel);
           // Falls der Lagerbestand kleiner ist als die Losgröße mache nichts..
-          if (this.lagerbestandSattel < this.losgroesse) {
+          if (this.lagerbestandSattel < this.losgroesseSattel) {
 
             // ...ansonsten...
           } else {
             // nimm die Losgröße aus dem Lager (weil sie versandt wird). TODO SW: Was passiert wenn lagerbestand >= 2xLosgroesse?
-            console.log('in else');
-            this.lagerbestandSattel = this.lagerbestandSattel - this.losgroesse;
+            this.lagerbestandSattel = this.lagerbestandSattel - this.losgroesseSattel;
             // Wert um die Losgröße aufzuteilen auf die Bestelltage
-            let tempValue = this.losgroesse;
+            let tempValue = this.losgroesseSattel;
             // Iteriere von hinten durch das Werte Array
             for (let ii = wertArr.length - 1; tempValue > 0; ii--) {
               // Falls der Wert darin 0 ist mache nichts (Ware für den Tag wurde also schon vesandt)
@@ -77,13 +88,10 @@ export class ScInboundService implements OnInit {
                   const verzoegerungDurchLosgroesse = ii - i;
                   // Berechne das Datum für den Produktionstag
 
-                  console.log('-----');
-                  console.log(this.scInboundSattel[ii].produktionsstartHersteller);
                   // TODO SW: Hier den Testwert löschen
                   // tslint:disable-next-line:max-line-length
                   // this.scInboundSattel[ii].produktionsstartHersteller =  this.scInboundSattel[ii].berechneStartBeimHersteller(this.scInboundSattel[ii].startLkw1, verzoegerungDurchLosgroesse);
                   this.scInboundSattel[ii].produktionsstartHersteller =  this.scInboundSattel[ii].berechneStartBeimHersteller(this.scInboundSattel[ii].produktionsstartOem, verzoegerungDurchLosgroesse);
-                  console.log(this.scInboundSattel[ii].produktionsstartHersteller);
 
                   // ... ansonsten ...
                 } else {
