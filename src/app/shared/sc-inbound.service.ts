@@ -12,16 +12,19 @@ export class ScInboundService {
 
 
   scInboundSattel: ScInboundSattel[] = new Array<ScInboundSattel>();
+  lagerbestandSattelArray: number[];
   lagerbestandSattel: number;
   losgroesseSattel: number;
   lieferdatenSattel: Lieferdaten;
 
   scInboundGabel: ScInboundGabel[] = new Array<ScInboundGabel>();
   lagerbestandGabel: number;
+  lagerbestandGabelArray: number[];
   losgroesseGabel: number;
   lieferdatenGabel: Lieferdaten;
 
   scInboundRahmen: ScInboundRahmen[] = new Array<ScInboundRahmen>();
+  lagerbestandRahmenArray: number[];
   lagerbestandRahmen: number;
   losgroesseRahmen: number;
   lieferdatenRahmen: Lieferdaten;
@@ -38,6 +41,8 @@ export class ScInboundService {
     * Sattel
     */
     const produktionsplanungSattel = this.produktionsplanungService.getSattel();
+    // Dient nur zur Anzeige
+    this.lagerbestandSattelArray = new Array(ScInboundSattel.length);
     this.lagerbestandSattel = 0;
     this.lieferdatenSattel = this.lieferdatenService.lieferdatenSattel;
     // this.losgroesseSattel = 200;
@@ -51,6 +56,8 @@ export class ScInboundService {
     * Gabel
     */
     const produktionsplanungGabel = this.produktionsplanungService.getGabel();
+        // Dient nur zur Anzeige
+    this.lagerbestandGabelArray = new Array(ScInboundGabel.length);
     this.lagerbestandGabel = 0;
     this.lieferdatenGabel = this.lieferdatenService.lieferdatenGabel;
     this.losgroesseGabel = this.lieferdatenGabel.losgroesseHersteller;

@@ -10,6 +10,10 @@
     </thead>
     <tbody>
         <tr>
+            <td>Benötigte / zu bestellende Menge:</td>
+            <td *ngFor="let e of scInboundSattel">{{e.menge}}</td>
+        </tr>
+        <tr>
             <td>Produktionsstart Hersteller:</td>
             <td *ngFor="let e of scInboundSattel"> {{datumAsString(e.produktionsstartHersteller)}} </td>            
         </tr>
