@@ -18,12 +18,13 @@ import { ScInboundSattel } from '../shared/sc-inbound-sattel.model';
 export class ScInboundComponent implements OnInit {
 
   scInboundSattel: ScInboundSattel[];
-  public lieferdaten: Fahrrad;
+  heutigesDatum: Date;
+
 
   constructor(private fahrradService: FahrradService, scInboundService: ScInboundService) {
 
-      this.lieferdaten = fahrradService.getFahrrad(0);
       this.scInboundSattel = scInboundService.getScInboundSattel();
+      this.heutigesDatum = new Date (2017, 4, 21);
   }
 
   ngOnInit() {

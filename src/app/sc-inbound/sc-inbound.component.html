@@ -1,9 +1,11 @@
-<h2>Supply Chain Inbound</h2>
+<h2>Ibound</h2>
+<p style="font-weight: bold">Heutiges Datum: {{datumAsString(heutigesDatum)}}</p>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Produktionsstart OEM:</th>
-            <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.produktionsstartOem)}} </th>
+            <th *ngFor="let e of scInboundSattel"
+            [ngClass]="{'down': heutigesDatum > e.produktionsstartHersteller}"> {{datumAsString(e.produktionsstartOem)}} </th>
         </tr>
     </thead>
     <tbody>
@@ -29,21 +31,3 @@
         </tr>
     </tbody>
 </table>
-
-
-<!-- <h4>Sattel</h4>
-Dauer LKW 2: 
-<input type="number" [(ngModel)]="lieferdaten.sattel.lieferdaten.supplychain[2].anzahl">
-<br>
-Dauer Schiff: 
-<input type="number" [(ngModel)]="lieferdaten.sattel.lieferdaten.supplychain[1].anzahl">
-<br>
-Dauer LKW 1: 
-<input type="number" [(ngModel)]="lieferdaten.sattel.lieferdaten.supplychain[0].anzahl">
-<br>
-<h4>Gabel</h4>
-Dauer Zug: 
-<input type="number" [(ngModel)]="lieferdaten.gabel.lieferdaten.supplychain[0].anzahl">
-<h4>Rahmen</h4>
-Dauer LKW: 
-<input type="number" [(ngModel)]="lieferdaten.rahmen.lieferdaten.supplychain[0].anzahl"> -->

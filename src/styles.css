@@ -31,3 +31,7 @@ table>tbody>tr>td {
 td.down {
     background-color: red;
 }
+
+th.down {
+    background-color: red;
+}

@@ -1,31 +1,25 @@
 
 <h2>Test ngModelChange</h2>
-Value 1 = <input type="number" [(ngModel)]="value1" (ngModelChange)="aendereLosgroesse()">
+Value 1 = <input type="number" [(ngModel)]="value1" (ngModelChange)="addiere()">
 <br>
-Value 2 = <input type="number" [(ngModel)]="value2" (ngModelChange)="aendereLosgroesse()">
+Value 2 = <input type="number" [(ngModel)]="value2" (ngModelChange)="addiere()">
 <br>
 Value 3: {{value3}}
 <hr>
-<h2>Summieren von Hinten</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th *ngFor="let e of scInboundSattel">{{e.produktionsstartOem}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td *ngFor="let e of scInboundSattel">{{e.menge}}</td>
-        </tr>
-        <tr>
-            <td *ngFor="let e of tempArray">{{e}}</td>
-        </tr>
-        <tr>
-            <td *ngFor="let e of tempArray2">{{e}}</td>
-        </tr>
-        <tr>
-            <td *ngFor="let e of scInboundSattel">{{e.produktionsstartHersteller}}</td>
-        </tr>
 
-    </tbody>
+
+
+<h2>Datum Test</h2>
+
+Date 1: {{date1.getDate()}}.{{date1.getMonth() + 1}}.{{date1.getFullYear()}}
+<br>
+Date 2: {{date2.getDate()}}.{{date2.getMonth() + 1}}.{{date2.getFullYear()}}
+<br>
+{{date1.getTime() > date2.getTime() ? "grün" : "rot"}}
+<br>
+<table>
+    <tr>
+        <td [ngClass]="{'down': date1 < date2}">{{date1 < date2}}</td>
+    </tr>
 </table>
+<h2>Test</h2>
