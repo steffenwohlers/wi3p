@@ -19,4 +19,8 @@ export class ScInboundGabel extends ScInbound {
     private berechneStartZugFahrt(date: Date) {
         return this.berechneStartFahrtKalendertage(date, this.lieferdaten.supplychain[0].anzahl);
     }
+
+    ersterTransport(): Date {
+        return this.startZug;
+    }
 }

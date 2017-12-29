@@ -16,4 +16,7 @@ export class ScInboundRahmen extends ScInbound {
     private berechneStartLkwFahrt(date: Date) {
         return this.berechneStartFahrtArbeitstage(date, this.lieferdaten.supplychain[0].anzahl);
     }
+    ersterTransport(): Date {
+        return this.startLkw;
+    }
 }

@@ -31,4 +31,8 @@ export class ScInboundSattel extends ScInbound {
     private berechneStartLkwFahrt2(date: Date) {
         return this.berechneStartFahrtArbeitstage(date, this.lieferdaten.supplychain[2].anzahl);
     }
+
+    ersterTransport(): Date {
+        return this.startLkw1;
+    }
 }

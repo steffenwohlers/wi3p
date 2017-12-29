@@ -6,7 +6,7 @@ import { ProduktionsplanungComponent } from './produktionsplanung/produktionspla
 import { ParameterComponent } from './parameter/parameter.component';
 import { ScInboundComponent } from './sc-inbound/sc-inbound.component';
 
-// TODO SW: Produktionsplanung + Stammdaten einfügen + Components erstellengit
+
 
 const APP_ROUTES: Routes = [
     { path: '', redirectTo: '/programmplanung', pathMatch: 'full'},

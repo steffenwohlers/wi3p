@@ -40,9 +40,8 @@ export class ScInboundService {
     const produktionsplanungSattel = this.produktionsplanungService.getSattel();
     this.lagerbestandSattel = 0;
     this.lieferdatenSattel = this.lieferdatenService.lieferdatenSattel;
-    // TODO SW: Hier die richtige Losgröße wieder verwenden
-    this.losgroesseSattel = 200;
-    // this.losgroesseSattel = this.lieferdatenSattel.losgroesseHersteller;
+    // this.losgroesseSattel = 200;
+    this.losgroesseSattel = this.lieferdatenSattel.losgroesseHersteller;
     for (let i = 0; i < produktionsplanungSattel.length; i++) {
       this.scInboundSattel[i] = new ScInboundSattel(produktionsplanungSattel[i], this.lieferdatenService);
     }
@@ -54,9 +53,7 @@ export class ScInboundService {
     const produktionsplanungGabel = this.produktionsplanungService.getGabel();
     this.lagerbestandGabel = 0;
     this.lieferdatenGabel = this.lieferdatenService.lieferdatenGabel;
-    // TODO SW: Hier die richtige Losgröße wieder verwenden
-    this.losgroesseGabel = 200;
-    // this.losgroesseGabel = this.lieferdatenGabel.losgroesseHersteller;
+    this.losgroesseGabel = this.lieferdatenGabel.losgroesseHersteller;
     for (let i = 0; i < produktionsplanungGabel.length; i++) {
       this.scInboundGabel[i] = new ScInboundGabel(produktionsplanungGabel[i], this.lieferdatenService);
     }
@@ -68,14 +65,11 @@ export class ScInboundService {
     const produktionsplanungRahmen = this.produktionsplanungService.getRahmen();
     this.lagerbestandRahmen = 0;
     this.lieferdatenRahmen = this.lieferdatenService.lieferdatenRahmen;
-    // TODO SW: Hier die richtige Losgröße wieder verwenden
-    this.losgroesseRahmen = 200;
-    // this.losgroesseRahmen = this.lieferdatenRahmen.losgroesseHersteller;
+    this.losgroesseRahmen = this.lieferdatenRahmen.losgroesseHersteller;
     for (let i = 0; i < produktionsplanungRahmen.length; i++) {
       this.scInboundRahmen[i] = new ScInboundRahmen(produktionsplanungRahmen[i], this.lieferdatenService);
     }
     this.beachteLosgroesseHersteller(this.scInboundRahmen, this.lagerbestandRahmen, this.losgroesseRahmen);
-
   }
 
   kloneArray(array: Array<any>): Array<number> {
@@ -116,10 +110,9 @@ export class ScInboundService {
               wertArr[ii] = 0;
               // Berechne wie lange die Verzögerung gedauert hat
               const verzoegerungDurchLosgroesse = ii - i;
-              // TODO SW: Hier den Testwert löschen
               // tslint:disable-next-line:max-line-length
-              // scInbound[ii].produktionsstartHersteller =  scInbound[ii].berechneStartBeimHersteller(scInbound[ii].startLkw1, verzoegerungDurchLosgroesse);
-              scInbound[ii].produktionsstartHersteller =  scInbound[ii].berechneStartBeimHersteller(scInbound[ii].produktionsstartOem, verzoegerungDurchLosgroesse);
+              scInbound[ii].produktionsstartHersteller =  scInbound[ii].berechneStartBeimHersteller(scInbound[ii].ersterTransport(), verzoegerungDurchLosgroesse);
+              // scInbound[ii].produktionsstartHersteller =  scInbound[ii].berechneStartBeimHersteller(scInbound[ii].produktionsstartOem, verzoegerungDurchLosgroesse);
               // ... ansonsten ...
             } else {
               // Verringere den den Wert (Ein Teil der bestellten Menge für den Produktionstag wird verschickt)
