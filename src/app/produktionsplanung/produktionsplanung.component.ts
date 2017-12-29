@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Fahrrad } from '../shared/fahrrad.model';
+import { FahrradService } from '../shared/fahrrad.service';
+import { Produktionsplanung } from '../shared/produktionsplanung.model';
 
 @Component({
   selector: 'app-produktionsplanung',
@@ -6,8 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class ProduktionsplanungComponent implements OnInit {
+  fahrraeder: Fahrrad[];
 
-  constructor() { }
+  constructor(private fahrradService: FahrradService) { }
 
   // TODO: MS: Den wochenweisen Input von der Programmplanung auf den Tag herunterrechnen
 
@@ -15,6 +19,8 @@ export class ProduktionsplanungComponent implements OnInit {
   // TODO: Nicht genug auf Lager wenn durch hohe Losgröße noch Rücklage im Lager || Wert nur 10 % höher durch Puffer
 
   ngOnInit() {
+    this.fahrraeder = this.fahrradService.getFahrraeder();
+    console.log(this.fahrraeder);
   }
 
 }
