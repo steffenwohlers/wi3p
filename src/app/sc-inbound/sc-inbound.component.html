@@ -8,24 +8,24 @@
     </thead>
     <tbody>
         <tr>
-            <th>Produktionsstart Hersteller:</th>
-            <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.produktionsstartHersteller)}} </th>            
+            <td>Produktionsstart Hersteller:</td>
+            <td *ngFor="let e of scInboundSattel"> {{datumAsString(e.produktionsstartHersteller)}} </td>            
         </tr>
         <tr>
-                <th>Start LKW zum Hafen:</th>
-                <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.startLkw1)}} </th>            
+                <td>Start LKW zum Hafen:</td>
+                <td *ngFor="let e of scInboundSattel"> {{datumAsString(e.startLkw1)}} </td>            
         </tr>
         <tr>
-            <th>Start Schiff nach Deutschland:</th>
-            <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.startSchiff)}} </th>            
+            <td>Start Schiff nach Deutschland:</td>
+            <td *ngFor="let e of scInboundSattel"> {{datumAsString(e.startSchiff)}} </td>            
         </tr>
         <tr>
-            <th>Start LKW zum OEM:</th>
-            <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.startLkw2)}} </th>            
+            <td>Start LKW zum OEM:</td>
+            <td *ngFor="let e of scInboundSattel"> {{datumAsString(e.startLkw2)}} </td>            
         </tr>
         <tr>
-            <th>Ankunft beim OEM:</th>
-            <th *ngFor="let e of scInboundSattel"> {{datumAsString(e.ankunftOEM)}} </th>            
+            <td>Ankunft beim OEM:</td>
+            <td *ngFor="let e of scInboundSattel"> {{datumAsString(e.ankunftOEM)}} </td>            
         </tr>
     </tbody>
 </table>
