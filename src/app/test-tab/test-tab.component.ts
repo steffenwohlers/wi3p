@@ -13,65 +13,24 @@ import { log } from 'util';
   templateUrl: './test-tab.component.html',
   styles: []
 })
-export class TestTabComponent implements OnInit {
+export class TestTabComponent {
 
   // Test1
   value1 = 0;
   value2 = 0;
   value3 = this.value2 + this.value1;
 
-  // Test2
-  scInboundSattel: ScInboundSattel[];
-  tempArray: number[];
-  tempArray2: number[];
-  losgroesse: number;
-  lagerbestandSattel: number;
+  // Test 2
+  date1: Date;
+  date2: Date;
 
   constructor(private scInboundService: ScInboundService) {
-
-    // Test2
-    this.scInboundSattel = scInboundService.getScInboundSattel();
-    this.tempArray = new Array(this.scInboundSattel.length);
-    this.tempArray2 = new Array(this.scInboundSattel.length);
-    this.losgroesse = 200;
-    this.lagerbestandSattel = 0;
+    this.date1 = new Date(2017, 0, 1);
+    this.date2 = new Date(2017, 0, 2);
 
   }
 
-  ngOnInit() {
-    this.berechneRueckwaerts();
-    this.berechneLosgroesse();
-
-  }
-
-  aendereLosgroesse() {
+  addiere() {
     this.value3 = this.value1 + this.value2;
-  }
-
-  berechneRueckwaerts() {
-    let result = 0;
-    for (let i = this.scInboundSattel.length - 1; i >= 0; i--) {
-      result = result + this.scInboundSattel[i].menge;
-      this.tempArray[i] = result;
-    }
-  }
-
-  berechneLosgroesse() {
-    let result = 0;
-
-    for (let i = this.scInboundSattel.length - 1; i >= 0; i--) {
-      // console.log('Vor Berechnung: ' + result);
-      result = result + this.scInboundSattel[i].menge;
-      // console.log('Nach Berechnung: ' + result);
-      if (result < this.losgroesse) {
-        this.tempArray2[i] = 0;
-      // console.log('In if ' + result);
-      } else {
-        result = result - this.losgroesse;
-        // console.log('In else ' + result);
-        this.tempArray2[i] = result;
-      }
-    }
-
   }
 }
