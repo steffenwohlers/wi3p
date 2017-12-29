@@ -1,3 +1,18 @@
-<p>
-  produktionsplanung works!
-</p>
+<h1>Produktionsplanung</h1>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th *ngFor="let item of fahrraeder[0].programmplanung.produktionsplanung">{{ item.datum | date: 'dd.MM.yy'}}</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let fahrrad of fahrraeder">
+        <tr>
+            <td rowspan="3">{{ fahrrad.modell }}</td>
+            <td *ngFor="let item of fahrrad.programmplanung.produktionsplanung">
+                {{item.menge}}
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,6 +1,7 @@
 import * as moment from '../../../node_modules/moment';
 import '../../../node_modules/moment/locale/de';
 import { DatumService } from './datum.service';
+import { Produktionsplanung } from './produktionsplanung.model';
 
 export class Programmplanung {
     public static startDatum: Date = new Date(2017, 0, 2);
@@ -8,6 +9,7 @@ export class Programmplanung {
     public vorlage: [number];
     public jahresWerte = [];
     public werte = [];
+    public produktionsplanung = [];
 
     static setStartDatum(start: Date) {
         // Durch die Planung auf Wochenbasis wird nur ein Montag als Startdatum akzeptiert
@@ -105,5 +107,16 @@ export class Programmplanung {
                 calendarYear: moment(montag).format('YY')
             };
         }
+
+        // Kalkuliere die Produktionsplanung
+        const datum = new Date(Programmplanung.startDatum);
+        for (let tage = 0; tage < 364; ++tage) {
+            this.produktionsplanung[tage] = new Produktionsplanung(
+                new Date(datum),
+                this.getOutputPerDay(datum)
+            );
+            datum.setDate(datum.getDate() + 1);
+        }
+        console.log(this.produktionsplanung);
     }
 }
