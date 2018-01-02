@@ -35,3 +35,9 @@ td.down {
 th.down {
     background-color: red;
 }
+
+tr.highlighted {
+    background-color: rgb(0, 0, 0);
+    font-weight: bold;
+    color: white;
+}

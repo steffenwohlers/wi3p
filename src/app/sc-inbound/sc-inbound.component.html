@@ -2,7 +2,7 @@
 <p style="font-weight: bold">Heutiges Datum: {{datumAsString(heutigesDatum)}}</p>
 <table class="table table-striped">
     <thead>
-        <tr>
+        <tr class="highlighted">
             <th>Produktionsstart OEM:</th>
             <th *ngFor="let e of scInboundSattel"
             [ngClass]="{'down': heutigesDatum > e.produktionsstartHersteller}"> {{datumAsString(e.produktionsstartOem)}} </th>
@@ -13,9 +13,13 @@
             <td>Benötigte / zu bestellende Menge:</td>
             <td *ngFor="let e of scInboundSattel">{{e.menge}}</td>
         </tr>
-        <tr>
+        <tr class="highlighted">
             <td>Produktionsstart Hersteller:</td>
             <td *ngFor="let e of scInboundSattel"> {{datumAsString(e.produktionsstartHersteller)}} </td>            
+        </tr>
+        <tr>
+            <td>Lagerbestand beim Hersteller:</td>
+            <td *ngFor="let e of scInboundService.lagerbestandSattelArray">{{e}}</td>
         </tr>
         <tr>
                 <td>Start LKW zum Hafen:</td>

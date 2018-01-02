@@ -21,7 +21,7 @@ export class ScInboundComponent implements OnInit {
   heutigesDatum: Date;
 
 
-  constructor(private fahrradService: FahrradService, scInboundService: ScInboundService) {
+  constructor(private fahrradService: FahrradService, public scInboundService: ScInboundService) {
 
       this.scInboundSattel = scInboundService.getScInboundSattel();
       this.heutigesDatum = new Date (2017, 4, 21);

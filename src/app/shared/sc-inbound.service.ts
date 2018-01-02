@@ -50,7 +50,7 @@ export class ScInboundService {
     for (let i = 0; i < produktionsplanungSattel.length; i++) {
       this.scInboundSattel[i] = new ScInboundSattel(produktionsplanungSattel[i], this.lieferdatenService);
     }
-    this.beachteLosgroesseHersteller(this.scInboundSattel, this.lagerbestandSattel, this.losgroesseSattel);
+    this.beachteLosgroesseHersteller(this.scInboundSattel, this.lagerbestandSattelArray, this.lagerbestandSattel, this.losgroesseSattel);
 
     /**
     * Gabel
@@ -64,19 +64,21 @@ export class ScInboundService {
     for (let i = 0; i < produktionsplanungGabel.length; i++) {
       this.scInboundGabel[i] = new ScInboundGabel(produktionsplanungGabel[i], this.lieferdatenService);
     }
-    this.beachteLosgroesseHersteller(this.scInboundGabel, this.lagerbestandGabel, this.losgroesseGabel);
+    this.beachteLosgroesseHersteller(this.scInboundGabel, this.lagerbestandGabelArray, this.lagerbestandGabel, this.losgroesseGabel);
 
     /**
     * Rahmen
     */
     const produktionsplanungRahmen = this.produktionsplanungService.getRahmen();
+    // Dient nur zur Anzeige
+    this.lagerbestandRahmenArray = new Array(ScInboundRahmen.length);
     this.lagerbestandRahmen = 0;
     this.lieferdatenRahmen = this.lieferdatenService.lieferdatenRahmen;
     this.losgroesseRahmen = this.lieferdatenRahmen.losgroesseHersteller;
     for (let i = 0; i < produktionsplanungRahmen.length; i++) {
       this.scInboundRahmen[i] = new ScInboundRahmen(produktionsplanungRahmen[i], this.lieferdatenService);
     }
-    this.beachteLosgroesseHersteller(this.scInboundRahmen, this.lagerbestandRahmen, this.losgroesseRahmen);
+    this.beachteLosgroesseHersteller(this.scInboundRahmen, this.lagerbestandRahmenArray, this.lagerbestandRahmen, this.losgroesseRahmen);
   }
 
   kloneArray(array: Array<any>): Array<number> {
@@ -88,11 +90,13 @@ export class ScInboundService {
   }
 
 
-  beachteLosgroesseHersteller(scInbound: Array<any>, lagerbestand: number, losgroesse: number) {
+  beachteLosgroesseHersteller(scInbound: Array<any>, lagerbestandArray: Array<number>, lagerbestand: number, losgroesse: number) {
     // Mengen-Werte des Datums zum Abgleich
     const wertArr = this.kloneArray(scInbound);
     // Iteriere von hinten durch das Original-Array
     for (let i = scInbound.length - 1; i >= 0; i--) {
+      // Nur zur Anzeige in der GUI
+      lagerbestandArray[i] = lagerbestand;
     // Hersteller produziert die benötigte Menge und legt sie ins Lager
     lagerbestand = lagerbestand + scInbound[i].menge;
     // Falls der Lagerbestand kleiner ist als die Losgröße mache nichts..
@@ -101,6 +105,8 @@ export class ScInboundService {
       } else {
         // nimm die Losgröße aus dem Lager (weil sie versandt wird). TODO SW: Was passiert wenn lagerbestand >= 2xLosgroesse?
         lagerbestand = lagerbestand - losgroesse;
+        // NUr zur Anzeige
+        lagerbestandArray[i] = lagerbestand;
         // Wert um die Losgröße aufzuteilen auf die Bestelltage
         let tempValue = losgroesse;
         // Iteriere von hinten durch das Werte Array
