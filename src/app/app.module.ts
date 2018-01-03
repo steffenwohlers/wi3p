@@ -18,6 +18,7 @@ import { ProduktionskapazitaetenService } from './shared/produktionskapazitaeten
 import { ScInboundComponent } from './sc-inbound/sc-inbound.component';
 import { ProduktionsplanungService } from './shared/produktionsplanung.service';
 import { ScInboundService } from './shared/sc-inbound.service';
+import { ReportingComponent } from './reporting/reporting.component';
 
 // tslint:disable-next-line:max-line-length
 
@@ -32,7 +33,8 @@ import { ScInboundService } from './shared/sc-inbound.service';
     TestTabComponent,
     ProduktionsplanungComponent,
     ParameterComponent,
-    ScInboundComponent
+    ScInboundComponent,
+    ReportingComponent
   ],
   imports: [
     BrowserModule,
