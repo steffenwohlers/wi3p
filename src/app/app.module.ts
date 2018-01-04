@@ -19,6 +19,7 @@ import { ScInboundComponent } from './sc-inbound/sc-inbound.component';
 import { ProduktionsplanungService } from './shared/produktionsplanung.service';
 import { ScInboundService } from './shared/sc-inbound.service';
 import { ReportingComponent } from './reporting/reporting.component';
+import { ChartsModule } from 'ng2-charts';
 
 // tslint:disable-next-line:max-line-length
 
@@ -39,7 +40,8 @@ import { ReportingComponent } from './reporting/reporting.component';
   imports: [
     BrowserModule,
     FormsModule,
-    routing
+    routing,
+    ChartsModule
   ],
   providers: [
     FahrradService,

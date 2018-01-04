@@ -1,3 +1,23 @@
-<p>
-  reporting works!
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <div style="display: block;">
+    <canvas baseChart width="400" height="400"
+                [datasets]="programmplanung"
+                [labels]="programmplanungLabels"
+                [options]="programmplanungOptions"
+                [colors]="programmplanungColors"
+                [legend]="true"
+                [chartType]="programmplanungChartType"></canvas>
+    </div>
+  </div>
+  <div class="col-md-6">
+      <div style="display: block">
+          <canvas baseChart
+                  [data]="pieChartData"
+                  [labels]="pieChartLabels"
+                  [chartType]="pieChartType"></canvas>
+        </div>
+  </div>
+</div>
+
+<!-- Pie Chart mit Aufteilung Fahrrad am Gesamtoutput, linear mit allen Fahrrädern und Output pro Monat -->
