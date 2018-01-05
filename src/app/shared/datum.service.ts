@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as holiday from '../../../node_modules/holiday-de';
-
+// TODO SW TODO MS : Die anderen Ort als Datum einfügen
 @Injectable()
 export class DatumService {
 

@@ -103,10 +103,12 @@ export class ScInboundService {
       if (lagerbestand < losgroesse) {
         // ...ansonsten...
       } else {
-        // nimm die Losgröße aus dem Lager (weil sie versandt wird). TODO SW: Was passiert wenn lagerbestand >= 2xLosgroesse?
-        lagerbestand = lagerbestand - losgroesse;
-        // NUr zur Anzeige
-        lagerbestandArray[i] = lagerbestand;
+        // nimm die Losgröße aus dem Lager (weil sie versandt wird)
+        while (lagerbestand >= losgroesse) {
+          lagerbestand = lagerbestand - losgroesse;
+          // NUr zur Anzeige
+          lagerbestandArray[i] = lagerbestand;
+        }
         // Wert um die Losgröße aufzuteilen auf die Bestelltage
         let tempValue = losgroesse;
         // Iteriere von hinten durch das Werte Array

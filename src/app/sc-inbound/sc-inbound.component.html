@@ -2,6 +2,49 @@
 <p style="font-weight: bold">Heutiges Datum: {{datumAsString(startDatum)}}</p>
  <br>
 <h3>Supply Chain Sattel</h3>
+<!-- Lieferdaten -->
+<div class="row">
+    <div class="col col-lg-4">
+        <h4>Lieferdaten</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold;">Produktionsort:</td>
+                    <td>Dengwong, China</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Losgröße:</td>
+                    <td>{{lieferdatenSattel.losgroesseHersteller}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Produktionsdauer:</td>
+                    <td>{{lieferdatenSattel.bestelleingangBisProduktion.anzahl}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Dauer LKW zum Hafen:</td>
+                    <td>{{lieferdatenSattel.supplychain[0].anzahl}} {{lieferdatenSattel.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Dauer Schiff nach Deutschland:</td>
+                    <td>{{lieferdatenSattel.supplychain[1].anzahl}} {{lieferdatenSattel.supplychain[1].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Dauer LKW zum OEM:</td>
+                    <td>{{lieferdatenSattel.supplychain[0].anzahl}} {{lieferdatenSattel.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- SC Inbound Anzeige -->
+<h4>Supply Chain</h4>
 <table class="table table-striped">
     <thead>
         <tr class="highlighted">
@@ -42,7 +85,41 @@
     </tbody>
 </table>
 <br>
+<hr>
 <h3>Supply Chain Gabel</h3>
+<!-- Lieferdaten -->
+<div class="row">
+    <div class="col col-lg-4">
+        <h4>Lieferdaten</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold;">Produktionsort:</td>
+                    <td>Saragossa, Spanien</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Losgröße:</td>
+                    <td>{{lieferdatenGabel.losgroesseHersteller}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Produktionsdauer:</td>
+                    <td>{{lieferdatenGabel.bestelleingangBisProduktion.anzahl}}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Dauer Zug zum OEM:</td>
+                    <td>{{lieferdatenGabel.supplychain[0].anzahl}} {{lieferdatenGabel.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<h4>Supply Chain</h4>
 <table class="table table-striped">
     <thead>
         <tr class="highlighted">
@@ -76,6 +153,39 @@
 </table>
 <br>
 <h3>Supply Chain Rahmen</h3>
+<!-- Lieferdaten -->
+<div class="row">
+        <div class="col col-lg-4">
+            <h4>Lieferdaten</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight: bold;">Produktionsort:</td>
+                        <td>Heilbronn, Deutschland</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Losgröße:</td>
+                        <td>{{lieferdatenRahmen.losgroesseHersteller}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Produktionsdauer:</td>
+                        <td>{{lieferdatenRahmen.bestelleingangBisProduktion.anzahl}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Dauer LKW zum OEM:</td>
+                        <td>{{lieferdatenRahmen.supplychain[0].anzahl}} {{lieferdatenRahmen.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h4>Supply Chain</h4>
 <table class="table table-striped">
     <thead>
         <tr class="highlighted">

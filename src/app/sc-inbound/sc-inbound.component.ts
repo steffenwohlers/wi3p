@@ -24,13 +24,20 @@ export class ScInboundComponent implements OnInit {
   scInboundRahmen: ScInboundRahmen[];
   startDatum: Date;
 
+  lieferdatenSattel: Lieferdaten;
+  lieferdatenGabel: Lieferdaten;
+  lieferdatenRahmen: Lieferdaten;
 
-  constructor(private fahrradService: FahrradService, public scInboundService: ScInboundService) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private fahrradService: FahrradService, public scInboundService: ScInboundService, private lieferdatenService: LieferdatenService) {
 
       this.scInboundSattel = scInboundService.getScInboundSattel();
       this.scInboundGabel = scInboundService.getScInboundGabel();
       this.scInboundRahmen = scInboundService.getScInboundRahmen();
       this.startDatum = Programmplanung.startDatum;
+      this.lieferdatenSattel = this.lieferdatenService.lieferdatenSattel;
+      this.lieferdatenGabel = this.lieferdatenService.lieferdatenGabel;
+      this.lieferdatenRahmen = this.lieferdatenService.lieferdatenRahmen;
   }
 
   ngOnInit() {
