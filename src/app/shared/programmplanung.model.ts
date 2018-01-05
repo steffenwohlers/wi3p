@@ -117,6 +117,6 @@ export class Programmplanung {
             );
             datum.setDate(datum.getDate() + 1);
         }
-        console.log(this.produktionsplanung);
+        // console.log(this.produktionsplanung);
     }
 }

@@ -9,6 +9,8 @@ import { Fahrrad } from '../shared/fahrrad.model';
 import { Programmplanung } from '../shared/programmplanung.model';
 import { ScInboundService } from '../shared/sc-inbound.service';
 import { ScInboundSattel } from '../shared/sc-inbound-sattel.model';
+import { ScInboundGabel } from '../shared/sc-inbound-gabel.model';
+import { ScInboundRahmen } from '../shared/sc-inbound-rahmen.model';
 
 @Component({
   selector: 'app-sc-inbound',
@@ -18,13 +20,17 @@ import { ScInboundSattel } from '../shared/sc-inbound-sattel.model';
 export class ScInboundComponent implements OnInit {
 
   scInboundSattel: ScInboundSattel[];
-  heutigesDatum: Date;
+  scInboundGabel: ScInboundGabel[];
+  scInboundRahmen: ScInboundRahmen[];
+  startDatum: Date;
 
 
   constructor(private fahrradService: FahrradService, public scInboundService: ScInboundService) {
 
       this.scInboundSattel = scInboundService.getScInboundSattel();
-      this.heutigesDatum = new Date (2017, 4, 21);
+      this.scInboundGabel = scInboundService.getScInboundGabel();
+      this.scInboundRahmen = scInboundService.getScInboundRahmen();
+      this.startDatum = Programmplanung.startDatum;
   }
 
   ngOnInit() {

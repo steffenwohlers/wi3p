@@ -1,11 +1,13 @@
 <h2>Ibound</h2>
-<p style="font-weight: bold">Heutiges Datum: {{datumAsString(heutigesDatum)}}</p>
+<p style="font-weight: bold">Heutiges Datum: {{datumAsString(startDatum)}}</p>
+ <br>
+<h3>Supply Chain Sattel</h3>
 <table class="table table-striped">
     <thead>
         <tr class="highlighted">
             <th>Produktionsstart OEM:</th>
             <th *ngFor="let e of scInboundSattel"
-            [ngClass]="{'down': heutigesDatum > e.produktionsstartHersteller}"> {{datumAsString(e.produktionsstartOem)}} </th>
+            [ngClass]="{'down': startDatum > e.produktionsstartHersteller}"> {{datumAsString(e.produktionsstartOem)}} </th>
         </tr>
     </thead>
     <tbody>
@@ -21,7 +23,7 @@
             <td>Lagerbestand beim Hersteller:</td>
             <td *ngFor="let e of scInboundService.lagerbestandSattelArray">{{e}}</td>
         </tr>
-        <tr>
+        <tr class="highlighted">
                 <td>Start LKW zum Hafen:</td>
                 <td *ngFor="let e of scInboundSattel"> {{datumAsString(e.startLkw1)}} </td>            
         </tr>
@@ -36,6 +38,72 @@
         <tr>
             <td>Ankunft beim OEM:</td>
             <td *ngFor="let e of scInboundSattel"> {{datumAsString(e.ankunftOEM)}} </td>            
+        </tr>
+    </tbody>
+</table>
+<br>
+<h3>Supply Chain Gabel</h3>
+<table class="table table-striped">
+    <thead>
+        <tr class="highlighted">
+            <th>Produktionsstart OEM:</th>
+            <th *ngFor="let e of scInboundGabel"
+            [ngClass]="{'down': startDatum > e.produktionsstartHersteller}"> {{datumAsString(e.produktionsstartOem)}} </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Benötigte / zu bestellende Menge:</td>
+            <td *ngFor="let e of scInboundGabel">{{e.menge}}</td>
+        </tr>
+        <tr class="highlighted">
+            <td>Produktionsstart Hersteller:</td>
+            <td *ngFor="let e of scInboundGabel"> {{datumAsString(e.produktionsstartHersteller)}} </td>            
+        </tr>
+        <tr>
+            <td>Lagerbestand beim Hersteller:</td>
+            <td *ngFor="let e of scInboundService.lagerbestandGabelArray">{{e}}</td>
+        </tr>
+        <tr class="highlighted">
+            <td>Start Zug zum Hersteller:</td>
+            <td *ngFor="let e of scInboundGabel"> {{datumAsString(e.startZug)}} </td>            
+        </tr>
+        <tr>
+            <td>Ankunft beim OEM:</td>
+            <td *ngFor="let e of scInboundGabel"> {{datumAsString(e.ankunftOEM)}} </td>            
+        </tr>
+    </tbody>
+</table>
+<br>
+<h3>Supply Chain Rahmen</h3>
+<table class="table table-striped">
+    <thead>
+        <tr class="highlighted">
+            <th>Produktionsstart OEM:</th>
+            <th *ngFor="let e of scInboundRahmen"
+            [ngClass]="{'down': startDatum > e.produktionsstartHersteller}"> {{datumAsString(e.produktionsstartOem)}} </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Benötigte / zu bestellende Menge:</td>
+            <td *ngFor="let e of scInboundRahmen">{{e.menge}}</td>
+        </tr>
+        <tr class="highlighted">
+            <td>Produktionsstart Hersteller:</td>
+            <td *ngFor="let e of scInboundRahmen"> {{datumAsString(e.produktionsstartHersteller)}} </td>            
+        </tr>
+        <tr>
+            <td>Lagerbestand beim Hersteller:</td>
+            <td *ngFor="let e of scInboundService.lagerbestandRahmenArray">{{e}}</td>
+        </tr>
+        <tr class="highlighted">
+            <td>Start LKW zum Hersteller:</td>
+            <td *ngFor="let e of scInboundRahmen"> {{datumAsString(e.startLkw)}} </td>            
+        </tr>
+        <tr>
+            <td>Ankunft beim OEM:</td>
+            <td *ngFor="let e of scInboundRahmen"> {{datumAsString(e.ankunftOEM)}} </td>            
         </tr>
     </tbody>
 </table>
