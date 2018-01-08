@@ -12,7 +12,6 @@ export class ProgrammplanungComponent implements OnInit {
   fahrraeder: Fahrrad[];
 
   constructor(private fahrradService: FahrradService) {
-    Programmplanung.setStartDatum(new Date(2017, 0, 2));
   }
 
   ngOnInit() {
