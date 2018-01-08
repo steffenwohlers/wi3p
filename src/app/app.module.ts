@@ -20,6 +20,7 @@ import { ProduktionsplanungService } from './shared/produktionsplanung.service';
 import { ScInboundService } from './shared/sc-inbound.service';
 import { ReportingComponent } from './reporting/reporting.component';
 import { ChartsModule } from 'ng2-charts';
+import { ProgrammplanungService } from './shared/programmplanung.service';
 
 // tslint:disable-next-line:max-line-length
 
@@ -49,7 +50,8 @@ import { ChartsModule } from 'ng2-charts';
     LieferdatenService,
     ProduktionskapazitaetenService,
     ProduktionsplanungService,
-    ScInboundService
+    ScInboundService,
+    ProgrammplanungService
   ],
   bootstrap: [AppComponent]
 })

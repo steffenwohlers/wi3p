@@ -1,3 +1,5 @@
+
+
 export class Produktionsplanung {
 
     public realOutput: number;
@@ -7,22 +9,23 @@ export class Produktionsplanung {
     constructor(public datum: Date, public menge: number, public teile) {
 
         const maxOutput = [];
-        let needToOrder = false;
-        let notAvailable = false;
+        const needToOrder = false;
+        const notAvailable = false;
         // Iteriere durch Teile dieses Fahrrads
         this.teile.forEach(teil => {
             // Frage im FahrradTeilService, ob noch "menge" im Lager ist?
             if (teil.lagerbestand < this.menge) {
                 // if (nochLieferBar()) {
-                /*    maxOutput.push(this.menge);
-                    needToOrder = true;
-                } else {
-                    maxOutput.push(teil.lagerbestand);
-                    notAvailable = true;
-                }*/
+                    // if (scInboundService.lieferungMoeglich(datum, teil)) {
+                //     maxOutput.push(this.menge);
+                //     needToOrder = true;
+                // } else {
+                //     maxOutput.push(teil.lagerbestand);
+                //     notAvailable = true;
+                // }
 
-                // Vorläufig:
-                maxOutput.push(this.menge);
+                // // Vorläufig:
+                // maxOutput.push(this.menge);
             } else {
                 maxOutput.push(this.menge);
             }
@@ -45,7 +48,7 @@ export class Produktionsplanung {
         // Wenn ja, entnehme aus Lager und setze "realOutput" auf "menge"
         // Wenn nein, entnehme Maximum aus Lager. Frage SC Inbound, ob dieses Teil bis "datum" lieferbar ist?
         // Wenn ja, setze realOutput auf "menge" und needToOrder auf true
-        // Wenn nein, setze realOutput auf Maximum und notAvailable auf true 
+        // Wenn nein, setze realOutput auf Maximum und notAvailable auf true
     }
 
     private min(arr): number {

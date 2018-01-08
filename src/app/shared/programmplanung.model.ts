@@ -3,6 +3,7 @@ import '../../../node_modules/moment/locale/de';
 import { DatumService } from './datum.service';
 import { Produktionsplanung } from './produktionsplanung.model';
 
+
 export class Programmplanung {
     public static startDatum: Date = new Date(2017, 0, 2);
 
