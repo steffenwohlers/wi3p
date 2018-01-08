@@ -1,5 +1,6 @@
 <h1>Programmplanung</h1>
-
+<input type="date" (ngModel)="getStartDate()">
+{{ getStartDate() }}
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -25,6 +26,7 @@
                 <input type="number"
                 class="form control"
                 [(ngModel)]="item.demand"
+                (change)="fahrrad.programmplanung.applyChanges(item.startDate, item.demand)"
                 >
             </td>
         </tr>

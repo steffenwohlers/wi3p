@@ -53,8 +53,6 @@ export class Programmplanung {
                 const monthlyOutput = this.vorlage[m];
                 const arbeitsTageVonMonat = DatumService.getArbeitstageMonat(datum);
                 const dailyOutput = monthlyOutput / arbeitsTageVonMonat;
-                // tslint:disable-next-line:max-line-length
-                // console.log('Output des Monats: ' + monthlyOutput + ', Arbeitstage: ' + arbeitsTageVonMonat + ', täglich: ' + dailyOutput);
 
                 // Iteriere durch jeden Tag und weise den Tagesoutput zu
                 // Runde jede Zahl ab und merke die Differenz, um diese auf den nächsten Wert drauf zu addieren
@@ -76,7 +74,6 @@ export class Programmplanung {
             }
 
             // Nach der Berechnung: Gebe den passenden Wert jetzt aus
-            // console.log(this.jahresWerte);
             return this.jahresWerte[jahr][monat][tag];
         }
     }
@@ -117,6 +114,50 @@ export class Programmplanung {
             );
             datum.setDate(datum.getDate() + 1);
         }
-        // console.log(this.produktionsplanung);
+    }
+
+    public applyChanges(aktuellerTag: Date, wochenDemand: number) {
+        console.log(aktuellerTag, wochenDemand, this.produktionsplanung);
+
+
+        // Wie viele Arbeitstage gibt es in diesem Monat?
+        let arbeitsTageWoche = 0;
+        const arbeitsTag = new Date(aktuellerTag);
+        for (let tag = 0; tag < 7; ++tag) {
+            if ( DatumService.istArbeitstag( arbeitsTag ) ) {
+                arbeitsTageWoche += 1;
+            }
+            arbeitsTag.setDate(arbeitsTag.getDate() + 1);
+        }
+
+        // Berechne benötigten Tagesoutput
+        const dailyOutput = wochenDemand / arbeitsTageWoche;
+
+        let rest = 0;
+        for (let tag = 0; tag < 7; ++tag) {
+            if ( DatumService.istArbeitstag( aktuellerTag ) ) {
+                const abgerundet = Math.floor(dailyOutput + rest);
+                this.updateProduktionsPlanung(aktuellerTag, abgerundet);
+                rest += dailyOutput - abgerundet;
+            } else {
+                this.updateProduktionsPlanung(aktuellerTag, 0);
+            }
+            aktuellerTag.setDate(aktuellerTag.getDate() + 1);
+        }
+        // Iteriere durch jeden Tag der Woche
+        // Finde Output pro Tag heraus
+        // Ersetze die jeweilige Stelle in der Produktionsplanung
+    }
+
+    private updateProduktionsPlanung(tag: Date, output: number) {
+        console.log('Neuer Wert für den ' + tag + ': ' + output);
+        this.produktionsplanung.forEach(element => {
+            if (element.datum.getFullYear() ===  tag.getFullYear()
+                && element.datum.getMonth() ===  tag.getMonth()
+                && element.datum.getDate() ===  tag.getDate()) {
+                    element.menge = output;
+                    return;
+            }
+        });
     }
 }

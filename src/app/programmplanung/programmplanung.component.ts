@@ -31,4 +31,8 @@ export class ProgrammplanungComponent implements OnInit {
     });
   }
 
+  public getStartDate(): Date {
+    return Programmplanung.startDatum;
+  }
+
 }
