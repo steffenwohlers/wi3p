@@ -24,11 +24,14 @@ export class ProgrammplanungComponent implements OnInit {
   }
 
   // Wenn ein neues Datum eingestellt wird, muss anschließend die Programmplanung neu berechnet werden
-  saveStartdate(startDate: Date) {
-    Programmplanung.setStartDatum(startDate);
-    this.fahrraeder.forEach(fahrrad => {
+  saveStartdate(startDate) {
+    startDate = startDate.target.valueAsDate;
+    if (startDate.getDay() === 1) {
+      Programmplanung.setStartDatum(startDate);
+      this.fahrraeder.forEach(fahrrad => {
       fahrrad.programmplanung.calculateOutput();
     });
+    }
   }
 
   public getStartDate(): Date {

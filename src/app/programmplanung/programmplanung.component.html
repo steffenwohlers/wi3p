@@ -1,6 +1,5 @@
 <h1>Programmplanung</h1>
-<input type="date" (ngModel)="getStartDate()">
-{{ getStartDate() }}
+Startdatum: <input type="date" [value]="getStartDate() | date:'yyyy-MM-dd'" (change)="saveStartdate($event)">
 <table class="table table-striped table-hover">
     <thead>
         <tr>
