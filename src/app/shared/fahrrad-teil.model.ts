@@ -7,6 +7,7 @@ export class FahrradTeil {
     constructor(
         public name: string,
         public type: FahrradTeilTyp,
-        public lieferdaten: Lieferdaten
+        public lieferdaten: Lieferdaten,
+        public lagerbestand: number
     ) { }
 }
