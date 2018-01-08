@@ -15,22 +15,22 @@ export class FahrradTeilService {
 
 
   this.teile = [
-    new FahrradTeil('Aluminium 7005DB', FahrradTeilTyp.Rahmen, this.lieferdatenService.lieferdatenRahmen),
-    new FahrradTeil('Aluminium 7005TB', FahrradTeilTyp.Rahmen, this.lieferdatenService.lieferdatenRahmen),
-    new FahrradTeil('Carbon Monocoque', FahrradTeilTyp.Rahmen, this.lieferdatenService.lieferdatenRahmen),
+    new FahrradTeil('Aluminium 7005DB', FahrradTeilTyp.Rahmen, this.lieferdatenService.lieferdatenRahmen, 10),
+    new FahrradTeil('Aluminium 7005TB', FahrradTeilTyp.Rahmen, this.lieferdatenService.lieferdatenRahmen, 10),
+    new FahrradTeil('Carbon Monocoque', FahrradTeilTyp.Rahmen, this.lieferdatenService.lieferdatenRahmen, 10),
 
-    new FahrradTeil('Fizik Tundra', FahrradTeilTyp.Sattel, this.lieferdatenService.lieferdatenSattel),
-    new FahrradTeil('Race line', FahrradTeilTyp.Sattel, this.lieferdatenService.lieferdatenSattel),
-    new FahrradTeil('Spark', FahrradTeilTyp.Sattel, this.lieferdatenService.lieferdatenSattel),
-    new FahrradTeil('Speed line', FahrradTeilTyp.Sattel, this.lieferdatenService.lieferdatenSattel),
+    new FahrradTeil('Fizik Tundra', FahrradTeilTyp.Sattel, this.lieferdatenService.lieferdatenSattel, 20),
+    new FahrradTeil('Race Line', FahrradTeilTyp.Sattel, this.lieferdatenService.lieferdatenSattel, 20),
+    new FahrradTeil('Spark', FahrradTeilTyp.Sattel, this.lieferdatenService.lieferdatenSattel, 20),
+    new FahrradTeil('Speed Line', FahrradTeilTyp.Sattel, this.lieferdatenService.lieferdatenSattel, 20),
 
-    new FahrradTeil('Fox32 F100', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel),
-    new FahrradTeil('Fox32 F80', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel),
-    new FahrradTeil('Fox Talas140', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel),
-    new FahrradTeil('Rock Schox Reba', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel),
-    new FahrradTeil('Rock Schox Recon351', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel),
-    new FahrradTeil('Rock Schox ReconSL', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel),
-    new FahrradTeil('SR Suntour Raidon', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel)
+    new FahrradTeil('Fox32 F100', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel, 30),
+    new FahrradTeil('Fox32 F80', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel, 30),
+    new FahrradTeil('Fox Talas140', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel, 30),
+    new FahrradTeil('Rock Schox Reba', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel, 30),
+    new FahrradTeil('Rock Schox Recon351', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel, 30),
+    new FahrradTeil('Rock Schox ReconSL', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel, 30),
+    new FahrradTeil('SR Suntour Raidon', FahrradTeilTyp.Gabel, this.lieferdatenService.lieferdatenGabel, 30)
   ];
 
  }
@@ -49,4 +49,26 @@ export class FahrradTeilService {
     });
     return result;
   }
+
+  entnehmeAusLager(name: string, menge: number) {
+
+    const tempTeil = this.getFahrradTeil(name);
+
+    tempTeil.lagerbestand = tempTeil.lagerbestand - menge;
+
+  }
+
+  getAnzahl(name: string): number {
+
+    const tempTeil = this.getFahrradTeil(name);
+
+    return tempTeil.lagerbestand;
+  }
+
+  fuegeHinzu (name: string, menge: number) {
+  const tempTeil = this.getFahrradTeil(name);
+
+  tempTeil.lagerbestand = tempTeil.lagerbestand + menge;
+  }
+
 }
