@@ -29,7 +29,13 @@ export class FahrradService {
                     1665,
                     2220,
                     1665
-                ])
+                ],
+                [
+                    this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
+                    this.fahrradTeilService.getFahrradTeil('Spark'),
+                    this.fahrradTeilService.getFahrradTeil('Fox32 F100')
+                ]
+            )
             ),
             new Fahrrad(
                 'MTBCompetition',
@@ -49,6 +55,11 @@ export class FahrradService {
                     832.5,
                     1110,
                     832.5
+                ],
+                [
+                    this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
+                    this.fahrradTeilService.getFahrradTeil('Speed Line'),
+                    this.fahrradTeilService.getFahrradTeil('Fox Talas140')
                 ])
             ),
             new Fahrrad(
@@ -69,6 +80,11 @@ export class FahrradService {
                     555,
                     740,
                     555
+                ],
+                [
+                    this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
+                    this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
+                    this.fahrradTeilService.getFahrradTeil('Fox Talas140')
                 ])
             ),
             new Fahrrad(
@@ -89,6 +105,11 @@ export class FahrradService {
                     388.5,
                     518,
                     388.5
+                ],
+                [
+                    this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
+                    this.fahrradTeilService.getFahrradTeil('Spark'),
+                    this.fahrradTeilService.getFahrradTeil('Rock Schox Reba')
                 ])
             ),
             new Fahrrad(
@@ -109,6 +130,11 @@ export class FahrradService {
                     277.5,
                     370,
                     277.5
+                ],
+                [
+                    this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
+                    this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
+                    this.fahrradTeilService.getFahrradTeil('Fox32 F80')
                 ])
             ),
             new Fahrrad(
@@ -129,6 +155,11 @@ export class FahrradService {
                     444,
                     592,
                     444
+                ],
+                [
+                    this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
+                    this.fahrradTeilService.getFahrradTeil('Race Line'),
+                    this.fahrradTeilService.getFahrradTeil('Rock Schox ReconSL')
                 ])
             ),
             new Fahrrad(
@@ -149,6 +180,11 @@ export class FahrradService {
                     666,
                     888,
                     666
+                ],
+                [
+                    this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
+                    this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
+                    this.fahrradTeilService.getFahrradTeil('Rock Schox Reba')
                 ])
             ),
             new Fahrrad(
@@ -169,6 +205,11 @@ export class FahrradService {
                     721.5,
                     962,
                     721.5
+                ],
+                [
+                    this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
+                    this.fahrradTeilService.getFahrradTeil('Speed Line'),
+                    this.fahrradTeilService.getFahrradTeil('SR Suntour Raidon')
                 ])
             ),
         ];

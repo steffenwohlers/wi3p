@@ -9,9 +9,7 @@ export class Fahrrad {
         public rahmen: FahrradTeil,
         public sattel: FahrradTeil,
         public gabel: FahrradTeil,
-        public programmplanung: Programmplanung,
-        // public produktionsplanung: Produktionsplanung
-        public produktionsplanung?: [Produktionsplanung]
+        public programmplanung: Programmplanung
     ) {
 
     }

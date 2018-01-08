@@ -142,7 +142,7 @@ export class ScInboundService {
       }
     }
     const tempDate = new Date(2017, 6, 3);
-    console.log(tempDate.getDate() + '.' + (tempDate.getMonth() + 1) + '.' + tempDate.getFullYear());
+    // console.log(tempDate.getDate() + '.' + (tempDate.getMonth() + 1) + '.' + tempDate.getFullYear());
   this.lieferungMoeglich(tempDate, FahrradTeilTyp.Sattel);
   }
 
@@ -165,17 +165,14 @@ export class ScInboundService {
     switch (typ) {
       // Rahmen
       case 0:
-        console.log('0');
         result = this.lieferungMöglichRahmen(datum);
         break;
       // Gabel
       case 1:
-      console.log('1');
       result = this.lieferungMöglichGabel(datum);
         break;
       // Sattel
       case 2:
-      console.log('2');
       result = this.lieferungMöglichSattel(datum);
         break;
 
@@ -191,16 +188,16 @@ export class ScInboundService {
       if (e.produktionsstartOem.getTime() === datum.getTime() ) {
 
         // tslint:disable-next-line:max-line-length
-        console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+        // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
 
         // tslint:disable-next-line:max-line-length
-        console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+        // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
 
         if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
-          console.log('Lieferung möglich: false');
+          // console.log('Lieferung möglich: false');
           return false;
         } else {
-          console.log('LIeferung möglich: true');
+          // console.log('LIeferung möglich: true');
           return true;
         }
       }
@@ -214,19 +211,19 @@ export class ScInboundService {
       if (e.produktionsstartOem.getTime() === datum.getTime() ) {
 
         // tslint:disable-next-line:max-line-length
-        console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+        // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
 
         // tslint:disable-next-line:max-line-length
-        console.log('Produktionsstart Hersteller: ' + e.produktionsstartHersteller.getDate() + '.' + (e.produktionsstartHersteller.getMonth() + 1) + '.' + e.produktionsstartHersteller.getFullYear());
+        // console.log('Produktionsstart Hersteller: ' + e.produktionsstartHersteller.getDate() + '.' + (e.produktionsstartHersteller.getMonth() + 1) + '.' + e.produktionsstartHersteller.getFullYear());
 
         // tslint:disable-next-line:max-line-length
-        console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+        // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
 
         if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
-          console.log('Lieferung möglich: false');
+          // console.log('Lieferung möglich: false');
           return false;
         } else {
-          console.log('Lieferung möglich: true');
+          // console.log('Lieferung möglich: true');
           return true;
         }
       }
@@ -239,16 +236,16 @@ export class ScInboundService {
         if (e.produktionsstartOem.getTime() === datum.getTime() ) {
 
           // tslint:disable-next-line:max-line-length
-          console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+          // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
 
           // tslint:disable-next-line:max-line-length
-          console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+          // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
 
           if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
-            console.log('Lieferung möglich: false');
+            // console.log('Lieferung möglich: false');
             return false;
           } else {
-            console.log('LIeferung möglich: true');
+            // console.log('LIeferung möglich: true');
             return true;
           }
         }

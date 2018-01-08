@@ -36,6 +36,13 @@ th.down {
     background-color: red;
 }
 
+td.green {
+    background-color: green;
+}
+td.red {
+    background-color: green;
+}
+
 tr.highlighted {
     background-color: rgb(82, 82, 82);
     /* font-weight: bold; */

@@ -19,7 +19,7 @@ export class Programmplanung {
     }
 
     // Nimmt Planwerte für Jahr entgegen und speichert ab, startet dann Outputberechnung
-    constructor(vorlage: [number]) {
+    constructor(vorlage: [number], public teile) {
         moment.locale('de');
 
         this.vorlage = vorlage;
@@ -109,7 +109,8 @@ export class Programmplanung {
         for (let tage = 0; tage < 364; ++tage) {
             this.produktionsplanung[tage] = new Produktionsplanung(
                 new Date(datum),
-                this.getOutputPerDay(datum)
+                this.getOutputPerDay(datum),
+                this.teile
             );
             datum.setDate(datum.getDate() + 1);
         }
@@ -147,11 +148,19 @@ export class Programmplanung {
     }
 
     private updateProduktionsPlanung(tag: Date, output: number) {
-        this.produktionsplanung.forEach(element => {
-            if (element.datum.getTime() ===  tag.getTime()) {
-                    element.menge = output;
-                    return;
+        for (let i = 0; i < this.produktionsplanung.length; ++i) {
+            if (this.produktionsplanung[i].datum.getTime() === tag.getTime()) {
+                console.log('Vorher', this.produktionsplanung[i]);
+                this.produktionsplanung[i] = new Produktionsplanung(new Date(tag), output, this.teile);
+                console.log('Nachher', this.produktionsplanung[i]);
+                return;
             }
-        });
+        }
+        /*this.produktionsplanung.forEach(element => {
+            if (element.datum.getTime() ===  tag.getTime()) {
+                element = new Produktionsplanung(tag, output);
+                return;
+            }
+        });*/
     }
 }
