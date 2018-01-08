@@ -62,11 +62,10 @@ export class Programmplanung {
                     const aktuellerTag = new Date(jahr, m, t);
                     if ( DatumService.istArbeitstag( aktuellerTag ) ) {
                         // tslint:disable-next-line:max-line-length
-                        const abgerundet = Math.floor(dailyOutput + rest); // TODO: @Steffen, hast du eine andere Idee? Das Ergebnis weicht um ein Fahrrad pro Monat ab vom erwarteten Wert
+                        const abgerundet = Math.floor(dailyOutput + rest);
                         this.jahresWerte[jahr][m][t] = abgerundet;
 
                         rest += dailyOutput - abgerundet;
-                        // console.log('Abgerundet, Rest: ' + abgerundet + ', ' + rest);
                     } else {
                         this.jahresWerte[jahr][m][t] = 0;
                     }
@@ -117,8 +116,9 @@ export class Programmplanung {
     }
 
     public applyChanges(aktuellerTag: Date, wochenDemand: number) {
-        console.log(aktuellerTag, wochenDemand, this.produktionsplanung);
 
+        // Die Referenz wird überschrieben, um keine ungewollten Wechselwirkungen zu ermöglichen
+        aktuellerTag = new Date(aktuellerTag);
 
         // Wie viele Arbeitstage gibt es in diesem Monat?
         let arbeitsTageWoche = 0;
@@ -144,17 +144,11 @@ export class Programmplanung {
             }
             aktuellerTag.setDate(aktuellerTag.getDate() + 1);
         }
-        // Iteriere durch jeden Tag der Woche
-        // Finde Output pro Tag heraus
-        // Ersetze die jeweilige Stelle in der Produktionsplanung
     }
 
     private updateProduktionsPlanung(tag: Date, output: number) {
-        console.log('Neuer Wert für den ' + tag + ': ' + output);
         this.produktionsplanung.forEach(element => {
-            if (element.datum.getFullYear() ===  tag.getFullYear()
-                && element.datum.getMonth() ===  tag.getMonth()
-                && element.datum.getDate() ===  tag.getDate()) {
+            if (element.datum.getTime() ===  tag.getTime()) {
                     element.menge = output;
                     return;
             }
