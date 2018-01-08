@@ -34,7 +34,7 @@ export class FahrradService {
             new Fahrrad(
                 'MTBCompetition',
                 this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
-                this.fahrradTeilService.getFahrradTeil('Speed line'),
+                this.fahrradTeilService.getFahrradTeil('Speed Line'),
                 this.fahrradTeilService.getFahrradTeil('Fox Talas140'),
                 new Programmplanung([
                     1110,
@@ -114,7 +114,7 @@ export class FahrradService {
             new Fahrrad(
                 'MTB Marathon',
                 this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
-                this.fahrradTeilService.getFahrradTeil('Race line'),
+                this.fahrradTeilService.getFahrradTeil('Race Line'),
                 this.fahrradTeilService.getFahrradTeil('Rock Schox ReconSL'),
                 new Programmplanung([
                     592,
@@ -154,7 +154,7 @@ export class FahrradService {
             new Fahrrad(
                 'MTBTrail',
                 this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
-                this.fahrradTeilService.getFahrradTeil('Speed line'),
+                this.fahrradTeilService.getFahrradTeil('Speed Line'),
                 this.fahrradTeilService.getFahrradTeil('SR Suntour Raidon'),
                 new Programmplanung([
                     962,

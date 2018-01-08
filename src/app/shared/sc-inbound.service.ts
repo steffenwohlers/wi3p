@@ -6,6 +6,9 @@ import { LieferdatenService } from './lieferdaten.service';
 import { Lieferdaten } from './lieferdaten.model';
 import { ScInboundGabel } from './sc-inbound-gabel.model';
 import { ScInboundRahmen } from './sc-inbound-rahmen.model';
+import { ScInbound } from './sc-inbound.model';
+import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
+import { Programmplanung } from './programmplanung.model';
 
 @Injectable()
 export class ScInboundService {
@@ -45,7 +48,6 @@ export class ScInboundService {
     this.lagerbestandSattelArray = new Array(ScInboundSattel.length);
     this.lagerbestandSattel = 0;
     this.lieferdatenSattel = this.lieferdatenService.lieferdatenSattel;
-    // this.losgroesseSattel = 200;
     this.losgroesseSattel = this.lieferdatenSattel.losgroesseHersteller;
     for (let i = 0; i < produktionsplanungSattel.length; i++) {
       this.scInboundSattel[i] = new ScInboundSattel(produktionsplanungSattel[i], this.lieferdatenService);
@@ -139,6 +141,9 @@ export class ScInboundService {
         }
       }
     }
+    const tempDate = new Date(2017, 6, 3);
+    console.log(tempDate.getDate() + '.' + (tempDate.getMonth() + 1) + '.' + tempDate.getFullYear());
+  this.lieferungMoeglich(tempDate, FahrradTeilTyp.Sattel);
   }
 
   getScInboundSattel(): ScInboundSattel[] {
@@ -153,5 +158,102 @@ export class ScInboundService {
     return this.scInboundRahmen;
   }
 
+  lieferungMoeglich(datum: Date, typ: FahrradTeilTyp) {
 
-}
+    let result: boolean;
+
+    switch (typ) {
+      // Rahmen
+      case 0:
+        console.log('0');
+        result = this.lieferungMöglichRahmen(datum);
+        break;
+      // Gabel
+      case 1:
+      console.log('1');
+      result = this.lieferungMöglichGabel(datum);
+        break;
+      // Sattel
+      case 2:
+      console.log('2');
+      result = this.lieferungMöglichSattel(datum);
+        break;
+
+      default:
+        break;
+    }
+
+  }
+
+  private lieferungMöglichRahmen(datum: Date) {
+
+    for (const e of this.scInboundRahmen) {
+      if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+
+        // tslint:disable-next-line:max-line-length
+        console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+
+        // tslint:disable-next-line:max-line-length
+        console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+
+        if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
+          console.log('Lieferung möglich: false');
+          return false;
+        } else {
+          console.log('LIeferung möglich: true');
+          return true;
+        }
+      }
+    }
+
+  }
+
+  private lieferungMöglichSattel(datum: Date) {
+
+    for (const e of this.scInboundSattel) {
+      if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+
+        // tslint:disable-next-line:max-line-length
+        console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+
+        // tslint:disable-next-line:max-line-length
+        console.log('Produktionsstart Hersteller: ' + e.produktionsstartHersteller.getDate() + '.' + (e.produktionsstartHersteller.getMonth() + 1) + '.' + e.produktionsstartHersteller.getFullYear());
+
+        // tslint:disable-next-line:max-line-length
+        console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+
+        if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
+          console.log('Lieferung möglich: false');
+          return false;
+        } else {
+          console.log('Lieferung möglich: true');
+          return true;
+        }
+      }
+    }
+  }
+
+    private lieferungMöglichGabel(datum: Date) {
+
+      for (const e of this.scInboundGabel) {
+        if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+
+          // tslint:disable-next-line:max-line-length
+          console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+
+          // tslint:disable-next-line:max-line-length
+          console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+
+          if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
+            console.log('Lieferung möglich: false');
+            return false;
+          } else {
+            console.log('LIeferung möglich: true');
+            return true;
+          }
+        }
+      }
+
+    }
+  }
+

@@ -19,10 +19,30 @@ import { FahrradTeil } from '../shared/fahrrad-teil.model';
 export class TestTabComponent {
 
   fahrradTeil1: FahrradTeil;
+  bwert1: boolean;
+  bwert2: boolean;
+
+  datum1 = new Date(2017, 0, 1);
+  datum2 = new Date(2017, 0, 2);
+  datum3 = new Date(2017, 0, 1);
 
 
   constructor(fahrradTeilService: FahrradTeilService) {
     this.fahrradTeil1 = fahrradTeilService.getFahrradTeil('Aluminium 7005DB');
+    console.log(this.fahrradTeil1.type);
+
+  if (this.datum1.getTime() === this.datum2.getTime()) {
+    this.bwert1 = true;
+  } else {
+    this.bwert1 = false;
+  }
+
+  if (this.datum1.getTime() === this.datum3.getTime()) {
+    this.bwert2 = true;
+  } else {
+    this.bwert2 = false;
+  }
+  console.log(this.datum2.getTime());
 
   }
 
