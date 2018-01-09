@@ -108,7 +108,7 @@ export class Programmplanung {
         // Kalkuliere die Produktionsplanung
         const datum = new Date(Programmplanung.startDatum);
         for (let tage = 0; tage < 364; ++tage) {
-            this.produktionsplanung[tage] = new Produktionsplanung(
+            this.produktionsplanung[tage] = new Produktionsplanung( // Hier stattdessen Datum, planned, real, rueckstand
                 new Date(datum),
                 this.getOutputPerDay(datum),
                 this.teile
@@ -117,6 +117,10 @@ export class Programmplanung {
         }
     }
 
+    /**
+     * Where Magic happens: Methode rechnet von diesem Tag an in der Produktionsplanung durch
+     * und addiert jeweils Rückstand etc. auf, guckt im Lager, checkt maxKapazität
+     */
     public applyChanges(aktuellerTag: Date, wochenDemand: number) {
 
         // Die Referenz wird überschrieben, um keine ungewollten Wechselwirkungen zu ermöglichen
@@ -151,17 +155,9 @@ export class Programmplanung {
     private updateProduktionsPlanung(tag: Date, output: number) {
         for (let i = 0; i < this.produktionsplanung.length; ++i) {
             if (this.produktionsplanung[i].datum.getTime() === tag.getTime()) {
-                console.log('Vorher', this.produktionsplanung[i]);
                 this.produktionsplanung[i] = new Produktionsplanung(new Date(tag), output, this.teile);
-                console.log('Nachher', this.produktionsplanung[i]);
                 return;
             }
         }
-        /*this.produktionsplanung.forEach(element => {
-            if (element.datum.getTime() ===  tag.getTime()) {
-                element = new Produktionsplanung(tag, output);
-                return;
-            }
-        });*/
     }
 }

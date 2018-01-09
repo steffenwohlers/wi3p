@@ -9,8 +9,8 @@
     <tbody *ngFor="let fahrrad of fahrraeder">
         <tr>
             <td rowspan="3">{{ fahrrad.modell }}</td>
-            <td *ngFor="let item of fahrrad.programmplanung.produktionsplanung" [ngClass]="{'green': item.needToOrder, 'red': item.notAvailable}">
-                {{item.realOutput}}
+            <td *ngFor="let item of fahrrad.programmplanung.produktionsplanung">
+                {{item.real}}
             </td>
         </tr>
     </tbody>
