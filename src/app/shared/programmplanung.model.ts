@@ -110,8 +110,10 @@ export class Programmplanung {
         for (let tage = 0; tage < 364; ++tage) {
             this.produktionsplanung[tage] = new Produktionsplanung( // Hier stattdessen Datum, planned, real, rueckstand
                 new Date(datum),
+                this.teile,
                 this.getOutputPerDay(datum),
-                this.teile
+                0,
+                0
             );
             datum.setDate(datum.getDate() + 1);
         }
@@ -155,7 +157,13 @@ export class Programmplanung {
     private updateProduktionsPlanung(tag: Date, output: number) {
         for (let i = 0; i < this.produktionsplanung.length; ++i) {
             if (this.produktionsplanung[i].datum.getTime() === tag.getTime()) {
-                this.produktionsplanung[i] = new Produktionsplanung(new Date(tag), output, this.teile);
+                this.produktionsplanung[i] = new Produktionsplanung(
+                    new Date(tag),
+                    this.teile,
+                    output,
+                    0,
+                    0
+                );
                 return;
             }
         }

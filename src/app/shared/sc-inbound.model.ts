@@ -16,7 +16,7 @@ export class ScInbound {
         this.lieferdaten = lieferdatenService.lieferdatenSattel;
         this.produktionsstartOem = produktionsplanung.datum;
         this.ankunftOEM = this.berechneAnkunftBeiOem(this.produktionsstartOem);
-        this.menge = this.produktionsplanung.menge;
+        this.menge = this.produktionsplanung.planned;
 
     }
 
