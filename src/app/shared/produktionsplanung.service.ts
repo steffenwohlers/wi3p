@@ -1,14 +1,14 @@
 import { Produktionsplanung } from './produktionsplanung.model';
 import { Injectable } from '@angular/core';
-import { FahrradService } from './fahrrad.service';
-import { Fahrrad } from './fahrrad.model';
+
+
 import { Programmplanung } from './programmplanung.model';
 import { ProgrammplanungService } from './programmplanung.service';
 
 @Injectable()
 export class ProduktionsplanungService {
 
-    private fahrraeder: Fahrrad[];
+
 
     private programmplanung: Programmplanung[];
 
@@ -23,12 +23,6 @@ export class ProduktionsplanungService {
         this.sattel = new Array(this.programmplanung[0].produktionsplanung.length);
         this.gabel = new Array(this.programmplanung[0].produktionsplanung.length);
         this.rahmen = new Array(this.programmplanung[0].produktionsplanung.length);
-
-
-        this.sattel = new Array(this.fahrraeder[0].programmplanung.produktionsplanung.length);
-        this.gabel = new Array(this.fahrraeder[0].programmplanung.produktionsplanung.length);
-        this.rahmen = new Array(this.fahrraeder[0].programmplanung.produktionsplanung.length);
-
 
         // für jeden Fahrrad-Typ
         for (let i = 0; i < this.programmplanung.length; i++) {

@@ -12,6 +12,9 @@ import { Programmplanung } from './programmplanung.model';
 
 @Injectable()
 export class ScInboundService {
+  static scInboundGabel: any;
+  static scInboundSattel: any;
+  static scInboundRahmen: any;
 
 
   scInboundSattel: ScInboundSattel[] = new Array<ScInboundSattel>();
@@ -141,9 +144,6 @@ export class ScInboundService {
         }
       }
     }
-    const tempDate = new Date(2017, 6, 3);
-    // console.log(tempDate.getDate() + '.' + (tempDate.getMonth() + 1) + '.' + tempDate.getFullYear());
-  this.lieferungMoeglich(tempDate, FahrradTeilTyp.Sattel);
   }
 
   getScInboundSattel(): ScInboundSattel[] {
@@ -158,7 +158,8 @@ export class ScInboundService {
     return this.scInboundRahmen;
   }
 
-  lieferungMoeglich(datum: Date, typ: FahrradTeilTyp) {
+  // tslint:disable-next-line:member-ordering
+ lieferungMoeglich(datum: Date, typ: FahrradTeilTyp) {
 
     let result: boolean;
 
@@ -182,6 +183,7 @@ export class ScInboundService {
 
   }
 
+  // tslint:disable-next-line:member-ordering
   private lieferungMöglichRahmen(datum: Date) {
 
     for (const e of this.scInboundRahmen) {
@@ -205,6 +207,7 @@ export class ScInboundService {
 
   }
 
+  // tslint:disable-next-line:member-ordering
   private lieferungMöglichSattel(datum: Date) {
 
     for (const e of this.scInboundSattel) {
@@ -230,6 +233,7 @@ export class ScInboundService {
     }
   }
 
+    // tslint:disable-next-line:member-ordering
     private lieferungMöglichGabel(datum: Date) {
 
       for (const e of this.scInboundGabel) {

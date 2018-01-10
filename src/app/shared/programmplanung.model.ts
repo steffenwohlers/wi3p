@@ -21,7 +21,7 @@ export class Programmplanung {
     }
 
     // Nimmt Planwerte für Jahr entgegen und speichert ab, startet dann Outputberechnung
-    constructor(vorlage: [number], public teile, private scInboundService: ScInboundService) {
+    constructor(vorlage: [number], public teile) {
         moment.locale('de');
 
         this.vorlage = vorlage;
@@ -151,16 +151,13 @@ export class Programmplanung {
             // Das lager-Array fängt die maximalen Werte die mit dem Lager produziert werden können je Teil
             const lager = [];
             this.teile.forEach(teil => {
-                let maxTeil = teil.lagerbestand;
+                const maxTeil = teil.lagerbestand;
 
                 // Wenn der Bestand im Lager unter der maxKapazität liegt, finde heraus ob das Teil rechtzeitig geliefert wäre
                 if (maxTeil < maxKapazität) {
 
                     // TODO: @Steffen, hier muss die Supply Chain befragt werden
 
-                    if (this.scInboundService.lieferungMoeglich(datum, teil)) {
-                        maxTeil = maxKapazität;
-                    }
                     /*if (supplyChain.istLieferungMoeglich(datum, teil)) {
                         // Wenn ja, dann ist ja in Wirklichkeit maxKapazität der höchst mögliche Output, da nachbestellt werden könnte
                         maxTeil = maxKapazität;
