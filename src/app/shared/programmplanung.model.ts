@@ -173,7 +173,7 @@ export class Programmplanung {
             const maxLager = this.min(lager);
 
             // Gebe diesen Wert zurück
-            return maxLager;
+            return this.min([maxLager, maxKapazität]);
         }
     }
 
