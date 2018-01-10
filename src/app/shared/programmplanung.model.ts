@@ -221,6 +221,7 @@ export class Programmplanung {
                 }
             });
         }
+        //console.log('Rückstand vom letzten Tag: ' + rueckstand);
 
         // Berechne die neuen Werte für diese Woche
         let rest = 0;
