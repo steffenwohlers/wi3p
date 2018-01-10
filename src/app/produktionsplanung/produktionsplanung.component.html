@@ -10,7 +10,8 @@
         <tr>
             <td rowspan="3">{{ fahrrad.modell }}</td>
             <td *ngFor="let item of fahrrad.programmplanung.produktionsplanung">
-                {{item.real}}
+                {{item.planned}} - {{item.real}} ({{item.rueckstand}})
+                <!-- {{item.real}} -->
             </td>
         </tr>
     </tbody>
