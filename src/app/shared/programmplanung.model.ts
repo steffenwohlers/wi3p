@@ -2,6 +2,7 @@ import * as moment from '../../../node_modules/moment';
 import '../../../node_modules/moment/locale/de';
 import { DatumService } from './datum.service';
 import { Produktionsplanung } from './produktionsplanung.model';
+import { ScInboundService } from './sc-inbound.service';
 
 
 export class Programmplanung {
@@ -108,15 +109,70 @@ export class Programmplanung {
         // Kalkuliere die Produktionsplanung
         const datum = new Date(Programmplanung.startDatum);
         for (let tage = 0; tage < 364; ++tage) {
-            this.produktionsplanung[tage] = new Produktionsplanung( // Hier stattdessen Datum, planned, real, rueckstand
+
+            const plannedOutput = this.getOutputPerDay(datum);
+            const maxOutput = this.getMaxOutput(datum);
+            let real;
+
+            if (plannedOutput < maxOutput) {
+                real = plannedOutput;
+            } else {
+                real = maxOutput;
+            }
+
+            this.produktionsplanung[tage] = new Produktionsplanung(
                 new Date(datum),
                 this.teile,
-                this.getOutputPerDay(datum),
-                0,
-                0
+                plannedOutput,
+                real, // <- where magic happens
+                plannedOutput - real
             );
             datum.setDate(datum.getDate() + 1);
         }
+    }
+
+    private getMaxOutput(datum: Date): number {
+        // Unter Berücksichtigung von max. Kapazität, Lager und Lieferung den maximalen Wert pro Tag
+
+        // Der maximal am Tag zu produzierende Wert
+        const maxKapazität = 8 * 64;
+
+        // Das lager-Array fängt die maximalen Werte die mit dem Lager produziert werden können je Teil
+        const lager = [];
+        this.teile.forEach(teil => {
+            let maxTeil = teil.lagerbestand;
+
+            // Wenn der Bestand im Lager unter der maxKapazität liegt, finde heraus ob das Teil rechtzeitig geliefert wäre
+            if (maxTeil < maxKapazität) {
+
+                // TODO: @Steffen, hier muss die Supply Chain befragt werden
+
+                /*if (supplyChain.istLieferungMoeglich(datum, teil)) {
+                    // Wenn ja, dann ist ja in Wirklichkeit maxKapazität der höchst mögliche Output, da nachbestellt werden könnte
+                    maxTeil = maxKapazität;
+                }*/
+            }
+
+            // Füge den maximalen Produktionswert für dieses Teil in das Array ein
+            lager.push(maxTeil);
+        });
+
+        // Nehme den minimalen Wert aus dem Lager als letztendlichen Wert vom Lager - denn wenn noch 1000 Gabeln da sind,
+        // aber nur 10 Rahmen und diese auch nicht nachgeliefert werden können, können nur 10 Einheiten produziert werden
+        const maxLager = this.min(lager);
+
+        // Gebe diesen Wert zurück
+        return maxLager;
+    }
+
+    private min(arr): number {
+        let min = arr[0];
+        arr.forEach(elem => {
+            if (elem < min) {
+                min = elem;
+            }
+        });
+        return min;
     }
 
     /**
