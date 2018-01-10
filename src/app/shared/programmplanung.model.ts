@@ -21,7 +21,7 @@ export class Programmplanung {
     }
 
     // Nimmt Planwerte für Jahr entgegen und speichert ab, startet dann Outputberechnung
-    constructor(vorlage: [number], public teile) {
+    constructor(vorlage: [number], public teile, private scInboundService: ScInboundService) {
         moment.locale('de');
 
         this.vorlage = vorlage;
@@ -158,6 +158,9 @@ export class Programmplanung {
 
                     // TODO: @Steffen, hier muss die Supply Chain befragt werden
 
+                    if (this.scInboundService.lieferungMoeglich(datum, teil)) {
+                        maxTeil = maxKapazität;
+                    }
                     /*if (supplyChain.istLieferungMoeglich(datum, teil)) {
                         // Wenn ja, dann ist ja in Wirklichkeit maxKapazität der höchst mögliche Output, da nachbestellt werden könnte
                         maxTeil = maxKapazität;
@@ -221,7 +224,7 @@ export class Programmplanung {
                 }
             });
         }
-        //console.log('Rückstand vom letzten Tag: ' + rueckstand);
+        // console.log('Rückstand vom letzten Tag: ' + rueckstand);
 
         // Berechne die neuen Werte für diese Woche
         let rest = 0;

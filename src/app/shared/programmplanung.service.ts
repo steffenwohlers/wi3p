@@ -1,9 +1,12 @@
 import { Programmplanung } from './programmplanung.model';
 import { FahrradTeilService } from './fahrrad-teil.service';
 import { Injectable } from '@angular/core';
+import { ScInboundService } from './sc-inbound.service';
 
 @Injectable()
 export class ProgrammplanungService {
+
+    programmplanungArray: Programmplanung[];
 
     mtbAllrounder: Programmplanung;
     mtbCompetition: Programmplanung;
@@ -14,7 +17,7 @@ export class ProgrammplanungService {
     mtbPerformance: Programmplanung;
     mtbTrail: Programmplanung;
 
-    constructor (private fahrradTeilService: FahrradTeilService) {
+    constructor (private fahrradTeilService: FahrradTeilService, private scInboundService: ScInboundService) {
 
         this.mtbAllrounder = new Programmplanung([
             2220,
@@ -34,7 +37,8 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
         this.fahrradTeilService.getFahrradTeil('Spark'),
         this.fahrradTeilService.getFahrradTeil('Fox32 F100')
-        ]
+        ],
+        this.scInboundService
     );
 
     this.mtbCompetition = new Programmplanung([
@@ -55,7 +59,9 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
         this.fahrradTeilService.getFahrradTeil('Speed Line'),
         this.fahrradTeilService.getFahrradTeil('Fox Talas140')
-    ]);
+    ],
+     this.scInboundService
+    );
 
     this.mtbDownhill = new Programmplanung([
         740,
@@ -75,7 +81,8 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
         this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
         this.fahrradTeilService.getFahrradTeil('Fox Talas140')
-    ]);
+    ],
+    this.scInboundService);
 
     this.mtbExtreme = new Programmplanung([
         518,
@@ -95,7 +102,8 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
         this.fahrradTeilService.getFahrradTeil('Spark'),
         this.fahrradTeilService.getFahrradTeil('Rock Schox Reba')
-    ]);
+    ],
+    this.scInboundService);
 
     this.mtbFreeride = new Programmplanung([
         370,
@@ -115,7 +123,8 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
         this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
         this.fahrradTeilService.getFahrradTeil('Fox32 F80')
-    ]);
+    ],
+    this.scInboundService);
 
     this.mtbMarathon = new Programmplanung([
         592,
@@ -135,7 +144,8 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
         this.fahrradTeilService.getFahrradTeil('Race Line'),
         this.fahrradTeilService.getFahrradTeil('Rock Schox ReconSL')
-    ]);
+    ],
+    this.scInboundService);
 
     this.mtbPerformance = new Programmplanung([
         888,
@@ -155,7 +165,8 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
         this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
         this.fahrradTeilService.getFahrradTeil('Rock Schox Reba')
-    ]);
+    ],
+    this.scInboundService);
 
     this.mtbTrail = new Programmplanung([
         962,
@@ -175,7 +186,20 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
         this.fahrradTeilService.getFahrradTeil('Speed Line'),
         this.fahrradTeilService.getFahrradTeil('SR Suntour Raidon')
-    ]);
+    ],
+    this.scInboundService);
 
+    this.programmplanungArray = new Array();
+
+    this.programmplanungArray[0] = this.mtbAllrounder;
+    this.programmplanungArray[1] = this.mtbCompetition;
+    this.programmplanungArray[2] = this.mtbDownhill;
+    this.programmplanungArray[3] = this.mtbExtreme;
+    this.programmplanungArray[4] = this.mtbFreeride;
+    this.programmplanungArray[5] = this.mtbMarathon;
+    this.programmplanungArray[6] = this.mtbPerformance;
+    this.programmplanungArray[7] = this.mtbTrail;
     }
+
+
 }
