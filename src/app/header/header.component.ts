@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ScInboundService } from '../shared/sc-inbound.service';
+import { ProgrammplanungService } from '../shared/programmplanung.service';
+
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { ScInboundService } from '../shared/sc-inbound.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private scInboundService: ScInboundService) { }
+  constructor(private scInboundService: ProgrammplanungService) { }
 
   ngOnInit() {
   }

@@ -1,6 +1,12 @@
 import { Programmplanung } from './programmplanung.model';
 import { FahrradTeilService } from './fahrrad-teil.service';
 import { Injectable } from '@angular/core';
+import { ScInboundSattel } from './sc-inbound-sattel.model';
+import { Lieferdaten } from './lieferdaten.model';
+import { ScInboundGabel } from './sc-inbound-gabel.model';
+import { ScInboundRahmen } from './sc-inbound-rahmen.model';
+import { Produktionsplanung } from './produktionsplanung.model';
+import { LieferdatenService } from './lieferdaten.service';
 
 @Injectable()
 export class ProgrammplanungService {
@@ -16,7 +22,52 @@ export class ProgrammplanungService {
     mtbPerformance: Programmplanung;
     mtbTrail: Programmplanung;
 
-    constructor (private fahrradTeilService: FahrradTeilService) {
+    //
+    // Inbound Start
+    //
+    private programmplanung: Programmplanung[];
+    private sattel: Produktionsplanung[];
+    private gabel: Produktionsplanung[];
+    private rahmen: Produktionsplanung[];
+
+    //
+    // Inbound Ende
+    //
+
+    //
+    // Inbound Start
+    //
+
+    // tslint:disable-next-line:member-ordering
+    static scInboundGabel: any;
+    // tslint:disable-next-line:member-ordering
+    static scInboundSattel: any;
+    // tslint:disable-next-line:member-ordering
+    static scInboundRahmen: any;
+
+    scInboundSattel: ScInboundSattel[] = new Array<ScInboundSattel>();
+    lagerbestandSattelArray: number[];
+    lagerbestandSattel: number;
+    losgroesseSattel: number;
+    lieferdatenSattel: Lieferdaten;
+
+    scInboundGabel: ScInboundGabel[] = new Array<ScInboundGabel>();
+    lagerbestandGabel: number;
+    lagerbestandGabelArray: number[];
+    losgroesseGabel: number;
+    lieferdatenGabel: Lieferdaten;
+
+    scInboundRahmen: ScInboundRahmen[] = new Array<ScInboundRahmen>();
+    lagerbestandRahmenArray: number[];
+    lagerbestandRahmen: number;
+    losgroesseRahmen: number;
+    lieferdatenRahmen: Lieferdaten;
+
+    //
+    // Inbound Ende
+    //
+
+    constructor (private fahrradTeilService: FahrradTeilService, private lieferdatenService: LieferdatenService) {
 
         this.mtbAllrounder = new Programmplanung([
             2220,
@@ -190,7 +241,264 @@ export class ProgrammplanungService {
     this.programmplanungArray[5] = this.mtbMarathon;
     this.programmplanungArray[6] = this.mtbPerformance;
     this.programmplanungArray[7] = this.mtbTrail;
+
+    //
+    // Produktionsplanung Start
+    //
+
+    this.programmplanung = this.programmplanungArray;
+
+    this.sattel = new Array(this.programmplanung[0].produktionsplanung.length);
+    this.gabel = new Array(this.programmplanung[0].produktionsplanung.length);
+    this.rahmen = new Array(this.programmplanung[0].produktionsplanung.length);
+
+    // für jeden Fahrrad-Typ
+    for (let i = 0; i < this.programmplanung.length; i++) {
+
+        // für jede Produktionsplanung
+        for (let ii = 0; ii < this.programmplanung[i].produktionsplanung.length; ii++) {
+
+            // Speichere sie in das jeweilige Array
+            this.sattel[ii] = this.programmplanung[i].produktionsplanung[ii];
+            this.gabel[ii] = this.programmplanung[i].produktionsplanung[ii];
+            this.rahmen[ii] = this.programmplanung[i].produktionsplanung[ii];
+        }
     }
 
+    //
+    // Produktionsplanung Ende
+    //
 
+
+    //
+    // Inbound Start
+    //
+
+    this.berechne();
+
+    //
+    // Inbound Ende
+    //
+
+    }
+
+    //
+    // Produktionsplanung Start
+    //
+
+    public getSattel(): Produktionsplanung[] {
+        return this.sattel;
+    }
+
+    public getGabel(): Produktionsplanung[] {
+        return this.sattel;
+    }
+
+    public getRahmen(): Produktionsplanung[] {
+        return this.sattel;
+    }
+
+    //
+    // Produktionsplanung Ende
+    //
+
+
+    //
+    // Inbound Start
+    //
+
+    berechne() {
+
+        /**
+        * Sattel
+        */
+        const produktionsplanungSattel = this.sattel;
+        // Dient nur zur Anzeige
+        this.lagerbestandSattelArray = new Array(ScInboundSattel.length);
+        this.lagerbestandSattel = 0;
+        this.lieferdatenSattel = this.lieferdatenService.lieferdatenSattel;
+        this.losgroesseSattel = this.lieferdatenSattel.losgroesseHersteller;
+        for (let i = 0; i < produktionsplanungSattel.length; i++) {
+          this.scInboundSattel[i] = new ScInboundSattel(produktionsplanungSattel[i], this.lieferdatenService);
+        }
+        // tslint:disable-next-line:max-line-length
+        this.beachteLosgroesseHersteller(this.scInboundSattel, this.lagerbestandSattelArray, this.lagerbestandSattel, this.losgroesseSattel);
+
+        /**
+        * Gabel
+        */
+        const produktionsplanungGabel = this.gabel;
+            // Dient nur zur Anzeige
+        this.lagerbestandGabelArray = new Array(ScInboundGabel.length);
+        this.lagerbestandGabel = 0;
+        this.lieferdatenGabel = this.lieferdatenService.lieferdatenGabel;
+        this.losgroesseGabel = this.lieferdatenGabel.losgroesseHersteller;
+        for (let i = 0; i < produktionsplanungGabel.length; i++) {
+          this.scInboundGabel[i] = new ScInboundGabel(produktionsplanungGabel[i], this.lieferdatenService);
+        }
+        this.beachteLosgroesseHersteller(this.scInboundGabel, this.lagerbestandGabelArray, this.lagerbestandGabel, this.losgroesseGabel);
+
+        /**
+        * Rahmen
+        */
+        const produktionsplanungRahmen = this.rahmen;
+        // Dient nur zur Anzeige
+        this.lagerbestandRahmenArray = new Array(ScInboundRahmen.length);
+        this.lagerbestandRahmen = 0;
+        this.lieferdatenRahmen = this.lieferdatenService.lieferdatenRahmen;
+        this.losgroesseRahmen = this.lieferdatenRahmen.losgroesseHersteller;
+        for (let i = 0; i < produktionsplanungRahmen.length; i++) {
+          this.scInboundRahmen[i] = new ScInboundRahmen(produktionsplanungRahmen[i], this.lieferdatenService);
+        }
+        // tslint:disable-next-line:max-line-length
+        this.beachteLosgroesseHersteller(this.scInboundRahmen, this.lagerbestandRahmenArray, this.lagerbestandRahmen, this.losgroesseRahmen);
+      }
+
+      kloneArray(array: Array<any>): Array<number> {
+        const klon: Array<number> = new Array(array.length);
+        for ( let i = 0; i < array.length; i++) {
+          klon[i] = array[i].menge;
+        }
+        return klon;
+      }
+
+
+      beachteLosgroesseHersteller(scInbound: Array<any>, lagerbestandArray: Array<number>, lagerbestand: number, losgroesse: number) {
+        // Mengen-Werte des Datums zum Abgleich
+        const wertArr = this.kloneArray(scInbound);
+        // Iteriere von hinten durch das Original-Array
+        for (let i = scInbound.length - 1; i >= 0; i--) {
+          // Nur zur Anzeige in der GUI
+          lagerbestandArray[i] = lagerbestand;
+        // Hersteller produziert die benötigte Menge und legt sie ins Lager
+        lagerbestand = lagerbestand + scInbound[i].menge;
+        // Falls der Lagerbestand kleiner ist als die Losgröße mache nichts..
+          if (lagerbestand < losgroesse) {
+            // ...ansonsten...
+          } else {
+            // nimm die Losgröße aus dem Lager (weil sie versandt wird)
+            while (lagerbestand >= losgroesse) {
+              lagerbestand = lagerbestand - losgroesse;
+              // NUr zur Anzeige
+              lagerbestandArray[i] = lagerbestand;
+            }
+            // Wert um die Losgröße aufzuteilen auf die Bestelltage
+            let tempValue = losgroesse;
+            // Iteriere von hinten durch das Werte Array
+            for (let ii = wertArr.length - 1; tempValue > 0; ii--) {
+              // Falls der Wert darin 0 ist mache nichts (Ware für den Tag wurde also schon vesandt)
+              if (wertArr[ii] === 0) {
+              // ... ansonsten ...
+              } else {
+                // Falls der der TempValue größer gleich dem Wert ist...
+                if (tempValue >= wertArr[ii]) {
+                  // reduziere den tempValue um den Wert
+                  tempValue = tempValue - wertArr[ii];
+                  // Setze den Wert auf 0
+                  wertArr[ii] = 0;
+                  // Berechne wie lange die Verzögerung gedauert hat
+                  const verzoegerungDurchLosgroesse = ii - i;
+                  // tslint:disable-next-line:max-line-length
+                  scInbound[ii].produktionsstartHersteller =  scInbound[ii].berechneStartBeimHersteller(scInbound[ii].ersterTransport(), verzoegerungDurchLosgroesse);
+                  // scInbound[ii].produktionsstartHersteller =  scInbound[ii].berechneStartBeimHersteller(scInbound[ii].produktionsstartOem, verzoegerungDurchLosgroesse);
+                  // ... ansonsten ...
+                } else {
+                  // Verringere den den Wert (Ein Teil der bestellten Menge für den Produktionstag wird verschickt)
+                  wertArr[ii] = wertArr[ii] - tempValue;
+                  // Setze tempValue auf 0 damit die Schleife beendet wird
+                  tempValue = 0;
+                }
+              }
+            }
+          }
+        }
+      }
+
+    getScInboundSattel(): ScInboundSattel[] {
+        return this.scInboundSattel;
+      }
+
+      getScInboundGabel(): ScInboundGabel[] {
+        return this.scInboundGabel;
+      }
+
+      getScInboundRahmen(): ScInboundRahmen[] {
+        return this.scInboundRahmen;
+      }
+
+      private lieferungMöglichRahmen(datum: Date) {
+
+        for (const e of this.scInboundRahmen) {
+          if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+
+            // tslint:disable-next-line:max-line-length
+            // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+
+            // tslint:disable-next-line:max-line-length
+            // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+
+            if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
+              // console.log('Lieferung möglich: false');
+              return false;
+            } else {
+              // console.log('LIeferung möglich: true');
+              return true;
+            }
+          }
+        }
+
+      }
+
+      // tslint:disable-next-line:member-ordering
+      private lieferungMöglichSattel(datum: Date) {
+
+        for (const e of this.scInboundSattel) {
+          if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+
+            // tslint:disable-next-line:max-line-length
+            // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+
+            // tslint:disable-next-line:max-line-length
+            // console.log('Produktionsstart Hersteller: ' + e.produktionsstartHersteller.getDate() + '.' + (e.produktionsstartHersteller.getMonth() + 1) + '.' + e.produktionsstartHersteller.getFullYear());
+
+            // tslint:disable-next-line:max-line-length
+            // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+
+            if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
+              // console.log('Lieferung möglich: false');
+              return false;
+            } else {
+              // console.log('Lieferung möglich: true');
+              return true;
+            }
+          }
+        }
+      }
+
+        // tslint:disable-next-line:member-ordering
+        private lieferungMöglichGabel(datum: Date) {
+
+          for (const e of this.scInboundGabel) {
+            if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+
+              // tslint:disable-next-line:max-line-length
+              // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+
+              // tslint:disable-next-line:max-line-length
+              // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+
+              if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
+                // console.log('Lieferung möglich: false');
+                return false;
+              } else {
+                // console.log('LIeferung möglich: true');
+                return true;
+              }
+            }
+          }
+
+        }
+    //
+    // Inbound Ende
+    //
 }

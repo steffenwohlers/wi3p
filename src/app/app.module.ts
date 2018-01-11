@@ -16,8 +16,6 @@ import { ParameterComponent } from './parameter/parameter.component';
 import { LieferdatenService } from './shared/lieferdaten.service';
 import { ProduktionskapazitaetenService } from './shared/produktionskapazitaeten.service';
 import { ScInboundComponent } from './sc-inbound/sc-inbound.component';
-import { ProduktionsplanungService } from './shared/produktionsplanung.service';
-import { ScInboundService } from './shared/sc-inbound.service';
 import { ReportingComponent } from './reporting/reporting.component';
 import { ChartsModule } from 'ng2-charts';
 import { ProgrammplanungService } from './shared/programmplanung.service';
@@ -49,8 +47,8 @@ import { ProgrammplanungService } from './shared/programmplanung.service';
     FahrradTeilService,
     LieferdatenService,
     ProduktionskapazitaetenService,
-    ProduktionsplanungService,
-    ScInboundService,
+
+
     ProgrammplanungService
   ],
   bootstrap: [AppComponent]

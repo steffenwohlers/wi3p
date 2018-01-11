@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProduktionsplanungService } from '../shared/produktionsplanung.service';
 import { Produktionsplanung } from '../shared/produktionsplanung.model';
 import { LieferdatenService } from '../shared/lieferdaten.service';
 import { Lieferdaten } from '../shared/lieferdaten.model';
@@ -7,10 +6,11 @@ import { DatumService } from '../shared/datum.service';
 import { FahrradService } from '../shared/fahrrad.service';
 import { Fahrrad } from '../shared/fahrrad.model';
 import { Programmplanung } from '../shared/programmplanung.model';
-import { ScInboundService } from '../shared/sc-inbound.service';
+
 import { ScInboundSattel } from '../shared/sc-inbound-sattel.model';
 import { ScInboundGabel } from '../shared/sc-inbound-gabel.model';
 import { ScInboundRahmen } from '../shared/sc-inbound-rahmen.model';
+import { ProgrammplanungService } from '../shared/programmplanung.service';
 
 @Component({
   selector: 'app-sc-inbound',
@@ -29,7 +29,7 @@ export class ScInboundComponent implements OnInit {
   lieferdatenRahmen: Lieferdaten;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private fahrradService: FahrradService, public scInboundService: ScInboundService, private lieferdatenService: LieferdatenService) {
+  constructor(private fahrradService: FahrradService, public scInboundService: ProgrammplanungService, private lieferdatenService: LieferdatenService) {
 
       this.scInboundSattel = scInboundService.getScInboundSattel();
       this.scInboundGabel = scInboundService.getScInboundGabel();

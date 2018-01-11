@@ -3,7 +3,6 @@ import { Fahrrad } from '../shared/fahrrad.model';
 import { FahrradService } from '../shared/fahrrad.service';
 import { LieferdatenService } from '../shared/lieferdaten.service';
 import { Lieferdaten } from '../shared/lieferdaten.model';
-import { ScInboundService } from '../shared/sc-inbound.service';
 import { ScInboundSattel } from '../shared/sc-inbound-sattel.model';
 import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 import { log } from 'util';

@@ -2,7 +2,8 @@ import * as moment from '../../../node_modules/moment';
 import '../../../node_modules/moment/locale/de';
 import { DatumService } from './datum.service';
 import { Produktionsplanung } from './produktionsplanung.model';
-import { ScInboundService } from './sc-inbound.service';
+
+
 
 
 export class Programmplanung {
@@ -161,7 +162,7 @@ export class Programmplanung {
                     /*if (supplyChain.istLieferungMoeglich(datum, teil)) {
                         // Wenn ja, dann ist ja in Wirklichkeit maxKapazität der höchst mögliche Output, da nachbestellt werden könnte
                         maxTeil = maxKapazität;
-                    }*/
+                    */
                 }
 
                 // Füge den maximalen Produktionswert für dieses Teil in das Array ein
