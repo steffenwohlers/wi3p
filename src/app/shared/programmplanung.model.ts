@@ -2,6 +2,10 @@ import * as moment from '../../../node_modules/moment';
 import '../../../node_modules/moment/locale/de';
 import { DatumService } from './datum.service';
 import { Produktionsplanung } from './produktionsplanung.model';
+import { ScInboundRahmen } from './sc-inbound-rahmen.model';
+import { ScInboundGabel } from './sc-inbound-gabel.model';
+import { ScInboundSattel } from './sc-inbound-sattel.model';
+import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
 
 
 
@@ -22,7 +26,8 @@ export class Programmplanung {
     }
 
     // Nimmt Planwerte für Jahr entgegen und speichert ab, startet dann Outputberechnung
-    constructor(vorlage: [number], public teile) {
+    // tslint:disable-next-line:max-line-length
+    constructor(vorlage: [number], public teile, private rahmen: ScInboundRahmen[], private  gabel: ScInboundGabel[], private  sattel: ScInboundSattel[]) {
         moment.locale('de');
 
         this.vorlage = vorlage;
@@ -152,13 +157,17 @@ export class Programmplanung {
             // Das lager-Array fängt die maximalen Werte die mit dem Lager produziert werden können je Teil
             const lager = [];
             this.teile.forEach(teil => {
-                const maxTeil = teil.lagerbestand;
+                let maxTeil = teil.lagerbestand;
 
                 // Wenn der Bestand im Lager unter der maxKapazität liegt, finde heraus ob das Teil rechtzeitig geliefert wäre
                 if (maxTeil < maxKapazität) {
 
                     // TODO: @Steffen, hier muss die Supply Chain befragt werden
 
+                    if (this.lieferungMoeglich(datum, teil)) {
+                        maxTeil = maxKapazität;
+
+                    }
                     /*if (supplyChain.istLieferungMoeglich(datum, teil)) {
                         // Wenn ja, dann ist ja in Wirklichkeit maxKapazität der höchst mögliche Output, da nachbestellt werden könnte
                         maxTeil = maxKapazität;
@@ -294,4 +303,99 @@ export class Programmplanung {
             }
         }
     }
+
+    lieferungMoeglich(datum: Date, typ: FahrradTeilTyp) {
+
+        let result: boolean;
+
+        switch (typ) {
+          // Rahmen
+          case 0:
+            result = this.lieferungMöglichRahmen(datum);
+            break;
+          // Gabel
+          case 1:
+          result = this.lieferungMöglichGabel(datum);
+            break;
+          // Sattel
+          case 2:
+          result = this.lieferungMöglichSattel(datum);
+            break;
+
+          default:
+            break;
+        }
+
+      }
+
+        // tslint:disable-next-line:member-ordering
+        private lieferungMöglichSattel(datum: Date) {
+
+          for (const e of this.sattel) {
+            if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+
+              // tslint:disable-next-line:max-line-length
+              // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+
+              // tslint:disable-next-line:max-line-length
+              // console.log('Produktionsstart Hersteller: ' + e.produktionsstartHersteller.getDate() + '.' + (e.produktionsstartHersteller.getMonth() + 1) + '.' + e.produktionsstartHersteller.getFullYear());
+
+              // tslint:disable-next-line:max-line-length
+              // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+
+              if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
+                // console.log('Lieferung möglich: false');
+                return false;
+              } else {
+                // console.log('Lieferung möglich: true');
+                return true;
+              }
+            }
+          }
+        }
+
+          // tslint:disable-next-line:member-ordering
+          private lieferungMöglichGabel(datum: Date) {
+
+            for (const e of this.gabel) {
+              if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+
+                // tslint:disable-next-line:max-line-length
+                // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+
+                // tslint:disable-next-line:max-line-length
+                // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+
+                if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
+                  // console.log('Lieferung möglich: false');
+                  return false;
+                } else {
+                  // console.log('LIeferung möglich: true');
+                  return true;
+                }
+              }
+            }
+          }
+          private lieferungMöglichRahmen(datum: Date) {
+
+            for (const e of this.rahmen) {
+              if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+
+                // tslint:disable-next-line:max-line-length
+                // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+
+                // tslint:disable-next-line:max-line-length
+                // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+
+                if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
+                  // console.log('Lieferung möglich: false');
+                  return false;
+                } else {
+                  // console.log('LIeferung möglich: true');
+                  return true;
+                }
+              }
+            }
+
+          }
 }

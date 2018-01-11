@@ -7,6 +7,7 @@ import { ScInboundGabel } from './sc-inbound-gabel.model';
 import { ScInboundRahmen } from './sc-inbound-rahmen.model';
 import { Produktionsplanung } from './produktionsplanung.model';
 import { LieferdatenService } from './lieferdaten.service';
+import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
 
 @Injectable()
 export class ProgrammplanungService {
@@ -88,7 +89,7 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Spark'),
         this.fahrradTeilService.getFahrradTeil('Fox32 F100')
         ]
-    );
+    , this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
 
     this.mtbCompetition = new Programmplanung([
         1110,
@@ -108,7 +109,7 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
         this.fahrradTeilService.getFahrradTeil('Speed Line'),
         this.fahrradTeilService.getFahrradTeil('Fox Talas140')
-    ]
+    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel
     );
 
     this.mtbDownhill = new Programmplanung([
@@ -129,7 +130,7 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
         this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
         this.fahrradTeilService.getFahrradTeil('Fox Talas140')
-    ]);
+    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
 
     this.mtbExtreme = new Programmplanung([
         518,
@@ -149,7 +150,7 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
         this.fahrradTeilService.getFahrradTeil('Spark'),
         this.fahrradTeilService.getFahrradTeil('Rock Schox Reba')
-    ]);
+    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
 
     this.mtbFreeride = new Programmplanung([
         370,
@@ -169,7 +170,7 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
         this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
         this.fahrradTeilService.getFahrradTeil('Fox32 F80')
-    ]);
+    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
 
     this.mtbMarathon = new Programmplanung([
         592,
@@ -189,7 +190,7 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
         this.fahrradTeilService.getFahrradTeil('Race Line'),
         this.fahrradTeilService.getFahrradTeil('Rock Schox ReconSL')
-    ]);
+    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
 
     this.mtbPerformance = new Programmplanung([
         888,
@@ -209,7 +210,7 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
         this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
         this.fahrradTeilService.getFahrradTeil('Rock Schox Reba')
-    ]);
+    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
 
     this.mtbTrail = new Programmplanung([
         962,
@@ -229,7 +230,7 @@ export class ProgrammplanungService {
         this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
         this.fahrradTeilService.getFahrradTeil('Speed Line'),
         this.fahrradTeilService.getFahrradTeil('SR Suntour Raidon')
-    ]);
+    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
 
     this.programmplanungArray = new Array();
 
@@ -448,6 +449,31 @@ export class ProgrammplanungService {
         }
 
       }
+
+      // tslint:disable-next-line:member-ordering
+      lieferungMoeglich(datum: Date, typ: FahrradTeilTyp) {
+
+      let result: boolean;
+
+      switch (typ) {
+        // Rahmen
+        case 0:
+          result = this.lieferungMöglichRahmen(datum);
+          break;
+        // Gabel
+        case 1:
+        result = this.lieferungMöglichGabel(datum);
+          break;
+        // Sattel
+        case 2:
+        result = this.lieferungMöglichSattel(datum);
+          break;
+
+        default:
+          break;
+      }
+
+    }
 
       // tslint:disable-next-line:member-ordering
       private lieferungMöglichSattel(datum: Date) {
