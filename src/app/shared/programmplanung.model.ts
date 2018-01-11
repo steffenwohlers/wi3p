@@ -6,6 +6,7 @@ import { ScInboundRahmen } from './sc-inbound-rahmen.model';
 import { ScInboundGabel } from './sc-inbound-gabel.model';
 import { ScInboundSattel } from './sc-inbound-sattel.model';
 import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
+import { FahrradTeil } from './fahrrad-teil.model';
 
 
 
@@ -134,6 +135,8 @@ export class Programmplanung {
                 real = maxOutput;
             }
 
+            this.entnehmeTeileAusLager(real);
+
             this.produktionsplanung[tage] = new Produktionsplanung(
                 new Date(datum),
                 this.teile,
@@ -159,19 +162,16 @@ export class Programmplanung {
             this.teile.forEach(teil => {
                 let maxTeil = teil.lagerbestand;
 
+                console.log('Im Lager: ' + maxTeil);
                 // Wenn der Bestand im Lager unter der maxKapazität liegt, finde heraus ob das Teil rechtzeitig geliefert wäre
                 if (maxTeil < maxKapazität) {
 
-                    // TODO: @Steffen, hier muss die Supply Chain befragt werden
+                    console.log('Zu wenig im Lager');
 
                     if (this.lieferungMoeglich(datum, teil)) {
                         maxTeil = maxKapazität;
-
+                        console.log('Lieferung möglich bis ' + datum);
                     }
-                    /*if (supplyChain.istLieferungMoeglich(datum, teil)) {
-                        // Wenn ja, dann ist ja in Wirklichkeit maxKapazität der höchst mögliche Output, da nachbestellt werden könnte
-                        maxTeil = maxKapazität;
-                    */
                 }
 
                 // Füge den maximalen Produktionswert für dieses Teil in das Array ein
@@ -185,6 +185,12 @@ export class Programmplanung {
             // Gebe diesen Wert zurück
             return this.min([maxLager, maxKapazität]);
         }
+    }
+
+    private entnehmeTeileAusLager(anzahl: number) {
+        this.teile.forEach(teil => {
+            teil.lagerbestand -= anzahl;
+        });
     }
 
     private min(arr): number {
@@ -205,6 +211,11 @@ export class Programmplanung {
 
         // Die Referenz wird überschrieben, um keine ungewollten Wechselwirkungen zu ermöglichen
         aktuellerTag = new Date(aktuellerTag);
+
+        // Test: Mache das Lager wieder voll
+        this.teile.forEach(teil => {
+            teil.lagerbestand = 2000;
+        });
 
         // Wie viele Arbeitstage gibt es in dieser Woche?
         let arbeitsTageWoche = 0;
@@ -304,22 +315,27 @@ export class Programmplanung {
         }
     }
 
-    lieferungMoeglich(datum: Date, typ: FahrradTeilTyp) {
+    lieferungMoeglich(datum: Date, typ: FahrradTeil) {
+
+        console.log('Lieferung möglich?', datum, typ);
 
         let result: boolean;
 
-        switch (typ) {
+        switch (typ.type) {
           // Rahmen
           case 0:
             result = this.lieferungMöglichRahmen(datum);
+            console.log('Rahmen lieferbar?' + result);
             break;
           // Gabel
           case 1:
           result = this.lieferungMöglichGabel(datum);
+          console.log('Gabel lieferbar?' + result);
             break;
           // Sattel
           case 2:
           result = this.lieferungMöglichSattel(datum);
+          console.log('Sattel lieferbar?' + result);
             break;
 
           default:
