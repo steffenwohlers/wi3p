@@ -281,6 +281,10 @@ export class ProgrammplanungService {
     // Inbound Ende
     //
 
+    for ( const e of this.programmplanungArray) {
+      e.calculateOutput();
+    }
+
     }
 
     //
@@ -426,105 +430,4 @@ export class ProgrammplanungService {
       getScInboundRahmen(): ScInboundRahmen[] {
         return this.scInboundRahmen;
       }
-
-      private lieferungMöglichRahmen(datum: Date) {
-
-        for (const e of this.scInboundRahmen) {
-          if (e.produktionsstartOem.getTime() === datum.getTime() ) {
-
-            // tslint:disable-next-line:max-line-length
-            // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
-
-            // tslint:disable-next-line:max-line-length
-            // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
-
-            if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
-              // console.log('Lieferung möglich: false');
-              return false;
-            } else {
-              // console.log('LIeferung möglich: true');
-              return true;
-            }
-          }
-        }
-
-      }
-
-      // tslint:disable-next-line:member-ordering
-      lieferungMoeglich(datum: Date, typ: FahrradTeilTyp) {
-
-      let result: boolean;
-
-      switch (typ) {
-        // Rahmen
-        case 0:
-          result = this.lieferungMöglichRahmen(datum);
-          break;
-        // Gabel
-        case 1:
-        result = this.lieferungMöglichGabel(datum);
-          break;
-        // Sattel
-        case 2:
-        result = this.lieferungMöglichSattel(datum);
-          break;
-
-        default:
-          break;
-      }
-
-    }
-
-      // tslint:disable-next-line:member-ordering
-      private lieferungMöglichSattel(datum: Date) {
-
-        for (const e of this.scInboundSattel) {
-          if (e.produktionsstartOem.getTime() === datum.getTime() ) {
-
-            // tslint:disable-next-line:max-line-length
-            // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
-
-            // tslint:disable-next-line:max-line-length
-            // console.log('Produktionsstart Hersteller: ' + e.produktionsstartHersteller.getDate() + '.' + (e.produktionsstartHersteller.getMonth() + 1) + '.' + e.produktionsstartHersteller.getFullYear());
-
-            // tslint:disable-next-line:max-line-length
-            // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
-
-            if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
-              // console.log('Lieferung möglich: false');
-              return false;
-            } else {
-              // console.log('Lieferung möglich: true');
-              return true;
-            }
-          }
-        }
-      }
-
-        // tslint:disable-next-line:member-ordering
-        private lieferungMöglichGabel(datum: Date) {
-
-          for (const e of this.scInboundGabel) {
-            if (e.produktionsstartOem.getTime() === datum.getTime() ) {
-
-              // tslint:disable-next-line:max-line-length
-              // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
-
-              // tslint:disable-next-line:max-line-length
-              // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
-
-              if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
-                // console.log('Lieferung möglich: false');
-                return false;
-              } else {
-                // console.log('LIeferung möglich: true');
-                return true;
-              }
-            }
-          }
-
-        }
-    //
-    // Inbound Ende
-    //
 }

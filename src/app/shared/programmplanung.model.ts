@@ -18,6 +18,13 @@ export class Programmplanung {
     public jahresWerte = [];
     public werte = [];
     public produktionsplanung = [];
+    // public teile: FahrradTeil[];
+
+    public rahmen: ScInboundRahmen[];
+    public gabel: ScInboundGabel[];
+    public sattel: ScInboundSattel[];
+
+
 
     static setStartDatum(start: Date) {
         // Durch die Planung auf Wochenbasis wird nur ein Montag als Startdatum akzeptiert
@@ -28,9 +35,17 @@ export class Programmplanung {
 
     // Nimmt Planwerte für Jahr entgegen und speichert ab, startet dann Outputberechnung
     // tslint:disable-next-line:max-line-length
-    constructor(vorlage: [number], public teile, private rahmen: ScInboundRahmen[], private gabel: ScInboundGabel[], private sattel: ScInboundSattel[]) {
-        moment.locale('de');
+    constructor(vorlage: [number], public teile, rahmen: ScInboundRahmen[], gabel: ScInboundGabel[], sattel: ScInboundSattel[]) {
 
+        // this.teile = teile;
+        this.rahmen = rahmen;
+        this.gabel = gabel;
+        this.sattel = sattel;
+
+        moment.locale('de');
+        console.log('erstellt Programmplanung');
+
+        // this.teile = teile;
         this.vorlage = vorlage;
         this.calculateOutput();
     }
@@ -144,6 +159,9 @@ export class Programmplanung {
                 real, // <- where magic happens
                 needToProduce - real
             );
+            // console.log('++++++++++++++');
+            // console.log(this.produktionsplanung[tage]);
+            // console.log('++++++++++++++');
             datum.setDate(datum.getDate() + 1);
         }
     }
@@ -162,15 +180,17 @@ export class Programmplanung {
             this.teile.forEach(teil => {
                 let maxTeil = teil.lagerbestand;
 
-                console.log('Im Lager: ' + maxTeil);
+                // console.log('Im Lager: ' + maxTeil);
                 // Wenn der Bestand im Lager unter der maxKapazität liegt, finde heraus ob das Teil rechtzeitig geliefert wäre
                 if (maxTeil < maxKapazität) {
 
-                    console.log('Zu wenig im Lager');
+                    // console.log('Zu wenig im Lager');
+                    // teil = this.teile[0];
+                    // datum = new Date(2017, 5, 3);
 
                     if (this.lieferungMoeglich(datum, teil)) {
                         maxTeil = maxKapazität;
-                        console.log('Lieferung möglich bis ' + datum);
+                        // console.log('Lieferung möglich bis ' + datum);
                     }
                 }
 
@@ -315,9 +335,10 @@ export class Programmplanung {
         }
     }
 
-    lieferungMoeglich(datum: Date, typ: FahrradTeil) {
-
-        console.log('Lieferung möglich?', datum, typ);
+    lieferungMoeglich(datum: Date, typ: FahrradTeil): boolean {
+       console.log('+++++++++++++++++++++++');
+        // console.log(typ);
+        // console.log(datum);
 
         let result: boolean;
 
@@ -325,20 +346,25 @@ export class Programmplanung {
             // Rahmen
             case 0:
                 result = this.lieferungMöglichRahmen(datum);
-                console.log('Rahmen lieferbar?' + result);
-                break;
+                console.log(result);
+                console.log('+++++++++++++++++++++++');
+                return result;
             // Gabel
             case 1:
                 result = this.lieferungMöglichGabel(datum);
-                console.log('Gabel lieferbar?' + result);
-                break;
+                console.log(result);
+                console.log('+++++++++++++++++++++++');
+                return result;
             // Sattel
             case 2:
+
                 result = this.lieferungMöglichSattel(datum);
-                console.log('Sattel lieferbar?' + result);
-                break;
+                console.log(result);
+                console.log('+++++++++++++++++++++++');
+                return result;
 
             default:
+                console.log('Im Default');
                 break;
         }
 
@@ -347,25 +373,16 @@ export class Programmplanung {
     // TODO: Für alle lieferMöglichXXX muss const e ... geändert werden zu dem Zugriff auf this.teile
 
     // tslint:disable-next-line:member-ordering
-    private lieferungMöglichSattel(datum: Date) {
+    private lieferungMöglichSattel(datum: Date): boolean {
 
         for (const e of this.sattel) {
             if (e.produktionsstartOem.getTime() === datum.getTime()) {
-
-                // tslint:disable-next-line:max-line-length
-                // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
-
-                // tslint:disable-next-line:max-line-length
-                // console.log('Produktionsstart Hersteller: ' + e.produktionsstartHersteller.getDate() + '.' + (e.produktionsstartHersteller.getMonth() + 1) + '.' + e.produktionsstartHersteller.getFullYear());
-
-                // tslint:disable-next-line:max-line-length
-                // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+                console.log(Programmplanung.startDatum);
+                console.log(e.produktionsstartHersteller);
 
                 if (Programmplanung.startDatum > e.produktionsstartHersteller) {
-                    // console.log('Lieferung möglich: false');
                     return false;
                 } else {
-                    // console.log('Lieferung möglich: true');
                     return true;
                 }
             }
@@ -373,43 +390,36 @@ export class Programmplanung {
     }
 
     // tslint:disable-next-line:member-ordering
-    private lieferungMöglichGabel(datum: Date) {
+    private lieferungMöglichGabel(datum: Date): boolean {
 
         for (const e of this.gabel) {
+
             if (e.produktionsstartOem.getTime() === datum.getTime()) {
-
-                // tslint:disable-next-line:max-line-length
-                // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
-
-                // tslint:disable-next-line:max-line-length
-                // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+                console.log(Programmplanung.startDatum);
+                console.log(e.produktionsstartHersteller);
 
                 if (Programmplanung.startDatum > e.produktionsstartHersteller) {
-                    // console.log('Lieferung möglich: false');
+
                     return false;
                 } else {
-                    // console.log('LIeferung möglich: true');
+
                     return true;
                 }
             }
         }
     }
-    private lieferungMöglichRahmen(datum: Date) {
+    private lieferungMöglichRahmen(datum: Date): boolean {
 
         for (const e of this.rahmen) {
             if (e.produktionsstartOem.getTime() === datum.getTime()) {
-
-                // tslint:disable-next-line:max-line-length
-                // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
-
-                // tslint:disable-next-line:max-line-length
-                // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+                console.log(Programmplanung.startDatum);
+                console.log(e.produktionsstartHersteller);
 
                 if (Programmplanung.startDatum > e.produktionsstartHersteller) {
-                    // console.log('Lieferung möglich: false');
+
                     return false;
                 } else {
-                    // console.log('LIeferung möglich: true');
+
                     return true;
                 }
             }
