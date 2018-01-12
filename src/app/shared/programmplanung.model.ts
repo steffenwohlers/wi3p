@@ -28,7 +28,7 @@ export class Programmplanung {
 
     // Nimmt Planwerte für Jahr entgegen und speichert ab, startet dann Outputberechnung
     // tslint:disable-next-line:max-line-length
-    constructor(vorlage: [number], public teile, private rahmen: ScInboundRahmen[], private  gabel: ScInboundGabel[], private  sattel: ScInboundSattel[]) {
+    constructor(vorlage: [number], public teile, private rahmen: ScInboundRahmen[], private gabel: ScInboundGabel[], private sattel: ScInboundSattel[]) {
         moment.locale('de');
 
         this.vorlage = vorlage;
@@ -322,59 +322,61 @@ export class Programmplanung {
         let result: boolean;
 
         switch (typ.type) {
-          // Rahmen
-          case 0:
-            result = this.lieferungMöglichRahmen(datum);
-            console.log('Rahmen lieferbar?' + result);
-            break;
-          // Gabel
-          case 1:
-          result = this.lieferungMöglichGabel(datum);
-          console.log('Gabel lieferbar?' + result);
-            break;
-          // Sattel
-          case 2:
-          result = this.lieferungMöglichSattel(datum);
-          console.log('Sattel lieferbar?' + result);
-            break;
+            // Rahmen
+            case 0:
+                result = this.lieferungMöglichRahmen(datum);
+                console.log('Rahmen lieferbar?' + result);
+                break;
+            // Gabel
+            case 1:
+                result = this.lieferungMöglichGabel(datum);
+                console.log('Gabel lieferbar?' + result);
+                break;
+            // Sattel
+            case 2:
+                result = this.lieferungMöglichSattel(datum);
+                console.log('Sattel lieferbar?' + result);
+                break;
 
-          default:
-            break;
+            default:
+                break;
         }
 
-      }
+    }
 
-        // tslint:disable-next-line:member-ordering
-        private lieferungMöglichSattel(datum: Date) {
+    // TODO: Für alle lieferMöglichXXX muss const e ... geändert werden zu dem Zugriff auf this.teile
 
-          for (const e of this.sattel) {
-            if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+    // tslint:disable-next-line:member-ordering
+    private lieferungMöglichSattel(datum: Date) {
 
-              // tslint:disable-next-line:max-line-length
-              // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
+        for (const e of this.sattel) {
+            if (e.produktionsstartOem.getTime() === datum.getTime()) {
 
-              // tslint:disable-next-line:max-line-length
-              // console.log('Produktionsstart Hersteller: ' + e.produktionsstartHersteller.getDate() + '.' + (e.produktionsstartHersteller.getMonth() + 1) + '.' + e.produktionsstartHersteller.getFullYear());
+                // tslint:disable-next-line:max-line-length
+                // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
 
-              // tslint:disable-next-line:max-line-length
-              // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+                // tslint:disable-next-line:max-line-length
+                // console.log('Produktionsstart Hersteller: ' + e.produktionsstartHersteller.getDate() + '.' + (e.produktionsstartHersteller.getMonth() + 1) + '.' + e.produktionsstartHersteller.getFullYear());
 
-              if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
-                // console.log('Lieferung möglich: false');
-                return false;
-              } else {
-                // console.log('Lieferung möglich: true');
-                return true;
-              }
+                // tslint:disable-next-line:max-line-length
+                // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
+
+                if (Programmplanung.startDatum > e.produktionsstartHersteller) {
+                    // console.log('Lieferung möglich: false');
+                    return false;
+                } else {
+                    // console.log('Lieferung möglich: true');
+                    return true;
+                }
             }
-          }
         }
+    }
 
-          // tslint:disable-next-line:member-ordering
-          private lieferungMöglichGabel(datum: Date) {
+    // tslint:disable-next-line:member-ordering
+    private lieferungMöglichGabel(datum: Date) {
 
-            for (const e of this.gabel) {
-              if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+        for (const e of this.gabel) {
+            if (e.produktionsstartOem.getTime() === datum.getTime()) {
 
                 // tslint:disable-next-line:max-line-length
                 // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
@@ -382,20 +384,20 @@ export class Programmplanung {
                 // tslint:disable-next-line:max-line-length
                 // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
 
-                if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
-                  // console.log('Lieferung möglich: false');
-                  return false;
+                if (Programmplanung.startDatum > e.produktionsstartHersteller) {
+                    // console.log('Lieferung möglich: false');
+                    return false;
                 } else {
-                  // console.log('LIeferung möglich: true');
-                  return true;
+                    // console.log('LIeferung möglich: true');
+                    return true;
                 }
-              }
             }
-          }
-          private lieferungMöglichRahmen(datum: Date) {
+        }
+    }
+    private lieferungMöglichRahmen(datum: Date) {
 
-            for (const e of this.rahmen) {
-              if (e.produktionsstartOem.getTime() === datum.getTime() ) {
+        for (const e of this.rahmen) {
+            if (e.produktionsstartOem.getTime() === datum.getTime()) {
 
                 // tslint:disable-next-line:max-line-length
                 // console.log('Produktionsstart OEM: ' + e.produktionsstartOem.getDate() + '.' + (e.produktionsstartOem.getMonth() + 1) + '.' + e.produktionsstartOem.getFullYear());
@@ -403,15 +405,15 @@ export class Programmplanung {
                 // tslint:disable-next-line:max-line-length
                 // console.log('Startdatum: ' + Programmplanung.startDatum.getDate() + '.' + (Programmplanung.startDatum.getMonth() + 1) + '.' + Programmplanung.startDatum.getFullYear());
 
-                if (Programmplanung.startDatum > e.produktionsstartHersteller ) {
-                  // console.log('Lieferung möglich: false');
-                  return false;
+                if (Programmplanung.startDatum > e.produktionsstartHersteller) {
+                    // console.log('Lieferung möglich: false');
+                    return false;
                 } else {
-                  // console.log('LIeferung möglich: true');
-                  return true;
+                    // console.log('LIeferung möglich: true');
+                    return true;
                 }
-              }
             }
+        }
 
-          }
+    }
 }
