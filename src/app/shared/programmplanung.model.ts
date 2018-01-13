@@ -365,8 +365,6 @@ export class Programmplanung {
 
     }
 
-    // TODO: Für alle lieferMöglichXXX muss const e ... geändert werden zu dem Zugriff auf this.teile
-
     // tslint:disable-next-line:member-ordering
     private lieferungMöglichSattel(datum: Date): boolean {
 
