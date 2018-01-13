@@ -197,7 +197,11 @@ export class Programmplanung {
 
     private entnehmeTeileAusLager(anzahl: number) {
         this.teile.forEach(teil => {
-            // TODO:
+            /* TODO:
+                Wenn diese nächste Zeile auskommentiert ist, klappt alles soweit
+                (bzw es wird halt für jeden Tag angezeigt dass das Lager völlig ausreichend ist)
+                Sobald ich das eingebe passt alles (siehe Konsole mit Auskommentiert 205)
+            */
             teil.lagerbestand = teil.lagerbestand - anzahl;
         });
     }
