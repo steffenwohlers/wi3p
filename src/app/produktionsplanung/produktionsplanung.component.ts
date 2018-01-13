@@ -15,7 +15,6 @@ export class ProduktionsplanungComponent implements OnInit {
 
   ngOnInit() {
     this.fahrraeder = this.fahrradService.getFahrraeder();
-    console.log(this.fahrraeder);
   }
 
 }

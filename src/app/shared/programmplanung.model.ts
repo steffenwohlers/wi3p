@@ -18,13 +18,10 @@ export class Programmplanung {
     public jahresWerte = [];
     public werte = [];
     public produktionsplanung = [];
-    // public teile: FahrradTeil[];
 
     public rahmen: ScInboundRahmen[];
     public gabel: ScInboundGabel[];
     public sattel: ScInboundSattel[];
-
-
 
     static setStartDatum(start: Date) {
         // Durch die Planung auf Wochenbasis wird nur ein Montag als Startdatum akzeptiert
@@ -37,16 +34,16 @@ export class Programmplanung {
     // tslint:disable-next-line:max-line-length
     constructor(vorlage: [number], public teile, rahmen: ScInboundRahmen[], gabel: ScInboundGabel[], sattel: ScInboundSattel[]) {
 
-        // this.teile = teile;
+        this.vorlage = vorlage;
+
+        console.log('Berechne für dieses Fahrrad', teile);
+
         this.rahmen = rahmen;
         this.gabel = gabel;
         this.sattel = sattel;
 
         moment.locale('de');
-        console.log('erstellt Programmplanung');
 
-        // this.teile = teile;
-        this.vorlage = vorlage;
         this.calculateOutput();
     }
 
@@ -85,7 +82,6 @@ export class Programmplanung {
                 for (let t = 1; t <= anzahlTage; ++t) {
                     const aktuellerTag = new Date(jahr, m, t);
                     if (DatumService.istArbeitstag(aktuellerTag)) {
-                        // tslint:disable-next-line:max-line-length
                         const abgerundet = Math.floor(dailyOutput + rest);
                         this.jahresWerte[jahr][m][t] = abgerundet;
 
@@ -154,14 +150,12 @@ export class Programmplanung {
 
             this.produktionsplanung[tage] = new Produktionsplanung(
                 new Date(datum),
-                this.teile,
+                // this.teile,
                 plannedOutput,
                 real, // <- where magic happens
                 needToProduce - real
             );
-            // console.log('++++++++++++++');
-            // console.log(this.produktionsplanung[tage]);
-            // console.log('++++++++++++++');
+
             datum.setDate(datum.getDate() + 1);
         }
     }
@@ -180,17 +174,11 @@ export class Programmplanung {
             this.teile.forEach(teil => {
                 let maxTeil = teil.lagerbestand;
 
-                // console.log('Im Lager: ' + maxTeil);
                 // Wenn der Bestand im Lager unter der maxKapazität liegt, finde heraus ob das Teil rechtzeitig geliefert wäre
                 if (maxTeil < maxKapazität) {
 
-                    // console.log('Zu wenig im Lager');
-                    // teil = this.teile[0];
-                    // datum = new Date(2017, 5, 3);
-
                     if (this.lieferungMoeglich(datum, teil)) {
                         maxTeil = maxKapazität;
-                        // console.log('Lieferung möglich bis ' + datum);
                     }
                 }
 
@@ -209,7 +197,8 @@ export class Programmplanung {
 
     private entnehmeTeileAusLager(anzahl: number) {
         this.teile.forEach(teil => {
-            teil.lagerbestand -= anzahl;
+            // TODO:
+            teil.lagerbestand = teil.lagerbestand - anzahl;
         });
     }
 
@@ -229,12 +218,14 @@ export class Programmplanung {
      */
     public applyChanges(aktuellerTag: Date, wochenDemand: number) {
 
+        console.log('applyChanges aufgerufen');
+
         // Die Referenz wird überschrieben, um keine ungewollten Wechselwirkungen zu ermöglichen
         aktuellerTag = new Date(aktuellerTag);
 
         // Test: Mache das Lager wieder voll
         this.teile.forEach(teil => {
-            teil.lagerbestand = 2000;
+            teil.lagerbestand = 5000;
         });
 
         // Wie viele Arbeitstage gibt es in dieser Woche?
@@ -294,7 +285,7 @@ export class Programmplanung {
             if (this.produktionsplanung[i].datum.getTime() >= aktuellerTag.getTime()) {
 
                 // Nutze den letzten Rückstand vom Vortag
-                console.log(this.produktionsplanung[i - 1].datum, this.produktionsplanung[i - 1].rueckstand);
+                // console.log(this.produktionsplanung[i - 1].datum, this.produktionsplanung[i - 1].rueckstand);
                 const letzterRueckstand = this.produktionsplanung[i - 1].rueckstand;
 
                 // Wenn der Rückstand 0 ist, muss nichts mehr aufgerechnet werden
@@ -325,7 +316,7 @@ export class Programmplanung {
             if (this.produktionsplanung[i].datum.getTime() === tag.getTime()) {
                 this.produktionsplanung[i] = new Produktionsplanung(
                     new Date(tag),
-                    this.teile,
+                    // this.teile,
                     planned,
                     real,
                     rueckstand
@@ -336,7 +327,7 @@ export class Programmplanung {
     }
 
     lieferungMoeglich(datum: Date, typ: FahrradTeil): boolean {
-       console.log('+++++++++++++++++++++++');
+        // console.log('+++++++++++++++++++++++');
         // console.log(typ);
         // console.log(datum);
 
@@ -346,21 +337,21 @@ export class Programmplanung {
             // Rahmen
             case 0:
                 result = this.lieferungMöglichRahmen(datum);
-                console.log(result);
-                console.log('+++++++++++++++++++++++');
+                // console.log(result);
+                // console.log('+++++++++++++++++++++++');
                 return result;
             // Gabel
             case 1:
                 result = this.lieferungMöglichGabel(datum);
-                console.log(result);
-                console.log('+++++++++++++++++++++++');
+                // console.log(result);
+                // console.log('+++++++++++++++++++++++');
                 return result;
             // Sattel
             case 2:
 
                 result = this.lieferungMöglichSattel(datum);
-                console.log(result);
-                console.log('+++++++++++++++++++++++');
+                // console.log(result);
+                // console.log('+++++++++++++++++++++++');
                 return result;
 
             default:
@@ -377,8 +368,8 @@ export class Programmplanung {
 
         for (const e of this.sattel) {
             if (e.produktionsstartOem.getTime() === datum.getTime()) {
-                console.log(Programmplanung.startDatum);
-                console.log(e.produktionsstartHersteller);
+                // console.log(Programmplanung.startDatum);
+                // console.log(e.produktionsstartHersteller);
 
                 if (Programmplanung.startDatum > e.produktionsstartHersteller) {
                     return false;
@@ -395,8 +386,8 @@ export class Programmplanung {
         for (const e of this.gabel) {
 
             if (e.produktionsstartOem.getTime() === datum.getTime()) {
-                console.log(Programmplanung.startDatum);
-                console.log(e.produktionsstartHersteller);
+                // console.log(Programmplanung.startDatum);
+                // console.log(e.produktionsstartHersteller);
 
                 if (Programmplanung.startDatum > e.produktionsstartHersteller) {
 
@@ -412,8 +403,8 @@ export class Programmplanung {
 
         for (const e of this.rahmen) {
             if (e.produktionsstartOem.getTime() === datum.getTime()) {
-                console.log(Programmplanung.startDatum);
-                console.log(e.produktionsstartHersteller);
+                // console.log(Programmplanung.startDatum);
+                // console.log(e.produktionsstartHersteller);
 
                 if (Programmplanung.startDatum > e.produktionsstartHersteller) {
 
