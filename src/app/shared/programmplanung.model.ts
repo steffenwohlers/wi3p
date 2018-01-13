@@ -145,8 +145,8 @@ export class Programmplanung {
             } else {
                 real = maxOutput;
             }
-
-            // this.entnehmeTeileAusLager(real);
+            console.log('Lagerbestand vor der Entnahme ' + this.teile[0].lagerbestand);
+            this.entnehmeTeileAusLager(real);
 
             this.produktionsplanung[tage] = new Produktionsplanung(
                 new Date(datum),
@@ -194,28 +194,12 @@ export class Programmplanung {
             return this.min([maxLager, maxKapazität]);
         }
     }
-    public entnehmeArray(anzahl: number) {
-        for ( const e of this.teile) {
-            e.lagerbestand = e.lagerbestand - anzahl;
-        }
-    }
 
     public entnehmeTeileAusLager(anzahl: number) {
         this.teile[0].lagerbestand = this.teile[0].lagerbestand - anzahl;
         this.teile[1].lagerbestand = this.teile[1].lagerbestand - anzahl;
         this.teile[2].lagerbestand = this.teile[2].lagerbestand - anzahl;
     }
-
-    // private entnehmeTeileAusLager(anzahl: number) {
-    //     this.teile.forEach(teil => {
-    //         /* TODO:
-    //             Wenn diese nächste Zeile auskommentiert ist, klappt alles soweit
-    //             (bzw es wird halt für jeden Tag angezeigt dass das Lager völlig ausreichend ist)
-    //             Sobald ich das eingebe passt alles (siehe Konsole mit Auskommentiert 205)
-    //         */
-    //         // teil.lagerbestand = teil.lagerbestand - anzahl;
-    //     });
-    // }
 
     private min(arr): number {
         let min = arr[0];
