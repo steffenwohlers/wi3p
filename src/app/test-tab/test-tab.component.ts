@@ -5,6 +5,7 @@ import { FahrradTeil } from '../shared/fahrrad-teil.model';
 import { Programmplanung } from '../shared/programmplanung.model';
 import { ProgrammplanungService } from '../shared/programmplanung.service';
 import { FahrradTeilService } from '../shared/fahrrad-teil.service';
+import { loadavg } from 'os';
 
 
 @Component({
@@ -21,23 +22,43 @@ export class TestTabComponent {
   result: boolean;
   programmplanung: Programmplanung;
   teil: FahrradTeil;
+  teile: FahrradTeil[];
 
   constructor(fahrradService: FahrradService, programmplanungService: ProgrammplanungService, fahrradTeilService: FahrradTeilService) {
 
-    this.fahrrad1 = fahrradService.getFahrrad(0);
-    this.date1 = new Date(2017, 5, 3);
     this.programmplanung = programmplanungService.mtbTrail;
+    this.teile = this.programmplanung.teile;
     this.teil = this.programmplanung.teile[0];
 
-
-
-
     console.log('----------------------------------------------------------------------');
     console.log('----------------------------------------------------------------------');
     console.log('----------------------------------------------------------------------');
 
-    this.result = this.programmplanung.lieferungMoeglich(this.date1, this.teil);
+    console.log('Vor den Berechnungen');
 
-    console.log(this.result);
+    console.log(this.teile);
+    console.log(this.teil);
+    console.log(this.teile[1]);
+
+    // this.teile[1].lagerbestand = this.teile[1].lagerbestand - 100;
+
+    // this.teil.lagerbestand = this.teil.lagerbestand - 100;
+
+    // console.log(' +++ Nach den Berechnungen in der Component +++ ');
+    // console.log(this.teile);
+    // console.log(this.teil);
+    // console.log(this.teile[1]);
+
+    this.programmplanung.entnehmeTeileAusLager(100);
+    console.log(' +++ Nach Methode entnehmeEinzeln(100) +++ ');
+    console.log(this.teile);
+    console.log(this.teil);
+    console.log(this.teile[1]);
+
+    // this.programmplanung.entnehmeArray(100);
+    // console.log(' +++ Nach Methode entnehmeArray(100) +++ ');
+    // console.log(this.teile);
+    // console.log(this.teil);
+    // console.log(this.teile[1]);
   }
 }

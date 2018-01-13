@@ -32,11 +32,11 @@ export class Programmplanung {
 
     // Nimmt Planwerte für Jahr entgegen und speichert ab, startet dann Outputberechnung
     // tslint:disable-next-line:max-line-length
-    constructor(vorlage: [number], public teile, rahmen: ScInboundRahmen[], gabel: ScInboundGabel[], sattel: ScInboundSattel[]) {
+    constructor(vorlage: [number], public teile: FahrradTeil[], rahmen: ScInboundRahmen[], gabel: ScInboundGabel[], sattel: ScInboundSattel[]) {
 
         this.vorlage = vorlage;
 
-        console.log('Berechne für dieses Fahrrad', teile);
+        // console.log('Berechne für dieses Fahrrad', teile);
 
         this.rahmen = rahmen;
         this.gabel = gabel;
@@ -146,7 +146,7 @@ export class Programmplanung {
                 real = maxOutput;
             }
 
-            this.entnehmeTeileAusLager(real);
+            // this.entnehmeTeileAusLager(real);
 
             this.produktionsplanung[tage] = new Produktionsplanung(
                 new Date(datum),
@@ -194,17 +194,28 @@ export class Programmplanung {
             return this.min([maxLager, maxKapazität]);
         }
     }
-
-    private entnehmeTeileAusLager(anzahl: number) {
-        this.teile.forEach(teil => {
-            /* TODO:
-                Wenn diese nächste Zeile auskommentiert ist, klappt alles soweit
-                (bzw es wird halt für jeden Tag angezeigt dass das Lager völlig ausreichend ist)
-                Sobald ich das eingebe passt alles (siehe Konsole mit Auskommentiert 205)
-            */
-            teil.lagerbestand = teil.lagerbestand - anzahl;
-        });
+    public entnehmeArray(anzahl: number) {
+        for ( const e of this.teile) {
+            e.lagerbestand = e.lagerbestand - anzahl;
+        }
     }
+
+    public entnehmeTeileAusLager(anzahl: number) {
+        this.teile[0].lagerbestand = this.teile[0].lagerbestand - anzahl;
+        this.teile[1].lagerbestand = this.teile[1].lagerbestand - anzahl;
+        this.teile[2].lagerbestand = this.teile[2].lagerbestand - anzahl;
+    }
+
+    // private entnehmeTeileAusLager(anzahl: number) {
+    //     this.teile.forEach(teil => {
+    //         /* TODO:
+    //             Wenn diese nächste Zeile auskommentiert ist, klappt alles soweit
+    //             (bzw es wird halt für jeden Tag angezeigt dass das Lager völlig ausreichend ist)
+    //             Sobald ich das eingebe passt alles (siehe Konsole mit Auskommentiert 205)
+    //         */
+    //         // teil.lagerbestand = teil.lagerbestand - anzahl;
+    //     });
+    // }
 
     private min(arr): number {
         let min = arr[0];

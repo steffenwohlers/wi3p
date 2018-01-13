@@ -8,6 +8,7 @@ import { ScInboundRahmen } from './sc-inbound-rahmen.model';
 import { Produktionsplanung } from './produktionsplanung.model';
 import { LieferdatenService } from './lieferdaten.service';
 import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
+import { FahrradTeil } from './fahrrad-teil.model';
 
 @Injectable()
 export class ProgrammplanungService {
@@ -70,6 +71,12 @@ export class ProgrammplanungService {
 
     constructor (private fahrradTeilService: FahrradTeilService, private lieferdatenService: LieferdatenService) {
 
+         const teileMtbAllrounder: Array<FahrradTeil> = [
+            this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
+            this.fahrradTeilService.getFahrradTeil('Spark'),
+            this.fahrradTeilService.getFahrradTeil('Fox32 F100')
+            ];
+
         this.mtbAllrounder = new Programmplanung([
             2220,
             3330,
@@ -84,12 +91,14 @@ export class ProgrammplanungService {
             2220,
             1665
         ],
-        [
-        this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
-        this.fahrradTeilService.getFahrradTeil('Spark'),
-        this.fahrradTeilService.getFahrradTeil('Fox32 F100')
-        ]
-    , this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+        teileMtbAllrounder,
+        this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+
+        const teileMtbCompetition: Array<FahrradTeil> = [
+            this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
+            this.fahrradTeilService.getFahrradTeil('Speed Line'),
+            this.fahrradTeilService.getFahrradTeil('Fox Talas140')
+        ];
 
     this.mtbCompetition = new Programmplanung([
         1110,
@@ -105,12 +114,15 @@ export class ProgrammplanungService {
         1110,
         832.5
     ],
-    [
-        this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
-        this.fahrradTeilService.getFahrradTeil('Speed Line'),
-        this.fahrradTeilService.getFahrradTeil('Fox Talas140')
-    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel
+    teileMtbCompetition,
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel
     );
+
+    const teileMtbDownhill: Array<FahrradTeil> = [
+        this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
+        this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
+        this.fahrradTeilService.getFahrradTeil('Fox Talas140')
+    ];
 
     this.mtbDownhill = new Programmplanung([
         740,
@@ -126,11 +138,14 @@ export class ProgrammplanungService {
         740,
         555
     ],
-    [
-        this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
-        this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
-        this.fahrradTeilService.getFahrradTeil('Fox Talas140')
-    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    teileMtbDownhill,
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+
+    const teileMtbExtreme: Array<FahrradTeil> = [
+        this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
+        this.fahrradTeilService.getFahrradTeil('Spark'),
+        this.fahrradTeilService.getFahrradTeil('Rock Schox Reba')
+    ];
 
     this.mtbExtreme = new Programmplanung([
         518,
@@ -146,11 +161,14 @@ export class ProgrammplanungService {
         518,
         388.5
     ],
-    [
-        this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
-        this.fahrradTeilService.getFahrradTeil('Spark'),
-        this.fahrradTeilService.getFahrradTeil('Rock Schox Reba')
-    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    teileMtbExtreme,
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+
+    const teileMtbFreeride: Array<FahrradTeil> = [
+        this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
+        this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
+        this.fahrradTeilService.getFahrradTeil('Fox32 F80')
+    ];
 
     this.mtbFreeride = new Programmplanung([
         370,
@@ -166,11 +184,14 @@ export class ProgrammplanungService {
         370,
         277.5
     ],
-    [
-        this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
-        this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
-        this.fahrradTeilService.getFahrradTeil('Fox32 F80')
-    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    teileMtbFreeride,
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+
+    const teileMtbMarathon: Array<FahrradTeil> = [
+        this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
+        this.fahrradTeilService.getFahrradTeil('Race Line'),
+        this.fahrradTeilService.getFahrradTeil('Rock Schox ReconSL')
+    ];
 
     this.mtbMarathon = new Programmplanung([
         592,
@@ -186,11 +207,14 @@ export class ProgrammplanungService {
         592,
         444
     ],
-    [
-        this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
-        this.fahrradTeilService.getFahrradTeil('Race Line'),
-        this.fahrradTeilService.getFahrradTeil('Rock Schox ReconSL')
-    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    teileMtbMarathon,
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+
+    const teileMtbPerfomance: Array<FahrradTeil> = [
+        this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
+        this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
+        this.fahrradTeilService.getFahrradTeil('Rock Schox Reba')
+    ];
 
     this.mtbPerformance = new Programmplanung([
         888,
@@ -206,11 +230,14 @@ export class ProgrammplanungService {
         888,
         666
     ],
-    [
-        this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
-        this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
-        this.fahrradTeilService.getFahrradTeil('Rock Schox Reba')
-    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    teileMtbPerfomance,
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+
+    const teileMtbTrail: Array<FahrradTeil> = [
+        this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
+        this.fahrradTeilService.getFahrradTeil('Speed Line'),
+        this.fahrradTeilService.getFahrradTeil('SR Suntour Raidon')
+    ];
 
     this.mtbTrail = new Programmplanung([
         962,
@@ -226,11 +253,8 @@ export class ProgrammplanungService {
         962,
         721.5
     ],
-    [
-        this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
-        this.fahrradTeilService.getFahrradTeil('Speed Line'),
-        this.fahrradTeilService.getFahrradTeil('SR Suntour Raidon')
-    ], this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    teileMtbTrail,
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
 
     this.programmplanungArray = new Array();
 
