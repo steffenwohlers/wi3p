@@ -36,6 +36,32 @@ export class ReportingComponent implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
+  public prodColors: Array<any> = [
+    {
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    {
+      backgroundColor: 'rgba(77,83,96,0.2)',
+      borderColor: 'rgba(77,83,96,1)',
+      pointBackgroundColor: 'rgba(77,83,96,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
+    },
+    {
+      backgroundColor: 'rgba(255,0,0,0.2)',
+      borderColor: 'rgba(255,0,0,1)',
+      pointBackgroundColor: 'rgba(255,0,0,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(255,0,0,0.8)'
+    }
+  ];
 
   // Programmplanung Chart Werte
   public programmplanung: Array<any> = [];
@@ -57,7 +83,13 @@ export class ReportingComponent implements OnInit {
   public produktionsplanung: Array<any> = [];
   public produktionsplanungLabels = [];
   public produktionsplanungOptions: any = {
-    responsive: true
+    responsive: true,
+    animation: false,
+    elements: {
+      point: {
+        radius: 0
+      }
+    }
   };
   public produktionsplanungChartType: String = 'line';
 
@@ -88,9 +120,11 @@ export class ReportingComponent implements OnInit {
       const rueckstand = [];
 
       fahrrad.programmplanung.produktionsplanung.forEach(item => {
-        planned.push(item.planned);
-        real.push(item.real);
-        rueckstand.push(item.rueckstand);
+        if (item.planned !== 0) {
+          planned.push(item.planned);
+          real.push(item.real);
+          rueckstand.push(item.rueckstand);
+        }
       });
 
       werte.push({data: planned, label: 'Geplant'});
@@ -102,9 +136,11 @@ export class ReportingComponent implements OnInit {
 
     // Produktionsplanung Chart - Label
     fahrraeder[0].programmplanung.produktionsplanung.forEach(item => {
-      const tag = item.datum.getDate();
-      const monat = item.datum.getMonth() + 1;
-      this.produktionsplanungLabels.push(tag + '.' + monat + '.');
+      if (item.planned !== 0) {
+        const tag = item.datum.getDate();
+        const monat = item.datum.getMonth() + 1;
+        this.produktionsplanungLabels.push(tag + '.' + monat + '.');
+      }
     });
     console.log(this.produktionsplanungLabels);
   }

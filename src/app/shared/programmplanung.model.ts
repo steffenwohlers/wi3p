@@ -126,7 +126,7 @@ export class Programmplanung {
 
         // Test: Mache das Lager wieder voll
         this.teile.forEach(teil => {
-            teil.lagerbestand = 4000;
+            teil.lagerbestand = 5000;
         });
         // Kalkuliere die Produktionsplanung
         const datum = new Date(Programmplanung.startDatum);
