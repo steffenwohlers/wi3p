@@ -278,9 +278,9 @@ export class Programmplanung {
 
                 this.entnehmeTeileAusLager(real);
 
-                this.updateProduktionsPlanung(aktuellerTag, planned, real, rueckstand);
+                this.updateProduktionsPlanung(new Date(aktuellerTag), planned, real, rueckstand);
             } else {
-                this.updateProduktionsPlanung(aktuellerTag, 0, 0, rueckstand);
+                this.updateProduktionsPlanung(new Date(aktuellerTag), 0, 0, rueckstand);
             }
             aktuellerTag.setDate(aktuellerTag.getDate() + 1);
         }
@@ -290,29 +290,23 @@ export class Programmplanung {
             if (this.produktionsplanung[i].datum.getTime() >= aktuellerTag.getTime()) {
 
                 // Nutze den letzten Rückstand vom Vortag
-                // console.log(this.produktionsplanung[i - 1].datum, this.produktionsplanung[i - 1].rueckstand);
                 const letzterRueckstand = this.produktionsplanung[i - 1].rueckstand;
 
-                // Wenn der Rückstand 0 ist, muss nichts mehr aufgerechnet werden
-                if (letzterRueckstand === 0) {
-                    break;
+                const planned = this.produktionsplanung[i].planned;
+                const maxOutput = this.getMaxOutput(this.produktionsplanung[i].datum);
+                const needToProduce = planned + letzterRueckstand;
+
+                let neuesReal;
+                if (needToProduce < maxOutput) {
+                    neuesReal = needToProduce;
                 } else {
-                    const real = this.produktionsplanung[i].real;
-                    const maxOutput = this.getMaxOutput(this.produktionsplanung[i].datum);
-                    const needToProduce = real + letzterRueckstand;
-
-                    let neuesReal;
-                    if (needToProduce < maxOutput) {
-                        neuesReal = needToProduce;
-                    } else {
-                        neuesReal = maxOutput;
-                    }
-
-                    this.entnehmeTeileAusLager(neuesReal);
-
-                    this.produktionsplanung[i].real = neuesReal;
-                    this.produktionsplanung[i].rueckstand += needToProduce - neuesReal;
+                    neuesReal = maxOutput;
                 }
+
+                this.entnehmeTeileAusLager(neuesReal);
+
+                this.produktionsplanung[i].real = neuesReal;
+                this.produktionsplanung[i].rueckstand = needToProduce - neuesReal;
             }
         }
 
