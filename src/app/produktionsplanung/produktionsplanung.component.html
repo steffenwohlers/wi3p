@@ -3,15 +3,29 @@
     <thead>
         <tr>
             <th></th>
+            <th></th>
             <th *ngFor="let item of fahrraeder[0].programmplanung.produktionsplanung">{{ item.datum | date: 'dd.MM.yy'}}</th>
         </tr>
     </thead>
     <tbody *ngFor="let fahrrad of fahrraeder">
         <tr>
-            <td rowspan="3">{{ fahrrad.modell }}</td>
+            <td rowspan="3" style="font-weight: bold">{{ fahrrad.modell }}</td>
+            <td>Geplant:</td>
             <td *ngFor="let item of fahrrad.programmplanung.produktionsplanung">
-                {{item.planned}} - {{item.real}} ({{item.rueckstand}})
-                <!-- {{item.real}} -->
+                {{item.planned}}
+            </td>
+        </tr>
+        <tr>
+            <td>Realisierbar:</td>
+            <td *ngFor="let item of fahrrad.programmplanung.produktionsplanung">
+                {{item.real}}
+            </td>
+        </tr>
+        <tr>
+            <td>Rückstand:</td>
+            <td *ngFor="let item of fahrrad.programmplanung.produktionsplanung"
+            [ngClass]="{'down': item.rueckstand > 0}">
+                {{item.rueckstand}}
             </td>
         </tr>
     </tbody>

@@ -8,6 +8,7 @@ import { ScInboundSattel } from './sc-inbound-sattel.model';
 import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
 import { FahrradTeil } from './fahrrad-teil.model';
 import { ParameterComponent } from '../parameter/parameter.component';
+import { ProduktionskapazitaetenService } from './produktionskapazitaeten.service';
 
 
 
@@ -33,7 +34,7 @@ export class Programmplanung {
 
     // Nimmt Planwerte für Jahr entgegen und speichert ab, startet dann Outputberechnung
     // tslint:disable-next-line:max-line-length
-    constructor(vorlage: [number], public teile: FahrradTeil[], rahmen: ScInboundRahmen[], gabel: ScInboundGabel[], sattel: ScInboundSattel[]) {
+    constructor(vorlage: [number], public teile: FahrradTeil[], rahmen: ScInboundRahmen[], gabel: ScInboundGabel[], sattel: ScInboundSattel[], private produktionskapazitaetenService: ProduktionskapazitaetenService) {
 
         this.vorlage = vorlage;
 
@@ -172,7 +173,7 @@ export class Programmplanung {
             return 0;
         } else {
             // Der maximal am Tag zu produzierende Wert
-            const maxKapazität = 8 * 64;
+            const maxKapazität = 8 * this.produktionskapazitaetenService.VolumenProStunde;
 
             // Das lager-Array fängt die maximalen Werte die mit dem Lager produziert werden können je Teil
             const lager = [];

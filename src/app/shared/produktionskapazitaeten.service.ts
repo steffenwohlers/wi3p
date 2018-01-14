@@ -1,4 +1,4 @@
 export class ProduktionskapazitaetenService {
     VolumenProJahr = 185000;
-    VolumenProStunde = 64;
+    VolumenProStunde = 65;
 }

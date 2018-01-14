@@ -9,6 +9,7 @@ import { Produktionsplanung } from './produktionsplanung.model';
 import { LieferdatenService } from './lieferdaten.service';
 import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
 import { FahrradTeil } from './fahrrad-teil.model';
+import { ProduktionskapazitaetenService } from './produktionskapazitaeten.service';
 
 @Injectable()
 export class ProgrammplanungService {
@@ -69,7 +70,8 @@ export class ProgrammplanungService {
     // Inbound Ende
     //
 
-    constructor (private fahrradTeilService: FahrradTeilService, private lieferdatenService: LieferdatenService) {
+    // tslint:disable-next-line:max-line-length
+    constructor (private fahrradTeilService: FahrradTeilService, private lieferdatenService: LieferdatenService, private produktionskapazitaetenService: ProduktionskapazitaetenService) {
 
          const teileMtbAllrounder: Array<FahrradTeil> = [
             this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
@@ -92,7 +94,7 @@ export class ProgrammplanungService {
             1665
         ],
         teileMtbAllrounder,
-        this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+        this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel, this.produktionskapazitaetenService);
 
         const teileMtbCompetition: Array<FahrradTeil> = [
             this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
@@ -115,7 +117,7 @@ export class ProgrammplanungService {
         832.5
     ],
     teileMtbCompetition,
-    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel, this.produktionskapazitaetenService
     );
 
     const teileMtbDownhill: Array<FahrradTeil> = [
@@ -139,7 +141,7 @@ export class ProgrammplanungService {
         555
     ],
     teileMtbDownhill,
-    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel, this.produktionskapazitaetenService);
 
     const teileMtbExtreme: Array<FahrradTeil> = [
         this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
@@ -162,7 +164,7 @@ export class ProgrammplanungService {
         388.5
     ],
     teileMtbExtreme,
-    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel, this.produktionskapazitaetenService);
 
     const teileMtbFreeride: Array<FahrradTeil> = [
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
@@ -185,7 +187,7 @@ export class ProgrammplanungService {
         277.5
     ],
     teileMtbFreeride,
-    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel, this.produktionskapazitaetenService);
 
     const teileMtbMarathon: Array<FahrradTeil> = [
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
@@ -208,7 +210,7 @@ export class ProgrammplanungService {
         444
     ],
     teileMtbMarathon,
-    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel, this.produktionskapazitaetenService);
 
     const teileMtbPerfomance: Array<FahrradTeil> = [
         this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
@@ -231,7 +233,7 @@ export class ProgrammplanungService {
         666
     ],
     teileMtbPerfomance,
-    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel, this.produktionskapazitaetenService);
 
     const teileMtbTrail: Array<FahrradTeil> = [
         this.fahrradTeilService.getFahrradTeil('Carbon Monocoque'),
@@ -254,7 +256,7 @@ export class ProgrammplanungService {
         721.5
     ],
     teileMtbTrail,
-    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel);
+    this.scInboundRahmen, this.scInboundGabel, this.scInboundSattel, this.produktionskapazitaetenService);
 
     this.programmplanungArray = new Array();
 
