@@ -11,10 +11,14 @@ import { Lieferdaten } from '../shared/lieferdaten.model';
   styles: []
 })
 export class ParameterComponent implements OnInit {
+
+  public static lieferzeitSattel = 49;
+  public static lieferzeitGabel = 14;
+  public static lieferzeitRahmen = 7;
+
   lieferdatenSattel: Lieferdaten;
   lieferdatenGabel: Lieferdaten;
   lieferdatenRahmen: Lieferdaten;
-
 
   constructor(private lieferdatenService: LieferdatenService, public produktionskapazitaetenService: ProduktionskapazitaetenService) { }
 
@@ -22,6 +26,25 @@ export class ParameterComponent implements OnInit {
     this.lieferdatenSattel = this.lieferdatenService.lieferdatenSattel;
     this.lieferdatenGabel = this.lieferdatenService.lieferdatenGabel;
     this.lieferdatenRahmen = this.lieferdatenService.lieferdatenRahmen;
+
+    ParameterComponent.lieferzeitSattel = this.lieferdatenSattel.vorlaufzeit.anzahl;
+    ParameterComponent.lieferzeitGabel = this.lieferdatenGabel.vorlaufzeit.anzahl;
+    ParameterComponent.lieferzeitRahmen = this.lieferdatenRahmen.vorlaufzeit.anzahl;
+  }
+
+  setSattelVorlaufzeit() {
+    ParameterComponent.lieferzeitSattel = this.lieferdatenSattel.vorlaufzeit.anzahl;
+    console.log(ParameterComponent.lieferzeitSattel);
+  }
+
+  setGabelVorlaufzeit() {
+    ParameterComponent.lieferzeitGabel = this.lieferdatenGabel.vorlaufzeit.anzahl;
+    console.log(ParameterComponent.lieferzeitGabel);
+  }
+
+  setRahmenVorlaufzeit() {
+    ParameterComponent.lieferzeitRahmen = this.lieferdatenRahmen.vorlaufzeit.anzahl;
+    console.log(ParameterComponent.lieferzeitRahmen);
   }
 
   add(value: number): number {

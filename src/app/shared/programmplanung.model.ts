@@ -7,6 +7,7 @@ import { ScInboundGabel } from './sc-inbound-gabel.model';
 import { ScInboundSattel } from './sc-inbound-sattel.model';
 import { FahrradTeilTyp } from './fahrrad-teil-typ.enum';
 import { FahrradTeil } from './fahrrad-teil.model';
+import { ParameterComponent } from '../parameter/parameter.component';
 
 
 
@@ -162,8 +163,6 @@ export class Programmplanung {
 
             datum.setDate(datum.getDate() + 1);
         }
-
-        console.log('Fertig');
     }
 
     private getMaxOutput(datum: Date): number {
@@ -225,8 +224,6 @@ export class Programmplanung {
      */
     public applyChanges(aktuellerTag: Date, wochenDemand: number) {
 
-        console.log('applyChanges aufgerufen');
-
         // Die Referenz wird überschrieben, um keine ungewollten Wechselwirkungen zu ermöglichen
         aktuellerTag = new Date(aktuellerTag);
 
@@ -260,7 +257,6 @@ export class Programmplanung {
                 }
             });
         }
-        // console.log('Rückstand vom letzten Tag: ' + rueckstand);
 
         // Berechne die neuen Werte für diese Woche
         let rest = 0;
@@ -279,6 +275,8 @@ export class Programmplanung {
                     real = maxOutput;
                 }
                 rueckstand += (planned - real);
+
+                this.entnehmeTeileAusLager(real);
 
                 this.updateProduktionsPlanung(aktuellerTag, planned, real, rueckstand);
             } else {
@@ -309,6 +307,8 @@ export class Programmplanung {
                     } else {
                         neuesReal = maxOutput;
                     }
+
+                    this.entnehmeTeileAusLager(neuesReal);
 
                     this.produktionsplanung[i].real = neuesReal;
                     this.produktionsplanung[i].rueckstand += needToProduce - neuesReal;
@@ -371,14 +371,13 @@ export class Programmplanung {
     // tslint:disable-next-line:member-ordering
     private lieferungMöglichSattel(datum: Date): boolean {
 
-        const startDatum = Programmplanung.startDatum;
-        const produktionsStartHersteller = new Date(datum);
-        produktionsStartHersteller.setDate(produktionsStartHersteller.getDate() - 49);
+        const startDatum = new Date(Programmplanung.startDatum); // 2.1.2017
+        startDatum.setDate(startDatum.getDate() + ParameterComponent.lieferzeitSattel); // Lieferung dann z.b. am 14.2.
 
-        if (produktionsStartHersteller < startDatum) {
-            return false;
-        } else {
+        if (startDatum.getTime() < datum.getTime()) { // Wenn die Lieferung vor dem Produktionstag ankommt, passt es
             return true;
+        } else {
+            return false;
         }
 
         /*for (const e of this.sattel) {
@@ -398,14 +397,13 @@ export class Programmplanung {
     // tslint:disable-next-line:member-ordering
     private lieferungMöglichGabel(datum: Date): boolean {
 
-        const startDatum = Programmplanung.startDatum;
-        const produktionsStartHersteller = new Date(datum);
-        produktionsStartHersteller.setDate(produktionsStartHersteller.getDate() - 14);
+        const startDatum = new Date(Programmplanung.startDatum); // 2.1.2017
+        startDatum.setDate(startDatum.getDate() + ParameterComponent.lieferzeitGabel); // Lieferung dann z.b. am 14.2.
 
-        if (produktionsStartHersteller < startDatum) {
-            return false;
-        } else {
+        if (startDatum.getTime() < datum.getTime()) { // Wenn die Lieferung vor dem Produktionstag ankommt, passt es
             return true;
+        } else {
+            return false;
         }
 
         /*for (const e of this.gabel) {
@@ -426,14 +424,13 @@ export class Programmplanung {
     }
     private lieferungMöglichRahmen(datum: Date): boolean {
 
-        const startDatum = Programmplanung.startDatum;
-        const produktionsStartHersteller = new Date(datum);
-        produktionsStartHersteller.setDate(produktionsStartHersteller.getDate() - 10);
+        const startDatum = new Date(Programmplanung.startDatum); // 2.1.2017
+        startDatum.setDate(startDatum.getDate() + ParameterComponent.lieferzeitRahmen); // Lieferung dann z.b. am 14.2.
 
-        if (produktionsStartHersteller < startDatum) {
-            return false;
-        } else {
+        if (startDatum.getTime() < datum.getTime()) { // Wenn die Lieferung vor dem Produktionstag ankommt, passt es
             return true;
+        } else {
+            return false;
         }
 
         /*for (const e of this.rahmen) {

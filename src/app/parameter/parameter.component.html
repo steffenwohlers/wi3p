@@ -66,21 +66,21 @@
                 <tr>
                     <td>Gabel</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="lieferdatenGabel.vorlaufzeit.anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenGabel.vorlaufzeit.anzahl" (change)="setGabelVorlaufzeit()">
                     </td>
                     <td>{{lieferdatenGabel.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
                 <tr>
                     <td>Sattel</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="lieferdatenSattel.vorlaufzeit.anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenSattel.vorlaufzeit.anzahl" (change)="setSattelVorlaufzeit()">
                     </td>
                     <td>{{lieferdatenSattel.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
                 <tr>
                     <td>Rahmen</td>
                     <td>
-                        <input type="number" class="form control" [(ngModel)]="lieferdatenRahmen.vorlaufzeit.anzahl">
+                        <input type="number" class="form control" [(ngModel)]="lieferdatenRahmen.vorlaufzeit.anzahl" (change)="setRahmenVorlaufzeit()">
                     </td>
                     <td>{{lieferdatenRahmen.vorlaufzeit.tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
