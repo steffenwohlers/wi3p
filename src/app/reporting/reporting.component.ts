@@ -9,16 +9,8 @@ import { Fahrrad } from '../shared/fahrrad.model';
 })
 export class ReportingComponent implements OnInit {
 
-  // Programmplanung Chart Werte
-  public programmplanung: Array<any> = [];
-  public programmplanungLabels: Array<any> = [
-    'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
-    'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
-  ];
-  public programmplanungOptions: any = {
-    responsive: true
-  };
-  public programmplanungColors: Array<any> = [
+
+  public chartColors: Array<any> = [
     {
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
@@ -44,6 +36,16 @@ export class ReportingComponent implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
+
+  // Programmplanung Chart Werte
+  public programmplanung: Array<any> = [];
+  public programmplanungLabels: Array<any> = [
+    'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+    'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
+  ];
+  public programmplanungOptions: any = {
+    responsive: true
+  };
   public programmplanungChartType: String = 'line';
 
   // Pie Chart Werte
@@ -51,6 +53,13 @@ export class ReportingComponent implements OnInit {
   public pieChartData: number[] = [];
   public pieChartType: String = 'pie';
 
+  // Produktionsplanung Chart Werte
+  public produktionsplanung: Array<any> = [];
+  public produktionsplanungLabels = [];
+  public produktionsplanungOptions: any = {
+    responsive: true
+  };
+  public produktionsplanungChartType: String = 'line';
 
   constructor(private fahrradService: FahrradService) { }
 
@@ -70,7 +79,34 @@ export class ReportingComponent implements OnInit {
         monatsWert += wert;
       });
       this.pieChartData.push(monatsWert);
+
+      // Produktionsplanung Chart
+      const fahrradName = fahrrad.modell;
+      const werte = [];
+      const planned = [];
+      const real = [];
+      const rueckstand = [];
+
+      fahrrad.programmplanung.produktionsplanung.forEach(item => {
+        planned.push(item.planned);
+        real.push(item.real);
+        rueckstand.push(item.rueckstand);
+      });
+
+      werte.push({data: planned, label: 'Geplant'});
+      werte.push({data: real, label: 'Tatsächlich'});
+      werte.push({data: rueckstand, label: 'Rückstand'});
+
+      this.produktionsplanung.push({fahrradName: fahrradName, data: werte});
     });
+
+    // Produktionsplanung Chart - Label
+    fahrraeder[0].programmplanung.produktionsplanung.forEach(item => {
+      const tag = item.datum.getDate();
+      const monat = item.datum.getMonth() + 1;
+      this.produktionsplanungLabels.push(tag + '.' + monat + '.');
+    });
+    console.log(this.produktionsplanungLabels);
   }
 
 

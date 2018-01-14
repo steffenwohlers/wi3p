@@ -5,7 +5,7 @@
                 [datasets]="programmplanung"
                 [labels]="programmplanungLabels"
                 [options]="programmplanungOptions"
-                [colors]="programmplanungColors"
+                [colors]="chartColors"
                 [legend]="true"
                 [chartType]="programmplanungChartType"></canvas>
     </div>
@@ -17,6 +17,18 @@
                   [labels]="pieChartLabels"
                   [chartType]="pieChartType"></canvas>
         </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12" *ngFor="let item of produktionsplanung">
+    <h4>{{item.fahrradName}}</h4>
+      <canvas baseChart width="800" height="400"
+                  [datasets]="item.data"
+                  [labels]="produktionsplanungLabels"
+                  [options]="produktionsplanungOptions"
+                  [colors]="chartColors"
+                  [legend]="true"
+                  [chartType]="produktionsplanungChartType"></canvas>
   </div>
 </div>
 

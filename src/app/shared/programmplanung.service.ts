@@ -306,7 +306,7 @@ export class ProgrammplanungService {
     //
 
     for ( const e of this.programmplanungArray) {
-      e.calculateOutput();
+      // e.calculateOutput();
     }
 
     }

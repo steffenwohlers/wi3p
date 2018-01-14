@@ -124,6 +124,10 @@ export class Programmplanung {
             };
         }
 
+        // Test: Mache das Lager wieder voll
+        this.teile.forEach(teil => {
+            teil.lagerbestand = 4000;
+        });
         // Kalkuliere die Produktionsplanung
         const datum = new Date(Programmplanung.startDatum);
         for (let tage = 0; tage < 364; ++tage) {
@@ -145,7 +149,7 @@ export class Programmplanung {
             } else {
                 real = maxOutput;
             }
-            console.log('Lagerbestand vor der Entnahme ' + this.teile[0].lagerbestand);
+
             this.entnehmeTeileAusLager(real);
 
             this.produktionsplanung[tage] = new Produktionsplanung(
@@ -158,6 +162,8 @@ export class Programmplanung {
 
             datum.setDate(datum.getDate() + 1);
         }
+
+        console.log('Fertig');
     }
 
     private getMaxOutput(datum: Date): number {
@@ -190,8 +196,10 @@ export class Programmplanung {
             // aber nur 10 Rahmen und diese auch nicht nachgeliefert werden können, können nur 10 Einheiten produziert werden
             const maxLager = this.min(lager);
 
+            const result = this.min([maxLager, maxKapazität]);
+
             // Gebe diesen Wert zurück
-            return this.min([maxLager, maxKapazität]);
+            return result;
         }
     }
 
@@ -363,7 +371,17 @@ export class Programmplanung {
     // tslint:disable-next-line:member-ordering
     private lieferungMöglichSattel(datum: Date): boolean {
 
-        for (const e of this.sattel) {
+        const startDatum = Programmplanung.startDatum;
+        const produktionsStartHersteller = new Date(datum);
+        produktionsStartHersteller.setDate(produktionsStartHersteller.getDate() - 49);
+
+        if (produktionsStartHersteller < startDatum) {
+            return false;
+        } else {
+            return true;
+        }
+
+        /*for (const e of this.sattel) {
             if (e.produktionsstartOem.getTime() === datum.getTime()) {
                 // console.log(Programmplanung.startDatum);
                 // console.log(e.produktionsstartHersteller);
@@ -374,13 +392,23 @@ export class Programmplanung {
                     return true;
                 }
             }
-        }
+        }*/
     }
 
     // tslint:disable-next-line:member-ordering
     private lieferungMöglichGabel(datum: Date): boolean {
 
-        for (const e of this.gabel) {
+        const startDatum = Programmplanung.startDatum;
+        const produktionsStartHersteller = new Date(datum);
+        produktionsStartHersteller.setDate(produktionsStartHersteller.getDate() - 14);
+
+        if (produktionsStartHersteller < startDatum) {
+            return false;
+        } else {
+            return true;
+        }
+
+        /*for (const e of this.gabel) {
 
             if (e.produktionsstartOem.getTime() === datum.getTime()) {
                 // console.log(Programmplanung.startDatum);
@@ -394,11 +422,21 @@ export class Programmplanung {
                     return true;
                 }
             }
-        }
+        }*/
     }
     private lieferungMöglichRahmen(datum: Date): boolean {
 
-        for (const e of this.rahmen) {
+        const startDatum = Programmplanung.startDatum;
+        const produktionsStartHersteller = new Date(datum);
+        produktionsStartHersteller.setDate(produktionsStartHersteller.getDate() - 10);
+
+        if (produktionsStartHersteller < startDatum) {
+            return false;
+        } else {
+            return true;
+        }
+
+        /*for (const e of this.rahmen) {
             if (e.produktionsstartOem.getTime() === datum.getTime()) {
                 // console.log(Programmplanung.startDatum);
                 // console.log(e.produktionsstartHersteller);
@@ -411,7 +449,7 @@ export class Programmplanung {
                     return true;
                 }
             }
-        }
+        }*/
 
     }
 }
