@@ -22,7 +22,6 @@ export class ScInboundSattel extends ScInbound {
 
     private berechneStartSchiffFahrt(date: Date) {
         const tempDate = this.berechneStartFahrtKalendertage(date, this.lieferdaten.supplychain[1].anzahl);
-        console.log(tempDate.getDay());
 
         let day = tempDate.getDay();
 
