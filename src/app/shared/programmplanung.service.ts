@@ -33,6 +33,10 @@ export class ProgrammplanungService {
     private gabel: Produktionsplanung[];
     private rahmen: Produktionsplanung[];
 
+    nachbestellungSattel: number;
+    nachbestellungRahmen: number;
+    nachbestellungGabel: number;
+
     //
     // Inbound Ende
     //
@@ -72,6 +76,10 @@ export class ProgrammplanungService {
 
     // tslint:disable-next-line:max-line-length
     constructor (private fahrradTeilService: FahrradTeilService, private lieferdatenService: LieferdatenService, private produktionskapazitaetenService: ProduktionskapazitaetenService) {
+
+        this.nachbestellungSattel = 0;
+        this.nachbestellungRahmen = 0;
+        this.nachbestellungGabel = 0;
 
          const teileMtbAllrounder: Array<FahrradTeil> = [
             this.fahrradTeilService.getFahrradTeil('Aluminium 7005DB'),
@@ -383,6 +391,8 @@ export class ProgrammplanungService {
         }
         // tslint:disable-next-line:max-line-length
         this.beachteLosgroesseHersteller(this.scInboundRahmen, this.lagerbestandRahmenArray, this.lagerbestandRahmen, this.losgroesseRahmen);
+
+        this.berechneNachbestellung();
       }
 
       kloneArray(array: Array<any>): Array<number> {
@@ -396,17 +406,55 @@ export class ProgrammplanungService {
       beachteLosgroesseHerstellerSattel() {
         // tslint:disable-next-line:max-line-length
         this.beachteLosgroesseHersteller(this.scInboundSattel, this.lagerbestandSattelArray, this.lagerbestandSattel, this.losgroesseSattel);
+        this.berechneNachbestellung();
       }
 
       beachteLosgroesseHerstellerGabel() {
         // tslint:disable-next-line:max-line-length
         this.beachteLosgroesseHersteller(this.scInboundGabel, this.lagerbestandGabelArray, this.lagerbestandGabel, this.losgroesseGabel);
+        this.berechneNachbestellung();
       }
 
       beachteLosgroesseHerstellerRahmen() {
         // tslint:disable-next-line:max-line-length
         this.beachteLosgroesseHersteller(this.scInboundRahmen, this.lagerbestandRahmenArray, this.lagerbestandRahmen, this.losgroesseRahmen);
+        this.berechneNachbestellung();
       }
+
+      berechneNachbestellung() {
+          this.berechneNachbestellungSattel();
+          this.berechneNachbestellungRahmen();
+          this.berechneNachbestellungGabel();
+
+      }
+
+    berechneNachbestellungSattel() {
+        this.nachbestellungSattel = 0;
+          for ( const e of this.scInboundSattel) {
+              if (Programmplanung.startDatum > e.produktionsstartHersteller) {
+                    this.nachbestellungSattel = this.nachbestellungSattel + e.menge;
+              }
+          }
+    }
+
+    berechneNachbestellungRahmen() {
+        this.nachbestellungRahmen = 0;
+        for ( const e of this.scInboundRahmen) {
+            if (Programmplanung.startDatum > e.produktionsstartHersteller) {
+                  this.nachbestellungRahmen = this.nachbestellungRahmen + e.menge;
+            }
+        }
+    }
+
+    berechneNachbestellungGabel() {
+        this.nachbestellungGabel = 0;
+        for ( const e of this.scInboundGabel) {
+            if (Programmplanung.startDatum > e.produktionsstartHersteller) {
+                  this.nachbestellungGabel = this.nachbestellungGabel + e.menge;
+                  console.log(e.produktionsstartOem);
+            }
+        }
+    }
 
 
       beachteLosgroesseHersteller(scInbound: Array<any>, lagerbestandArray: Array<number>, lagerbestand: number, losgroesse: number) {

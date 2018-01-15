@@ -33,35 +33,7 @@ export class TestTabComponent {
     console.log('----------------------------------------------------------------------');
     console.log('----------------------------------------------------------------------');
     console.log('----------------------------------------------------------------------');
+    console.log(programmplanungService.nachbestellungGabel);
 
-    console.log('Vor den Berechnungen');
-
-    console.log(this.teile);
-    console.log(this.teil);
-    console.log(this.teile[1]);
-
-    // this.teile[1].lagerbestand = this.teile[1].lagerbestand - 100;
-
-    // this.teil.lagerbestand = this.teil.lagerbestand - 100;
-
-    // console.log(' +++ Nach den Berechnungen in der Component +++ ');
-    // console.log(this.teile);
-    // console.log(this.teil);
-    // console.log(this.teile[1]);
-
-    this.teile[0].lagerbestand -= 100;
-    this.teile[1].lagerbestand -= 100;
-    this.teile[2].lagerbestand -= 100;
-    // this.programmplanung.entnehmeTeileAusLager(100);
-    console.log(' +++ Nach Methode entnehmeEinzeln(100) +++ ');
-    console.log(this.teile);
-    console.log(this.teil);
-    console.log(this.teile[1]);
-
-    // this.programmplanung.entnehmeArray(100);
-    // console.log(' +++ Nach Methode entnehmeArray(100) +++ ');
-    // console.log(this.teile);
-    // console.log(this.teil);
-    // console.log(this.teile[1]);
   }
 }

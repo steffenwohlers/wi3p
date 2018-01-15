@@ -36,6 +36,10 @@
                     <td style="font-weight: bold;">Dauer LKW zum OEM:</td>
                     <td>{{lieferdatenSattel.supplychain[0].anzahl}} {{lieferdatenSattel.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
+                <tr>
+                    <td style="font-weight: bold;">Nötige Nachbestellung::</td>
+                    <td>{{scInboundService.nachbestellungSattel}}</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -118,6 +122,10 @@
                     <td style="font-weight: bold;">Dauer Zug zum OEM:</td>
                     <td>{{lieferdatenGabel.supplychain[0].anzahl}} {{lieferdatenGabel.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
+                <tr>
+                    <td style="font-weight: bold;">Nötige Nachbestellung:</td>
+                    <td>{{scInboundService.nachbestellungGabel}}</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -188,6 +196,10 @@
                     <tr>
                         <td style="font-weight: bold;">Dauer LKW zum OEM:</td>
                         <td>{{lieferdatenRahmen.supplychain[0].anzahl}} {{lieferdatenRahmen.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Nötige Nachbestellung:</td>
+                        <td>{{scInboundService.nachbestellungRahmen}}</td>
                     </tr>
                 </tbody>
             </table>
