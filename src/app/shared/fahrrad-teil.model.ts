@@ -8,6 +8,7 @@ export class FahrradTeil {
         public name: string,
         public type: FahrradTeilTyp,
         public lieferdaten: Lieferdaten,
-        public lagerbestand: number
+        public lagerbestand: number,
+        public anzahlVerwendungInFahrrad: number
     ) { }
 }

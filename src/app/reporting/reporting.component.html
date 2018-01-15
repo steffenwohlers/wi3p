@@ -1,5 +1,42 @@
+<body>
 <div class="row">
+  <h2>Stückliste</h2>
+    <div class="col-md-4">
+      <h3>Verteilung Sattel</h3>
+      <div style="display: block">
+          <canvas baseChart
+          [data]="pieChartSattelData"
+          [labels]="pieChartSattelLabels"
+          [chartType]="pieChartSattelType"></canvas>
+      </div>
+    </div>
+    <div class="col-md-4">
+        <h3>Verteilung Rahmen</h3>
+        <div style="display: block">
+            <canvas baseChart
+            [data]="pieChartRahmenData"
+            [labels]="pieChartRahmenLabels"
+            [chartType]="pieChartRahmenType"></canvas>
+        </div>
+      </div>
+      <h3>Verteilung Gablen</h3>
+      <div class="col-md-4">
+          <div style="display: block">
+              <canvas baseChart
+              [data]="pieChartGabelnData"
+              [labels]="pieChartGabelnLabels"
+              [chartType]="pieChartGabelnType"></canvas>
+          </div>
+        </div>
+  </div>
+<hr>
+<hr>
+<div class="row">
+  <div>
+    <h2>Programmplanung</h2>
+  </div>
   <div class="col-md-6">
+      <h3>Programmplanung über Monate</h3>
     <div style="display: block;">
     <canvas baseChart width="400" height="400"
                 [datasets]="programmplanung"
@@ -11,6 +48,7 @@
     </div>
   </div>
   <div class="col-md-6">
+    <h3>Programmplanung Gesamt</h3>
       <div style="display: block">
           <canvas baseChart
                   [data]="pieChartData"
@@ -19,9 +57,12 @@
         </div>
   </div>
 </div>
+<hr>
+<hr>
+<h2>Produktionsplanung</h2>
 <div class="row">
   <div class="col-md-12" *ngFor="let item of produktionsplanung">
-    <h4>{{item.fahrradName}}</h4>
+    <h3>{{item.fahrradName}}</h3>
       <canvas baseChart width="800" height="400"
                   [datasets]="item.data"
                   [labels]="produktionsplanungLabels"
@@ -29,7 +70,9 @@
                   [colors]="prodColors"
                   [legend]="true"
                   [chartType]="produktionsplanungChartType"></canvas>
+                  <hr>
   </div>
 </div>
+</body>
 
 <!-- Pie Chart mit Aufteilung Fahrrad am Gesamtoutput, linear mit allen Fahrrädern und Output pro Monat -->

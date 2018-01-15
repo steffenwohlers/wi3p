@@ -30,7 +30,7 @@ export class FahrradService {
                 'MTBDownhill',
                 this.fahrradTeilService.getFahrradTeil('Aluminium 7005TB'),
                 this.fahrradTeilService.getFahrradTeil('Fizik Tundra'),
-                this.fahrradTeilService.getFahrradTeil('Fox Talas140'),
+                this.fahrradTeilService.getFahrradTeil('Rock Schox Recon351'),
                 this.programmplanungService.mtbDownhill
             ),
             new Fahrrad(

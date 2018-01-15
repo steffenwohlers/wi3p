@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FahrradService } from '../shared/fahrrad.service';
 import { Fahrrad } from '../shared/fahrrad.model';
+import { FahrradTeilService } from '../shared/fahrrad-teil.service';
+import { FahrradTeil } from '../shared/fahrrad-teil.model';
 
 @Component({
   selector: 'app-reporting',
@@ -79,6 +81,30 @@ export class ReportingComponent implements OnInit {
   public pieChartData: number[] = [];
   public pieChartType: String = 'pie';
 
+    // Pie Chart Teile Werte
+    public teile: Array<any> = [];
+    public pieChartTeileLabels: string[] = [];
+    public pieChartTeileData: number[] = [];
+    public pieChartTeileType: String = 'pie';
+
+    // Pie Chart Sattel Werte
+    public sattel: Array<any> = [];
+    public pieChartSattelLabels: string[] = [];
+    public pieChartSattelData: number[] = [];
+    public pieChartSattelType: String = 'pie';
+
+    // Pie Chart Rahmen Werte
+    public rahmen: Array<any> = [];
+    public pieChartRahmenLabels: string[] = [];
+    public pieChartRahmenData: number[] = [];
+    public pieChartRahmenType: String = 'pie';
+
+    // Pie Chart Gabeln Werte
+    public gabeln: Array<any> = [];
+    public pieChartGabelnLabels: string[] = [];
+    public pieChartGabelnData: number[] = [];
+    public pieChartGabelnType: String = 'pie';
+
   // Produktionsplanung Chart Werte
   public produktionsplanung: Array<any> = [];
   public produktionsplanungLabels = [];
@@ -93,10 +119,11 @@ export class ReportingComponent implements OnInit {
   };
   public produktionsplanungChartType: String = 'line';
 
-  constructor(private fahrradService: FahrradService) { }
+  constructor(private fahrradService: FahrradService, private fahrradTeilService: FahrradTeilService) { }
 
   ngOnInit() {
     const fahrraeder: Fahrrad[] = this.fahrradService.getFahrraeder();
+    const fahrradTeile: FahrradTeil[] = this.fahrradTeilService.getFahrradTeile();
 
     fahrraeder.forEach(fahrrad => {
       // Programmplanung Line Chart
@@ -132,6 +159,37 @@ export class ReportingComponent implements OnInit {
       werte.push({data: rueckstand, label: 'Rückstand'});
 
       this.produktionsplanung.push({fahrradName: fahrradName, data: werte});
+    });
+
+    // Stueckliste
+    fahrradTeile.forEach( teil => {
+      const label = teil.name;
+      const data = teil.anzahlVerwendungInFahrrad;
+
+      if (teil.type === 0) {
+        this.pieChartRahmenLabels.push(label);
+        this.pieChartRahmenData.push(data);
+        console.log('0');
+
+      }
+
+      if (teil.type === 1) {
+        this.pieChartGabelnLabels.push(label);
+        this.pieChartGabelnData.push(data);
+        console.log('1');
+
+      }
+
+      if (teil.type === 2) {
+        this.pieChartSattelLabels.push(label);
+        this.pieChartSattelData.push(data);
+        console.log('2');
+
+      }
+
+      this.pieChartTeileLabels.push(label);
+      this.pieChartTeileData.push(data);
+
     });
 
     // Produktionsplanung Chart - Label
