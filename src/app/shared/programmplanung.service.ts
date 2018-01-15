@@ -393,6 +393,21 @@ export class ProgrammplanungService {
         return klon;
       }
 
+      beachteLosgroesseHerstellerSattel() {
+        // tslint:disable-next-line:max-line-length
+        this.beachteLosgroesseHersteller(this.scInboundSattel, this.lagerbestandSattelArray, this.lagerbestandSattel, this.losgroesseSattel);
+      }
+
+      beachteLosgroesseHerstellerGabel() {
+        // tslint:disable-next-line:max-line-length
+        this.beachteLosgroesseHersteller(this.scInboundGabel, this.lagerbestandGabelArray, this.lagerbestandGabel, this.losgroesseGabel);
+      }
+
+      beachteLosgroesseHerstellerRahmen() {
+        // tslint:disable-next-line:max-line-length
+        this.beachteLosgroesseHersteller(this.scInboundRahmen, this.lagerbestandRahmenArray, this.lagerbestandRahmen, this.losgroesseRahmen);
+      }
+
 
       beachteLosgroesseHersteller(scInbound: Array<any>, lagerbestandArray: Array<number>, lagerbestand: number, losgroesse: number) {
         // Mengen-Werte des Datums zum Abgleich

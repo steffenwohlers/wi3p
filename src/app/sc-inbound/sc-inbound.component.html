@@ -54,7 +54,12 @@
     <tbody>
         <tr>
             <td style="font-weight: bold;">Benötigte / zu bestellende Menge:</td>
-            <td *ngFor="let e of scInboundSattel">{{e.menge}}</td>
+            <td *ngFor="let e of scInboundSattel">
+                    <input type="number"
+                    class="form control"
+                    [(ngModel)]="e.menge"
+                    (change)="scInboundService.beachteLosgroesseHerstellerSattel()">
+            </td>
         </tr>
         <tr>
             <td style="font-weight: bold;">Produktionsstart Hersteller:</td>
@@ -128,8 +133,13 @@
     </thead>
     <tbody>
         <tr>
-            <td>Benötigte / zu bestellende Menge:</td>
-            <td *ngFor="let e of scInboundGabel">{{e.menge}}</td>
+                <td style="font-weight: bold;">Benötigte / zu bestellende Menge:</td>
+                <td *ngFor="let e of scInboundGabel">
+                        <input type="number"
+                        class="form control"
+                        [(ngModel)]="e.menge"
+                        (change)="scInboundService.beachteLosgroesseHerstellerGabel()">
+                </td>        
         </tr>
         <tr>
             <td style="font-weight: bold;">Produktionsstart Hersteller:</td>
@@ -194,8 +204,13 @@
     </thead>
     <tbody>
         <tr>
-            <td>Benötigte / zu bestellende Menge:</td>
-            <td *ngFor="let e of scInboundRahmen">{{e.menge}}</td>
+                <td style="font-weight: bold;">Benötigte / zu bestellende Menge:</td>
+                <td *ngFor="let e of scInboundRahmen">
+                        <input type="number"
+                        class="form control"
+                        [(ngModel)]="e.menge"
+                        (change)="scInboundService.beachteLosgroesseHerstellerRahmen()">
+                </td>
         </tr>
         <tr>
             <td style="font-weight: bold;">Produktionsstart Hersteller:</td>
