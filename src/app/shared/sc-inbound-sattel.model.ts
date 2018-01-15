@@ -21,7 +21,34 @@ export class ScInboundSattel extends ScInbound {
     }
 
     private berechneStartSchiffFahrt(date: Date) {
-        return this.berechneStartFahrtKalendertage(date, this.lieferdaten.supplychain[1].anzahl);
+        const tempDate = this.berechneStartFahrtKalendertage(date, this.lieferdaten.supplychain[1].anzahl);
+        console.log(tempDate.getDay());
+
+        let day = tempDate.getDay();
+
+        // while (!(day === (3 || 5))) {
+        //     tempDate.setDate(tempDate.getDate() - 1);
+        //     day = tempDate.getDay();
+        // }
+
+        if (day === 3 || day === 5) {
+            return tempDate;
+        } else {
+            if ((day > 5) || (day < 3))  {
+                while (!(day === 5)) {
+                    tempDate.setDate(tempDate.getDate() - 1);
+                    day = tempDate.getDay();
+                }
+                return tempDate;
+            } else {
+                while (!(day === 3)) {
+                    tempDate.setDate(tempDate.getDate() - 1);
+                    day = tempDate.getDay();
+                }
+                return tempDate;
+            }
+
+        }
     }
 
     private berechneStartLkwFahrt1(date: Date) {
