@@ -26,11 +26,6 @@ export class ScInboundSattel extends ScInbound {
 
         let day = tempDate.getDay();
 
-        // while (!(day === (3 || 5))) {
-        //     tempDate.setDate(tempDate.getDate() - 1);
-        //     day = tempDate.getDay();
-        // }
-
         if (day === 3 || day === 5) {
             return tempDate;
         } else {
