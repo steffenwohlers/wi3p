@@ -37,8 +37,13 @@
                     <td>{{lieferdatenSattel.supplychain[0].anzahl}} {{lieferdatenSattel.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
                 <tr>
-                    <td style="font-weight: bold;">Nötige Nachbestellung::</td>
-                    <td>{{scInboundService.nachbestellungSattel}}</td>
+                    <td style="font-weight: bold;" [ngClass]="{'down': scInboundService.nachbestellungSattel > 5000}">Nötige Nachbestellung::</td>
+                    <td>
+                        <input type="number"
+                    class="form control"
+                    [(ngModel)]="scInboundService.nachbestellungSattel" >
+                    
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -123,8 +128,13 @@
                     <td>{{lieferdatenGabel.supplychain[0].anzahl}} {{lieferdatenGabel.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                 </tr>
                 <tr>
-                    <td style="font-weight: bold;">Nötige Nachbestellung:</td>
-                    <td>{{scInboundService.nachbestellungGabel}}</td>
+                    <td style="font-weight: bold;" [ngClass]="{'down': scInboundService.nachbestellungGabel > 5000}">Nötige Nachbestellung::</td>
+                    <td>
+                        <input type="number"
+                    class="form control"
+                    [(ngModel)]="scInboundService.nachbestellungGabel" >
+                    
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -198,8 +208,13 @@
                         <td>{{lieferdatenRahmen.supplychain[0].anzahl}} {{lieferdatenRahmen.supplychain[0].tag == 0 ? "Arbeitstag" : "Kalendertag"}}</td>
                     </tr>
                     <tr>
-                        <td style="font-weight: bold;">Nötige Nachbestellung:</td>
-                        <td>{{scInboundService.nachbestellungRahmen}}</td>
+                        <td style="font-weight: bold;" [ngClass]="{'down': scInboundService.nachbestellungRahmen > 5000}">Nötige Nachbestellung::</td>
+                        <td>
+                            <input type="number"
+                        class="form control"
+                        [(ngModel)]="scInboundService.nachbestellungRahmen" >
+                        
+                        </td>
                     </tr>
                 </tbody>
             </table>
